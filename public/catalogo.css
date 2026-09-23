@@ -2,6 +2,9 @@
    Complementan los estilos base que están en index.html. */
 
 [hidden] { display: none !important; }
+/* Netlify inyecta una insignia fija abajo a la derecha (~52px visibles, z-index 2147483645).
+   Los botones flotantes quedan por encima de ella y el panel abierto la cubre. */
+:root { --badge-clear: 72px; }
 html { -webkit-text-size-adjust: 100%; }
 body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 
@@ -10,8 +13,25 @@ body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 .hero-tag { margin-bottom: 14px; font-size: 10px; letter-spacing: 2.5px; }
 .hero h1 { font-size: clamp(2rem, 9vw, 4rem); margin-bottom: 12px; }
 .hero p { font-size: .95rem; }
-.hero p small { display: block; margin-top: 10px; font-size: .72rem; line-height: 1.5; opacity: .85; }
-.hero-dots { margin-top: 20px; }
+/* Llamado principal al asesor: visible sin tener que buscar el botón flotante */
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; margin-top: 22px; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 48px; padding: 0 24px; border-radius: 24px; border: none; cursor: pointer;
+  background: #fff; color: var(--green-dark);
+  font: 600 15px 'DM Sans', sans-serif;
+  box-shadow: 0 8px 24px rgba(10,25,17,.25);
+  transition: transform .15s, box-shadow .15s;
+}
+.hero-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(10,25,17,.3); }
+.hero-cta:focus-visible, .hero-link:focus-visible, .hero-chat:focus-visible { outline: 3px solid var(--green-light); outline-offset: 3px; }
+.hero-link {
+  color: var(--green-pale); font-size: 14px; font-weight: 500;
+  text-decoration: underline; text-decoration-color: rgba(216,243,220,.45); text-underline-offset: 4px;
+}
+.hero-link:hover { text-decoration-color: var(--green-pale); }
+.hero .hero-note { max-width: 480px; margin-top: 20px; font-size: .72rem; line-height: 1.5; opacity: .8; }
+.hero-visual { display: none; }
 
 /* ---------- Barra fija: buscador + categorías + subsecciones ---------- */
 .topbar {
@@ -65,7 +85,7 @@ body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 .sub-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ---------- Categorías (divisiones) y subsecciones ---------- */
-.main { padding: 18px 12px calc(110px + env(safe-area-inset-bottom)); }
+.main { padding: 18px 12px calc(150px + env(safe-area-inset-bottom)); }
 .no-results { text-align: center; color: var(--text-light); padding: 40px 10px; font-size: 14px; }
 
 .cat-block {
@@ -99,7 +119,7 @@ body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 /* ---------- Tarjetas ---------- */
 .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
 .card { border-radius: 14px; }
-.card-img { height: 150px; }
+.card-img { height: 150px; background: #fff; border-bottom: 1px solid #edf2ee; }
 .card-badge-row { padding: 8px 10px 0; gap: 4px; }
 .badge { font-size: 9px; padding: 2px 7px; }
 .card-body { padding: 8px 10px 12px; }
@@ -119,17 +139,17 @@ body { -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
   .card-img { width: 38%; height: auto; min-height: 130px; flex-shrink: 0; }
 }
 
-footer { padding: 28px 20px calc(96px + env(safe-area-inset-bottom)); }
+footer { padding: 28px 20px calc(150px + env(safe-area-inset-bottom)); }
 
 /* ---------- Botones flotantes ---------- */
 #scrollTop {
-  right: 22px; bottom: calc(90px + env(safe-area-inset-bottom));
+  right: 22px; bottom: calc(var(--badge-clear) + 72px + env(safe-area-inset-bottom));
   width: 42px; height: 42px; pointer-events: none;
 }
 #scrollTop.visible { pointer-events: auto; }
 
 #advisorToggle {
-  position: fixed; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom));
+  position: fixed; right: 16px; bottom: calc(var(--badge-clear) + env(safe-area-inset-bottom));
   width: 58px; height: 58px; border-radius: 50%;
   background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
   border: none; cursor: pointer; z-index: 9990;
@@ -145,12 +165,12 @@ footer { padding: 28px 20px calc(96px + env(safe-area-inset-bottom)); }
   font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   border: 2px solid var(--cream, #f8f5f0);
 }
-#advisorToggle .tooltip { display: none; }
+#advisorToggle .advisor-label { display: none; }
 body.advisor-open #advisorToggle, body.advisor-open #scrollTop { visibility: hidden; }
 
 /* ---------- Panel del asesor ---------- */
 #advisorOverlay {
-  position: fixed; inset: 0; z-index: 9998;
+  position: fixed; inset: 0; z-index: 2147483646;
   background: rgba(10,25,17,.45);
   opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
 }
@@ -158,7 +178,7 @@ body.advisor-open #advisorToggle, body.advisor-open #scrollTop { visibility: hid
 
 /* Celular: pantalla completa, entra desde abajo */
 #advisorPanel {
-  position: fixed; inset: 0; z-index: 9999;
+  position: fixed; inset: 0; z-index: 2147483647;
   height: 100vh; height: 100dvh;
   display: flex; flex-direction: column;
   background: #fdfcfa;
@@ -196,7 +216,6 @@ body.advisor-open #advisorToggle, body.advisor-open #scrollTop { visibility: hid
   .hero { padding: 70px 40px 60px; }
   .hero-tag { margin-bottom: 22px; font-size: 11px; letter-spacing: 3px; }
   .hero p { font-size: 1.05rem; }
-  .hero-dots { margin-top: 32px; }
   .search-wrap { max-width: 560px; margin: 0 auto; }
   .cat-nav, .sub-nav.has-items { justify-content: safe center; }
   .main { padding: 32px 20px 80px; }
@@ -208,22 +227,67 @@ body.advisor-open #advisorToggle, body.advisor-open #scrollTop { visibility: hid
   .card-name { font-size: 1rem; }
   .card-benefits li { font-size: 12px; }
   footer { padding: 30px 20px; }
-  #scrollTop { right: 30px; bottom: 100px; }
-  #advisorToggle { right: 24px; bottom: 24px; width: 62px; height: 62px; }
-  #advisorToggle .tooltip {
-    display: block; position: absolute; right: 72px;
-    background: #1a3a2a; color: #d8f3dc; font: 500 12px 'DM Sans', sans-serif;
-    padding: 6px 14px; border-radius: 20px; white-space: nowrap; pointer-events: none;
-    opacity: 0; transform: translateX(8px); transition: all .2s;
+  /* Escritorio: botón con texto, por encima de la insignia de Netlify (esquina inferior derecha, ~64px) */
+  #advisorToggle {
+    right: 24px; bottom: var(--badge-clear); width: auto; height: 54px;
+    padding: 0 22px 0 16px; gap: 10px; border-radius: 27px;
+    font-size: 22px;
   }
-  #advisorToggle:hover { transform: scale(1.08); }
-  #advisorToggle:hover .tooltip { opacity: 1; transform: none; }
+  #advisorToggle .advisor-label { display: block; font: 600 14px 'DM Sans', sans-serif; color: #fff; white-space: nowrap; }
+  #advisorToggle .badge-notif { top: -4px; right: -4px; }
+  #advisorToggle:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(45,106,79,.5); }
+  #advisorToggle:focus-visible { outline: 3px solid var(--green-light); outline-offset: 3px; }
+  #scrollTop { right: 30px; bottom: calc(var(--badge-clear) + 70px); }
 
-  /* Escritorio: panel lateral */
+  /* Escritorio: tarjeta flotante a la derecha */
   #advisorPanel {
-    inset: 0 0 0 auto; width: 420px; height: 100vh;
-    box-shadow: -4px 0 40px rgba(0,0,0,.2);
-    transform: translateX(100%);
+    inset: 20px 24px 20px auto; width: 420px; height: auto;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(10,25,17,.35);
+    transform: translateY(24px); opacity: 0;
+    transition: transform .25s cubic-bezier(.4,0,.2,1), opacity .2s, visibility .25s;
   }
+  #advisorPanel.open { opacity: 1; }
   .advisor-bar { padding-top: 12px; }
+}
+
+/* ---------- Escritorio amplio: hero en dos columnas ---------- */
+@media (min-width: 1000px) {
+  .hero { padding: 64px 48px; text-align: left; }
+  .hero-inner {
+    position: relative; max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center;
+  }
+  .hero h1 { font-size: clamp(3.2rem, 5.2vw, 4.6rem); }
+  .hero p { margin: 0; max-width: 460px; }
+  .hero-actions { justify-content: flex-start; margin-top: 30px; }
+  .hero .hero-note { margin-top: 28px; max-width: 440px; }
+
+  .hero-visual { display: block; position: relative; }
+  .hero-visual img {
+    display: block; width: 100%; height: 400px; object-fit: cover; object-position: 50% 45%;
+    border-radius: 24px; box-shadow: 0 30px 60px rgba(5,18,11,.35);
+  }
+  .hero-chat {
+    position: absolute; left: -32px; bottom: -28px; width: 300px;
+    display: flex; flex-direction: column; gap: 8px; padding: 14px;
+    background: #fdfcfa; border: none; border-radius: 18px; cursor: pointer; text-align: left;
+    box-shadow: 0 18px 40px rgba(5,18,11,.3);
+    font: 13px/1.45 'DM Sans', sans-serif; color: var(--text-dark);
+    transition: transform .15s;
+  }
+  .hero-chat:hover { transform: translateY(-2px); }
+  .hero-chat-msg { display: block; padding: 9px 12px; border-radius: 14px; }
+  .hero-chat-msg.me { align-self: flex-end; max-width: 85%; background: var(--green-mid); color: #fff; border-bottom-right-radius: 4px; }
+  .hero-chat-msg.bot { background: #eef5ef; border-bottom-left-radius: 4px; }
+  .hero-chat-msg.bot b { display: block; font-size: 11px; color: var(--green-mid); margin-bottom: 2px; }
+  .hero-chat-cta {
+    display: block; padding: 9px 12px; border-radius: 12px; border: 1.5px solid #dde8de;
+    color: var(--text-light); font-size: 12.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #advisorToggle { animation: none; }
+  .hero-cta, .hero-chat, #advisorPanel { transition: none; }
 }
