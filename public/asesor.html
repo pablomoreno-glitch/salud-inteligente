@@ -135,6 +135,13 @@
     border-top: 1px solid var(--border);
   }
 
+  /* Aviso de salud (INVIMA) */
+  .health-notice {
+    flex-shrink: 0; padding: 7px 14px;
+    background: var(--g5); border-top: 1px solid var(--g6);
+    font-size: 10.5px; line-height: 1.4; color: var(--tm); text-align: center;
+  }
+
   /* INPUT */
   .input-bar {
     padding: 11px 14px; border-top: 1px solid var(--border);
@@ -203,6 +210,10 @@
       Cuéntame <strong>qué síntomas tienes</strong>, <strong>qué quieres mejorar</strong> o <strong>qué meta de salud buscas</strong> — ya sea escribiendo o tocando uno de los temas de arriba — y te recomendaré los suplementos más adecuados. 🌱
     </div>
   </div>
+</div>
+
+<div class="health-notice" role="note">
+  ⚕️ Estos productos son <strong>suplementos dietarios, no medicamentos</strong>. El asesor no diagnostica ni reemplaza la consulta médica. Si tienes síntomas graves, estás en embarazo, tomas medicamentos o es para un niño, consulta a un profesional de la salud.
 </div>
 
 <div class="input-bar">
@@ -293,7 +304,7 @@
       addMsg('bot', render(reply));
     } catch(err) {
       hideTyping();
-      addMsg('bot', '⚠️ <strong>Error al conectar.</strong> Verifica que la API key esté configurada en Netlify.<br><small>' + err.message + '</small>');
+      addMsg('bot', '⚠️ <strong>No pude responder.</strong><br><small>' + String(err.message).replace(/</g,'&lt;') + '</small>');
     }
     loading = false; btnEl.disabled = false; inpEl.focus();
   }

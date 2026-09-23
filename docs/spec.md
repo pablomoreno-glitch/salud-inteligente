@@ -58,26 +58,28 @@ La API key (`ANTHROPIC_API_KEY`) vive **solo** en las variables de entorno de Ne
 }
 ```
 
-`messages` es el historial completo de la conversación en el formato de la Messages API de Anthropic (`role`: `user` | `assistant`).
+`messages` es el historial de la conversación en el formato de la Messages API de Anthropic (`role`: `user` | `assistant`). Debe ser un arreglo no vacío; el servidor solo envía al modelo los **últimos 20 mensajes** (y descarta los iniciales hasta que el primero sea del usuario).
 
-**Response**: se reenvía tal cual la respuesta de `https://api.anthropic.com/v1/messages`, con el mismo código de estado.
+**Response**: si todo sale bien, `200` con la respuesta de `https://api.anthropic.com/v1/messages` tal cual (el texto está en `content[0].text`). Los errores siempre llegan como `{ "error": "mensaje en español" }`.
 
 **Errores propios**
 
 | Código | Causa |
 |---|---|
 | `405` | Método distinto de `POST` / `OPTIONS` |
-| `400` | Body no es JSON válido |
-| `500` | `ANTHROPIC_API_KEY` no configurada, o fallo al contactar la API |
+| `400` | Body no es JSON válido, `messages` falta / no es arreglo / está vacío, o algún mensaje no tiene `role` y `content` válidos |
+| `500` | `ANTHROPIC_API_KEY` no configurada (mensaje genérico; el detalle solo va al log) |
+| `502` | La API de Anthropic respondió con error o no se pudo contactar. Se registra con `console.error` (estado, tipo y mensaje, nunca la key) y el cliente recibe un mensaje genérico |
 
-**CORS**: `Access-Control-Allow-Origin: *`; `OPTIONS` responde `200`.
+**CORS**: `Access-Control-Allow-Origin: *`; `OPTIONS` responde `204`.
 
 ### Parámetros del modelo
 
 | Parámetro | Valor |
 |---|---|
-| `model` | `claude-sonnet-4-20250514` |
-| `max_tokens` | `1000` |
+| `model` | `process.env.CLAUDE_MODEL`, por defecto `claude-sonnet-5` |
+| `max_tokens` | `1024` |
+| Historial máximo | 20 mensajes |
 | `anthropic-version` | `2023-06-01` |
 
 ### Formato de las recomendaciones
@@ -94,6 +96,7 @@ Si el cliente solo saluda o no describe síntomas, **no** se incluye el bloque `
 
 ## 4. Reglas del asesor (system prompt)
 
+0. **Aviso de salud (INVIMA):** los productos son suplementos dietarios, no medicamentos; el asesor no diagnostica ni reemplaza la consulta médica. Ante síntomas graves o persistentes, embarazo o lactancia, uso de medicamentos o consultas para niños, debe recomendar consultar a un profesional de la salud. El mismo aviso se muestra en `public/asesor.html` (fijo sobre la caja de texto) y en el encabezado de `public/index.html`.
 1. Nunca diagnosticar ni reemplazar al médico; ante condiciones serias, remitir a un profesional.
 2. Máximo 3–4 productos, los más relevantes.
 3. Tono cálido y cercano, en español colombiano.
@@ -120,6 +123,7 @@ Cada producto se identifica por su referencia (`VW-158`, `LN-76`, …); el prefi
 | Variable | Dónde | Descripción |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Netlify → Site configuration → Environment variables | Key de la API de Claude (`sk-ant-...`). Para desarrollo local, en `.env` (ignorado por Git). |
+| `CLAUDE_MODEL` | Igual que la anterior (opcional) | Modelo de Claude a usar. Si no existe, se usa `claude-sonnet-5`. Permite cambiar de modelo sin tocar código. |
 
 ---
 

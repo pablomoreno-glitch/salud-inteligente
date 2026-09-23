@@ -1,33 +1,59 @@
+const MODEL = process.env.CLAUDE_MODEL || "claude-sonnet-5";
+const MAX_TOKENS = 1024;
+const MAX_HISTORY = 20;
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+function json(statusCode, data, extraHeaders = {}) {
+  return {
+    statusCode,
+    headers: { ...CORS_HEADERS, "Content-Type": "application/json", ...extraHeaders },
+    body: JSON.stringify(data),
+  };
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
-      body: "",
-    };
+    return { statusCode: 204, headers: CORS_HEADERS, body: "" };
   }
 
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
-
-  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-  if (!ANTHROPIC_API_KEY) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "API key no configurada en el servidor." }),
-    };
+    return json(405, { error: "Método no permitido. Usa POST." }, { Allow: "POST, OPTIONS" });
   }
 
   let body;
   try {
-    body = JSON.parse(event.body);
+    body = JSON.parse(event.body || "");
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "JSON inválido." }) };
+    return json(400, { error: "El cuerpo de la petición no es un JSON válido." });
+  }
+
+  if (!body || !Array.isArray(body.messages) || body.messages.length === 0) {
+    return json(400, { error: "El campo \"messages\" es obligatorio y debe ser un arreglo con al menos un mensaje." });
+  }
+
+  const validMessage = (m) =>
+    m && (m.role === "user" || m.role === "assistant") &&
+    (typeof m.content === "string" || Array.isArray(m.content));
+  if (!body.messages.every(validMessage)) {
+    return json(400, { error: "Cada mensaje debe tener \"role\" (user | assistant) y \"content\"." });
+  }
+
+  // Solo los últimos MAX_HISTORY mensajes; la API exige que el primero sea del usuario.
+  const messages = body.messages.slice(-MAX_HISTORY);
+  while (messages.length && messages[0].role !== "user") messages.shift();
+  if (messages.length === 0) {
+    return json(400, { error: "La conversación debe incluir al menos un mensaje del usuario." });
+  }
+
+  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+  if (!ANTHROPIC_API_KEY) {
+    console.error("[chat] Falta la variable de entorno ANTHROPIC_API_KEY");
+    return json(500, { error: "El asesor no está configurado en el servidor. Intenta más tarde." });
   }
 
   const CATALOG = `CATÁLOGO DE SUPLEMENTOS DISPONIBLES:
@@ -66,6 +92,11 @@ GLUCOSA/AZÚCAR EN SANGRE: Blood Sugar Vital World (VW-149, VW-260) - equilibrio
 
   const SYSTEM = `Eres un asesor de bienestar natural amigable para una tienda de suplementos en Colombia. Tu trabajo es escuchar síntomas o necesidades del cliente y recomendar productos del catálogo.
 
+AVISO DE SALUD (obligatorio, normativa INVIMA):
+- Los productos del catálogo son SUPLEMENTOS DIETARIOS, NO son medicamentos. Nunca digas que curan, tratan o previenen enfermedades.
+- No diagnosticas enfermedades ni reemplazas la consulta médica.
+- Si el cliente menciona síntomas graves o persistentes, embarazo o lactancia, que toma medicamentos, o si la consulta es para un niño o niña, recomiéndale expresamente consultar a un profesional de la salud antes de tomar cualquier suplemento.
+
 REGLAS IMPORTANTES:
 1. NUNCA diagnostiques enfermedades ni reemplaces al médico. Ante condiciones médicas serias, recomienda siempre ver un profesional de salud.
 2. Recomienda MÁXIMO 3 o 4 productos — los más relevantes para lo que describe el cliente.
@@ -87,28 +118,29 @@ ${CATALOG}`;
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
+        model: MODEL,
+        max_tokens: MAX_TOKENS,
         system: SYSTEM,
-        messages: body.messages,
+        messages,
       }),
     });
 
-    const apiData = await apiRes.json();
+    const apiData = await apiRes.json().catch(() => null);
 
-    return {
-      statusCode: apiRes.status,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(apiData),
-    };
+    if (!apiRes.ok || !apiData) {
+      // Solo se registra el estado y el error que devuelve Anthropic, nunca la API key ni los headers.
+      console.error("[chat] Error de la API de Anthropic", {
+        status: apiRes.status,
+        model: MODEL,
+        type: apiData?.error?.type,
+        message: apiData?.error?.message,
+      });
+      return json(502, { error: "El asesor no está disponible en este momento. Intenta de nuevo en unos minutos." });
+    }
+
+    return json(200, apiData);
   } catch (err) {
-    return {
-      statusCode: 500,
-      headers: { "Access-Control-Allow-Origin": "*" },
-      body: JSON.stringify({ error: "Error interno del servidor: " + err.message }),
-    };
+    console.error("[chat] Error al contactar la API de Anthropic:", err.message);
+    return json(502, { error: "El asesor no está disponible en este momento. Intenta de nuevo en unos minutos." });
   }
 };
