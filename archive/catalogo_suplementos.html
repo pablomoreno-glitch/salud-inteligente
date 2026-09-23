@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Suplementos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #74c69d;
+    --green-pale: #d8f3dc;
+    --cream: #f8f5f0;
+    --warm-white: #fdfcfa;
+    --text-dark: #1a2218;
+    --text-mid: #3d5a3e;
+    --text-light: #6b8f71;
+    --accent: #40916c;
+    --gold: #b7882c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+    padding: 70px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: var(--green-pale);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .hero-dots {
+    display: flex; justify-content: center; gap: 8px; margin-top: 32px;
+  }
+  .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .hero-dot.active { background: var(--green-light); width: 24px; border-radius: 3px; }
+
+  /* NAV CATEGORIES */
+  .cat-nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid #e8ede9;
+    padding: 0 20px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-btn {
+    white-space: nowrap;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .cat-btn:hover { color: var(--accent); }
+  .cat-btn.active { color: var(--green-dark); border-bottom-color: var(--green-mid); font-weight: 600; }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 50px 0 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #dde8de;
+  }
+  .section-header:first-of-type { margin-top: 0; }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--green-pale);
+    line-height: 1;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .section-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  /* PRODUCT CARD */
+  .card {
+    background: var(--warm-white);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e4ece5;
+    transition: transform .2s, box-shadow .2s;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(45,106,79,0.12);
+  }
+  .card-badge-row {
+    display: flex;
+    gap: 6px;
+    padding: 14px 16px 0;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .badge-cat { background: var(--green-pale); color: var(--green-mid); }
+  .badge-form { background: #fff3cd; color: #856404; }
+  .badge-viral { background: #ffe8e8; color: #c0392b; }
+  .badge-trend { background: #e8f4ff; color: #1a5b8a; }
+
+  .card-body { padding: 14px 16px 18px; flex: 1; display: flex; flex-direction: column; }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .card-ref {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .card-benefits {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  .card-benefits li {
+    font-size: 12.5px;
+    color: var(--text-mid);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+  .card-benefits li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--green-light);
+    font-size: 9px;
+    top: 2px;
+  }
+  .card-meta {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #edf2ee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-invima {
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+  .card-pres {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--green-pale);
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 13px;
+  }
+  footer strong { color: var(--green-light); }
+
+  /* SCROLL TO TOP */
+  #scrollTop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 42px;
+    height: 42px;
+    background: var(--green-mid);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  #scrollTop.visible { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 50px 20px 40px; }
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .main { padding: 24px 12px 60px; }
+  }
+  @media (max-width: 380px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Catálogo Oficial 2026</div>
+  <h1>Suplementos<br>Naturales</h1>
+  <p>Salud · Bienestar · Vitalidad<br>Todos los productos cuentan con registro INVIMA vigente.</p>
+  <div class="hero-dots">
+    <div class="hero-dot active"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+  </div>
+</div>
+
+<nav class="cat-nav" id="catNav">
+  <button class="cat-btn active" onclick="scrollToSection('virales')">⭐ Virales</button>
+  <button class="cat-btn" onclick="scrollToSection('greensofg')">🌿 Greensofg</button>
+  <button class="cat-btn" onclick="scrollToSection('tendencia')">🔥 Tendencia</button>
+  <button class="cat-btn" onclick="scrollToSection('colagenos')">💎 Colágenos</button>
+  <button class="cat-btn" onclick="scrollToSection('fibras')">🌾 Fibras</button>
+  <button class="cat-btn" onclick="scrollToSection('liquidos')">💧 Líquidos</button>
+  <button class="cat-btn" onclick="scrollToSection('gomas')">🍬 Gomas</button>
+  <button class="cat-btn" onclick="scrollToSection('ninos')">👶 Niños</button>
+  <button class="cat-btn" onclick="scrollToSection('polvos')">🥄 Polvos</button>
+  <button class="cat-btn" onclick="scrollToSection('blister')">💊 Blíster</button>
+</nav>
+
+<div class="main">
+
+  <!-- ===== VIRALES ===== -->
+  <div class="section-header" id="virales">
+    <span class="section-num">01</span>
+    <span class="section-title">Productos Virales</span>
+    <span class="section-count">Más vendidos</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">Magnesium Complex 8 en 1</div>
+        <div class="card-ref">Ref. VW-158</div>
+        <ul class="card-benefits">
+          <li>Reduce el estrés y mejora el sueño</li>
+          <li>Disminuye calambres y dolores musculares</li>
+          <li>Aporta energía y mejora el ánimo</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2040-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">120 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Toplux – Magnesium Complex 8 en 1</div>
+        <div class="card-ref">Ref. VW-259</div>
+        <ul class="card-benefits">
+          <li>Combina ocho tipos de magnesio de alta absorción</li>
+          <li>Relajación muscular y mejor sueño</li>
+          <li>Reducción del estrés y recuperación</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-1249-2026</span><span class="card-pres">120 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps – bolsa</span></div>
+      <div class="card-body">
+        <div class="card-name">Magnesio Complex 8 en 1 Bolsa</div>
+        <div class="card-ref">Ref. VW-261</div>
+        <ul class="card-benefits">
+          <li>Reduce el estrés y mejora el sueño</li>
+          <li>Disminuye calambres y dolores musculares</li>
+          <li>Aporta energía y mejora el ánimo</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2040-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">Magnesium Complex 12 en 1</div>
+        <div class="card-ref">Ref. VW-157</div>
+        <ul class="card-benefits">
+          <li>Reduce calambres, tensión y dolor muscular</li>
+          <li>Aumenta la energía</li>
+          <li>Fortalece huesos y articulaciones</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2040-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps – bolsa</span></div>
+      <div class="card-body">
+        <div class="card-name">Magnesio Complex 12 en 1 Bolsa</div>
+        <div class="card-ref">Ref. VW-262</div>
+        <ul class="card-benefits">
+          <li>Reduce calambres, tensión y dolor muscular</li>
+          <li>Aumenta la energía</li>
+          <li>Fortalece huesos y articulaciones</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2040-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 gomas</span></div>
+      <div class="card-body">
+        <div class="card-name">Blood Sugar Vital World</div>
+        <div class="card-ref">Ref. VW-149</div>
+        <ul class="card-benefits">
+          <li>Apoya el equilibrio de glucosa en sangre</li>
+          <li>Con canela y cromo para el metabolismo</li>
+          <li>Reduce picos de azúcar tras las comidas</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-4178-2025</span><span class="card-pres">100 gomas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps – bolsa</span></div>
+      <div class="card-body">
+        <div class="card-name">Blood Sugar Bolsa</div>
+        <div class="card-ref">Ref. VW-260</div>
+        <ul class="card-benefits">
+          <li>Equilibrio saludable de glucosa en sangre</li>
+          <li>Metabolismo de la glucosa con canela y cromo</li>
+          <li>Apoya el metabolismo y la energía diaria</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-4178-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">623 g polvo</span></div>
+      <div class="card-body">
+        <div class="card-name">Colágeno con Péptidos + Proteína</div>
+        <div class="card-ref">Ref. VW-268</div>
+        <ul class="card-benefits">
+          <li>Favorece la salud de piel, cabello y uñas</li>
+          <li>Apoya la recuperación y crecimiento muscular</li>
+          <li>Fortalecimiento de articulaciones y huesos</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-1297-2026</span><span class="card-pres">623 g</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 gomas</span></div>
+      <div class="card-body">
+        <div class="card-name">Collagen Peptides Vital World</div>
+        <div class="card-ref">Ref. VW-150</div>
+        <ul class="card-benefits">
+          <li>Mejora la elasticidad y firmeza de la piel</li>
+          <li>Fortalece cabello y uñas</li>
+          <li>Apoya la salud de articulaciones y huesos</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-0341-2026</span><span class="card-pres">100 gomas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 gomas</span></div>
+      <div class="card-body">
+        <div class="card-name">Liposomal Vitamina C</div>
+        <div class="card-ref">Ref. VW-151</div>
+        <ul class="card-benefits">
+          <li>Refuerza el sistema inmunológico</li>
+          <li>Potente acción antioxidante</li>
+          <li>Ayuda a la producción de colágeno</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-0341-2026</span><span class="card-pres">100 gomas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">60 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">Lemme Burn</div>
+        <div class="card-ref">Ref. QS-212</div>
+        <ul class="card-benefits">
+          <li>Apoya el metabolismo energético</li>
+          <li>Mejora el rendimiento físico y resistencia</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-0341-2026</span><span class="card-pres">60 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">90 cáps sofgel</span></div>
+      <div class="card-body">
+        <div class="card-name">URO Vital World</div>
+        <div class="card-ref">Ref. VW-266</div>
+        <ul class="card-benefits">
+          <li>Apoyo a la salud del tracto urinario</li>
+          <li>Promueve la salud digestiva</li>
+          <li>Equilibrio de la flora intestinal</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-3695-2025</span><span class="card-pres">90 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">FOS Probióticos y Zinc</div>
+        <div class="card-ref">Ref. LN-1</div>
+        <ul class="card-benefits">
+          <li>Equilibrio del pH íntimo</li>
+          <li>Apoya la salud vaginal y reduce el mal olor</li>
+          <li>Mejora la flora intestinal y vaginal</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Oil of Oregano Frasco</div>
+        <div class="card-ref">Ref. PS-133</div>
+        <ul class="card-benefits">
+          <li>Potente antibacteriano y antimicrobiano natural</li>
+          <li>Apoya el sistema inmunológico</li>
+          <li>Combate hongos y parásitos intestinales</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2365-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps – bolsa</span></div>
+      <div class="card-body">
+        <div class="card-name">Oil of Oregano Bolsa</div>
+        <div class="card-ref">Ref. PS-134</div>
+        <ul class="card-benefits">
+          <li>Potente antibacteriano y antimicrobiano natural</li>
+          <li>Apoya el sistema inmunológico</li>
+          <li>Combate hongos y parásitos intestinales</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2365-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">Orégano Cápsulas Colon Max</div>
+        <div class="card-ref">Ref. CM-24</div>
+        <ul class="card-benefits">
+          <li>Mejora la digestión y disminuye la inflamación</li>
+          <li>Alivia gripe, tos y molestias respiratorias</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2944-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">90 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Pumpking Semillas de Calabaza</div>
+        <div class="card-ref">Ref. PS-135 / PS-136</div>
+        <ul class="card-benefits">
+          <li>Apoya la salud de la próstata</li>
+          <li>Contribuye a la salud urinaria y hormonal</li>
+          <li>Rico en Omega 3, 6 y 9</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2365-2025</span><span class="card-pres">90 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">60 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Candida Cleanse Vital World</div>
+        <div class="card-ref">Ref. VW-153</div>
+        <ul class="card-benefits">
+          <li>Equilibrio natural de la flora intestinal</li>
+          <li>Digestión más ligera y confortable</li>
+          <li>Bienestar digestivo diario</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2862-2025</span><span class="card-pres">60 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">90 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Vitamina D3 &amp; K2</div>
+        <div class="card-ref">Ref. PS-137 / PS-233</div>
+        <ul class="card-benefits">
+          <li>Mejor absorción del calcio</li>
+          <li>Fortalece huesos y dientes</li>
+          <li>Apoya el sistema inmunológico y cardiovascular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2365-2025</span><span class="card-pres">90 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">20 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Flexacil Ultra</div>
+        <div class="card-ref">Ref. VW-155</div>
+        <ul class="card-benefits">
+          <li>Moverse sin molestias articulares</li>
+          <li>Articulaciones más flexibles y ágiles</li>
+          <li>Confort al caminar, subir escaleras o ejercitarse</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2862-2025</span><span class="card-pres">20 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">500 g polvo</span></div>
+      <div class="card-body">
+        <div class="card-name">Creatine Vitalherb</div>
+        <div class="card-ref">Ref. VW-154</div>
+        <ul class="card-benefits">
+          <li>Aumenta la fuerza y potencia muscular</li>
+          <li>Mejora el rendimiento en entrenamientos intensos</li>
+          <li>Favorece la recuperación post-entreno</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2549-2025</span><span class="card-pres">500 g</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">350 g polvo</span></div>
+      <div class="card-body">
+        <div class="card-name">Creatine Vital World x350 g</div>
+        <div class="card-ref">Ref. VW-235</div>
+        <ul class="card-benefits">
+          <li>Creatina monohidratada micronizada sin sabor</li>
+          <li>Alta pureza y fácil absorción</li>
+          <li>Mejora fuerza, rendimiento y potencia muscular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2549-2025</span><span class="card-pres">350 g</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">Polvo</span></div>
+      <div class="card-body">
+        <div class="card-name">Proteína Shilajit Vital World (Whey)</div>
+        <div class="card-ref">Ref. VW-222</div>
+        <ul class="card-benefits">
+          <li>Proteína isolada de suero de leche 90%</li>
+          <li>Rendimiento, definición y recuperación muscular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-2233-2025</span><span class="card-pres">Polvo</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">Líquido</span></div>
+      <div class="card-body">
+        <div class="card-name">L-Carnitine</div>
+        <div class="card-ref">Ref. VW-156</div>
+        <ul class="card-benefits">
+          <li>Aumenta la energía y la resistencia</li>
+          <li>Mejora el rendimiento en entrenamiento</li>
+          <li>Favorece una recuperación muscular más rápida</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2328-2025</span><span class="card-pres">Líquido</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Shilajit Cápsulas</div>
+        <div class="card-ref">Ref. VW-160</div>
+        <ul class="card-benefits">
+          <li>Energía, vitalidad y resistencia</li>
+          <li>Rendimiento físico y mental</li>
+          <li>Maca, borojó, chontaduro y guaraná: libido y vigor</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0036530-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">120 ml jalea</span></div>
+      <div class="card-body">
+        <div class="card-name">Shilajit Compota</div>
+        <div class="card-ref">Ref. LN-68</div>
+        <ul class="card-benefits">
+          <li>Aporta energía y vitalidad</li>
+          <li>Mejora el rendimiento físico</li>
+          <li>Reduce el cansancio y favorece el bienestar</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0025193-2023</span><span class="card-pres">120 ml</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">15 sachets</span></div>
+      <div class="card-body">
+        <div class="card-name">Shilajit Sachet</div>
+        <div class="card-ref">Ref. LN-69</div>
+        <ul class="card-benefits">
+          <li>Energía, vitalidad y vigor</li>
+          <li>Mejora rendimiento físico y mental</li>
+          <li>Reduce cansancio y fatiga</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0025193-2023</span><span class="card-pres">15 sachets</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">1000 ml líquido</span></div>
+      <div class="card-body">
+        <div class="card-name">Shilajit Natural Health Líquido x1000</div>
+        <div class="card-ref">Ref. NH-191</div>
+        <ul class="card-benefits">
+          <li>Energía y resistencia física natural</li>
+          <li>Vitalidad y rendimiento diario</li>
+          <li>Fortalece las defensas del organismo</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0026005-2023</span><span class="card-pres">1000 ml</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body">
+        <div class="card-name">Gomas de Inositol Natural Health</div>
+        <div class="card-ref">Ref. NH-184</div>
+        <ul class="card-benefits">
+          <li>Equilibrio hormonal</li>
+          <li>Mejora la sensibilidad a la insulina</li>
+          <li>Contribuye al bienestar emocional</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA NSA-3192-2025</span><span class="card-pres">60 gomas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">120 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">Inositol Efervescente</div>
+        <div class="card-ref">Ref. CO-11</div>
+        <ul class="card-benefits">
+          <li>Equilibrio hormonal y ayuda en SOP</li>
+          <li>Regula el ciclo menstrual</li>
+          <li>Mejora la sensibilidad a la insulina</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2121-2025</span><span class="card-pres">120 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-viral">Viral</span><span class="badge badge-form">100 cáps blandas</span></div>
+      <div class="card-body">
+        <div class="card-name">Inositol Greensofg</div>
+        <div class="card-ref">Ref. LN-81</div>
+        <ul class="card-benefits">
+          <li>Regula el ciclo menstrual y equilibrio hormonal</li>
+          <li>Sensibilidad a la insulina</li>
+          <li>Favorece la salud ovárica (SOP)</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0865-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+  </div><!-- /virales grid -->
+
+
+  <!-- ===== GREENSOFG ===== -->
+  <div class="section-header" id="greensofg">
+    <span class="section-num">02</span>
+    <span class="section-title">Línea Greensofg</span>
+    <span class="section-count">Premium Line</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Resveratrol Greensofg</div>
+        <div class="card-ref">Ref. LN-83</div>
+        <ul class="card-benefits">
+          <li>Potente antioxidante y antiedad</li>
+          <li>Salud cardiovascular</li>
+          <li>Piel, articulaciones, uñas e inmunidad</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0037244-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">NAD+ Resveratrol Greensofg</div>
+        <div class="card-ref">Ref. LN-82</div>
+        <ul class="card-benefits">
+          <li>Energía celular y función cognitiva</li>
+          <li>Favorece el envejecimiento saludable</li>
+          <li>Potente acción antioxidante</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0037244-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Citrato de Magnesio y Potasio Greensofg</div>
+        <div class="card-ref">Ref. LN-74</div>
+        <ul class="card-benefits">
+          <li>Mejora el sueño y reduce estrés</li>
+          <li>Función muscular y previene calambres</li>
+          <li>Favorece la energía y el rendimiento</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0037244-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Colágeno Hidrolizado Greensofg</div>
+        <div class="card-ref">Ref. LN-75</div>
+        <ul class="card-benefits">
+          <li>Piel más firme y elástica con biotina</li>
+          <li>Cabello, uñas, huesos y articulaciones</li>
+          <li>Salud muscular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Vitamina E + Selenio Greensofg</div>
+        <div class="card-ref">Ref. LN-84</div>
+        <ul class="card-benefits">
+          <li>Potente antioxidante celular</li>
+          <li>Refuerza el sistema inmunológico</li>
+          <li>Apoya salud cardiovascular y de la piel</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Con Biotina Greensofg</div>
+        <div class="card-ref">Ref. LN-76</div>
+        <ul class="card-benefits">
+          <li>Fortalece cabello, piel y uñas</li>
+          <li>Reduce la caída del cabello</li>
+          <li>Apoya el metabolismo y la energía</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Isoflavonas Greensofg</div>
+        <div class="card-ref">Ref. LN-168</div>
+        <ul class="card-benefits">
+          <li>Alivia síntomas de la menopausia</li>
+          <li>Puede reducir molestias premenstruales</li>
+          <li>Salud y fortalecimiento de los huesos</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Clorofila Greensofg</div>
+        <div class="card-ref">Ref. LN-178</div>
+        <ul class="card-benefits">
+          <li>Desintoxicación natural del organismo</li>
+          <li>Digestión y bienestar estomacal</li>
+          <li>Equilibrio corporal y salud respiratoria</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0865-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Omega 3 Greensofg</div>
+        <div class="card-ref">Ref. LN-33</div>
+        <ul class="card-benefits">
+          <li>Aumenta la concentración y rendimiento mental</li>
+          <li>Reduce inflamación y dolor articular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Greensofg</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Omega 3, 6, 9 Greensofg</div>
+        <div class="card-ref">Ref. LN-34</div>
+        <ul class="card-benefits">
+          <li>Concentración y rendimiento mental</li>
+          <li>Reduce inflamación y alivia dolor articular</li>
+        </ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034378-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+  </div><!-- /greensofg -->
+
+
+  <!-- ===== TENDENCIA ===== -->
+  <div class="section-header" id="tendencia">
+    <span class="section-num">03</span>
+    <span class="section-title">Productos en Tendencia</span>
+    <span class="section-count">Lo más buscado</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Ashwagandha Colon Max</div>
+        <div class="card-ref">Ref. CM-14</div>
+        <ul class="card-benefits"><li>Reduce estrés y ansiedad</li><li>Equilibrio del cortisol y energía</li><li>Favorece el descanso y bienestar</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2944-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">Ashwagandha Natural Health</div>
+        <div class="card-ref">Ref. NH-90</div>
+        <ul class="card-benefits"><li>Reduce estrés, mejora sueño y concentración</li><li>Aporta energía y vitalidad</li><li>Contribuye a la saciedad y recuperación muscular</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034199-2024</span><span class="card-pres">100 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body">
+        <div class="card-name">Goma de Ashwagandha con Magnesio y Vitamina C</div>
+        <div class="card-ref">Ref. NH-181</div>
+        <ul class="card-benefits"><li>Reduce el estrés y la ansiedad</li><li>Contribuye a aumentar la energía</li><li>Apoya el sistema inmunológico</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">60 gomas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Omega 3 Colon Max</div>
+        <div class="card-ref">Ref. CM-22</div>
+        <ul class="card-benefits"><li>Reduce triglicéridos e inflamación</li><li>Concentración, memoria y claridad mental</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2944-2025</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">30 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Omega 3 Colon Max x30</div>
+        <div class="card-ref">Ref. CM-23</div>
+        <ul class="card-benefits"><li>Mejora la circulación y apoya el corazón</li><li>Reduce triglicéridos e inflamación</li><li>Memoria, enfoque y rendimiento mental</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-2944-2025</span><span class="card-pres">30 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">NAD+ con Resveratrol Natural Health</div>
+        <div class="card-ref">Ref. NH-97</div>
+        <ul class="card-benefits"><li>Energía celular y concentración</li><li>Envejecimiento saludable</li><li>Acción antioxidante del resveratrol</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034199-2024</span><span class="card-pres">100 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">1000 ml líquido</span></div>
+      <div class="card-body">
+        <div class="card-name">NAD+ con Resveratrol Líquido</div>
+        <div class="card-ref">Ref. NH-236</div>
+        <ul class="card-benefits"><li>Más energía, vitalidad y antioxidante antiedad</li><li>Mejora la concentración</li><li>Fortalece músculos y piel</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034568-2024</span><span class="card-pres">1000 ml</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">Té Matcha Natural Health</div>
+        <div class="card-ref">Ref. NH-102</div>
+        <ul class="card-benefits"><li>Energía y concentración</li><li>Acelera el metabolismo</li><li>Enfoque y rendimiento mental</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0039199-2024</span><span class="card-pres">100 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">Melena de León Natural Health</div>
+        <div class="card-ref">Ref. NH-105</div>
+        <ul class="card-benefits"><li>Apoya la memoria y la concentración</li><li>Salud del sistema nervioso</li><li>Claridad mental y enfoque</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034199-2024</span><span class="card-pres">100 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Betaglucano de Ganoderma</div>
+        <div class="card-ref">Ref. NH-91</div>
+        <ul class="card-benefits"><li>Refuerza el sistema inmunológico</li><li>Respuesta antiinflamatoria</li><li>Energía, vitalidad y defensas</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0034199-2024</span><span class="card-pres">100 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">60 tabletas</span></div>
+      <div class="card-body">
+        <div class="card-name">Ginkgo Biloba Alnature</div>
+        <div class="card-ref">Ref. IM-167</div>
+        <ul class="card-benefits"><li>Memoria y concentración</li><li>Mejora la circulación sanguínea</li><li>Salud cerebral y rendimiento mental</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA pft2020-0002733</span><span class="card-pres">60 tabletas</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">90 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Trigosamine</div>
+        <div class="card-ref">Ref. IM-47</div>
+        <ul class="card-benefits"><li>Fortalece huesos y articulaciones</li><li>Reduce dolor y rigidez articular</li><li>Mejora la movilidad y absorción de calcio</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA SD2013-0002853</span><span class="card-pres">90 cáps</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-trend">Tendencia</span><span class="badge badge-form">30 cáps</span></div>
+      <div class="card-body">
+        <div class="card-name">Isoflavonas de Soya Prame</div>
+        <div class="card-ref">Ref. PS-245</div>
+        <ul class="card-benefits"><li>Alivio síntomas de la menopausia</li><li>Equilibrio hormonal natural</li><li>Protección ósea y cardiovascular</li></ul>
+        <div class="card-meta"><span class="card-invima">INVIMA RSA-0032589-2024</span><span class="card-pres">30 cáps</span></div>
+      </div>
+    </div>
+
+  </div><!-- /tendencia -->
+
+
+  <!-- ===== COLÁGENOS ===== -->
+  <div class="section-header" id="colagenos">
+    <span class="section-num">04</span>
+    <span class="section-title">Colágenos</span>
+    <span class="section-count">Piel · Huesos · Articulaciones</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomas de Colágeno Hidrolizado Natural Health</div><div class="card-ref">Ref. NH-182</div><ul class="card-benefits"><li>Firmeza y elasticidad de la piel</li><li>Cabello y uñas</li><li>Articulaciones y tejidos conectivos</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Hidrolizado y Biotina Colon Max</div><div class="card-ref">Ref. CM-19</div><ul class="card-benefits"><li>Fortalece cabello y uñas</li><li>Apoya articulaciones y reduce molestias</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-2944-2025</span><span class="card-pres">100 cáps</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">1100 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Hidrolizado con Cúrcuma Nutri Pluss</div><div class="card-ref">Ref. NL-179</div><ul class="card-benefits"><li>Piel más firme y elástica</li><li>Articulaciones y huesos con colágeno y magnesio</li><li>Antioxidante del resveratrol y cúrcuma</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0016444-2021</span><span class="card-pres">1100 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">800 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Nutri Pluss</div><div class="card-ref">Ref. NL-111</div><ul class="card-benefits"><li>Huesos, articulaciones, piel, cabello y uñas</li><li>Elasticidad, firmeza y brillo</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0013518-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">500 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Hidrolizado x500 g</div><div class="card-ref">Ref. CM-18</div><ul class="card-benefits"><li>Piel, uñas, cabello y articulaciones</li><li>Músculos y huesos</li><li>Efecto antioxidante</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0032553-2024</span><span class="card-pres">500 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">500 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Péptidos de Colágeno de Pescado</div><div class="card-ref">Ref. CM-25</div><ul class="card-benefits"><li>Piel, uñas y cabello</li><li>Articulaciones y huesos</li><li>Elasticidad y firmeza de la piel</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0032553-2024</span><span class="card-pres">500 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">1000 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colagecol + Colágeno Hidrolizado 1000 g</div><div class="card-ref">Ref. CO-237</div><ul class="card-benefits"><li>Con resveratrol, cúrcuma, biotina, vitamina E y calcio</li><li>Piel, cabello, uñas, articulaciones y huesos</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">1000 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">800 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Hidrolizado Suminat</div><div class="card-ref">Ref. SU-142</div><ul class="card-benefits"><li>Piel más firme</li><li>Huesos y articulaciones fuertes</li><li>Cabello y uñas fortalecidos con biotina B8</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0011637-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">1000 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Hidrolizado x1000 ml</div><div class="card-ref">Ref. LN-64 / WN-228</div><ul class="card-benefits"><li>Articulaciones, huesos y piel</li><li>Uñas y cabello fortalecidos</li><li>Movilidad y recuperación muscular</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0025193-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">750 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Natural Strong</div><div class="card-ref">Ref. NS-165</div><ul class="card-benefits"><li>Articulaciones y huesos</li><li>Elasticidad y firmeza de la piel</li><li>Uñas y cabello</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0036191-2025</span><span class="card-pres">750 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno</span><span class="badge badge-form">700 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colaget</div><div class="card-ref">Ref. IS-48</div><ul class="card-benefits"><li>Huesos, articulaciones y movilidad</li><li>Piel, uñas y cabello</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0036041-2025</span><span class="card-pres">700 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno marino</span><span class="badge badge-form">1100 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Marino x1100 g</div><div class="card-ref">Ref. NL-110</div><ul class="card-benefits"><li>Piel firme, elástica y luminosa</li><li>Articulaciones y huesos</li><li>Uñas y cabello</li></ul><div class="card-meta"><span class="card-invima">INVIMA RAS-0016444-2021</span><span class="card-pres">1100 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno marino</span><span class="badge badge-form">1000 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Marino Líquido</div><div class="card-ref">Ref. NL-109 / NH-225</div><ul class="card-benefits"><li>Firmeza y elasticidad de la piel</li><li>Huesos, articulaciones y tejidos</li><li>Uñas y cabello</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026730-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Colágeno marino</span><span class="badge badge-form">800 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Colágeno Marino Hidrolizado Dorada Plus</div><div class="card-ref">Ref. CM-238</div><ul class="card-benefits"><li>Salud de la piel y articular</li><li>Salud ósea y sistema nervioso</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010776-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+  </div><!-- /colágenos -->
+
+
+  <!-- ===== FIBRAS ===== -->
+  <div class="section-header" id="fibras">
+    <span class="section-num">05</span>
+    <span class="section-title">Fibras</span>
+    <span class="section-count">Digestión · Control de peso</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Col-Nclin</div><div class="card-ref">Ref. NH-94</div><ul class="card-benefits"><li>Limpieza intestinal natural</li><li>Equilibrio de la flora digestiva</li><li>Bienestar y regularidad intestinal</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-2022-2025</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Maxi Clean</div><div class="card-ref">Ref. CM-21</div><ul class="card-benefits"><li>Favorece la digestión y el tránsito intestinal</li><li>Depuración natural del organismo</li><li>Control de peso complementario</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010314-2021</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Batido Verde Vitalys Company</div><div class="card-ref">Ref. VC-161</div><ul class="card-benefits"><li>Digestión y tránsito intestinal</li><li>Control de peso y saciedad</li><li>Desintoxicación natural con té verde</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010829-2021</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Pitahaya</div><div class="card-ref">Ref. VC-162</div><ul class="card-benefits"><li>Mejora el tránsito intestinal</li><li>Alta en fibra — saciedad</li><li>Favorece la digestión</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010829-2021</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Psyllium</div><div class="card-ref">Ref. VC-163</div><ul class="card-benefits"><li>Tránsito intestinal y depuración del colon</li><li>Saciedad para control de peso</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010829-2021</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">500 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Batido Verde Colon Max</div><div class="card-ref">Ref. CM-15</div><ul class="card-benefits"><li>Digestión, desintoxicación y tránsito intestinal</li><li>Control de peso y saciedad</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010314-2021</span><span class="card-pres">500 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">450 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Semilla de Aguaje</div><div class="card-ref">Ref. NH-101</div><ul class="card-benefits"><li>Aumenta la saciedad y controla el apetito</li><li>Mejora digestión y tránsito</li><li>Regula glucosa e insulina</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0013828-2023</span><span class="card-pres">450 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">100 tabletas</span></div>
+      <div class="card-body"><div class="card-name">QB Max</div><div class="card-ref">Ref. NH-99</div><ul class="card-benefits"><li>Limpieza del colon y tránsito intestinal</li><li>Reduce gases e inflamación abdominal</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0006910-2019</span><span class="card-pres">100 tabletas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">500 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Fibraplus</div><div class="card-ref">Ref. IS-54</div><ul class="card-benefits"><li>Tránsito intestinal y alivio del estreñimiento</li><li>Limpieza digestiva</li><li>Fibra natural y vitaminas</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0023314-2023</span><span class="card-pres">500 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">500 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Lasskol</div><div class="card-ref">Ref. IS-57</div><ul class="card-benefits"><li>Digestión y tránsito intestinal</li><li>Control del estreñimiento</li><li>Metabolismo y control de peso</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-003921-2025</span><span class="card-pres">500 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Fibra</span><span class="badge badge-form">Polvo</span></div>
+      <div class="card-body"><div class="card-name">Fibra de Flor de Jamaica</div><div class="card-ref">Ref. VC-241</div><ul class="card-benefits"><li>Linaza con alcachofa, pitahaya, té verde, noni, spirulina</li><li>Apoya la digestión y bienestar intestinal</li></ul><div class="card-meta"><span class="card-invima">—</span><span class="card-pres">Polvo</span></div></div>
+    </div>
+
+  </div><!-- /fibras -->
+
+
+  <!-- ===== LÍQUIDOS ===== -->
+  <div class="section-header" id="liquidos">
+    <span class="section-num">06</span>
+    <span class="section-title">Líquidos</span>
+    <span class="section-count">Energía · Vitalidad · Bienestar</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">500 ml</span></div>
+      <div class="card-body"><div class="card-name">Vita F3</div><div class="card-ref">Ref. SU-171</div><ul class="card-benefits"><li>Energía y vitalidad</li><li>Mejora el rendimiento físico y sexual</li><li>Combate el cansancio y la fatiga</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0011706-2021</span><span class="card-pres">500 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1100 ml</span></div>
+      <div class="card-body"><div class="card-name">Text-Ultra</div><div class="card-ref">Ref. GE-31</div><ul class="card-benefits"><li>Apoya el deseo y rendimiento sexual</li><li>Energía, vitalidad y circulación</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0007153-2018</span><span class="card-pres">1100 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Torovitol</div><div class="card-ref">Ref. NP-130</div><ul class="card-benefits"><li>Energía y vitalidad</li><li>Apoya el sistema nervioso y el rendimiento físico</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0029174-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Torofull</div><div class="card-ref">Ref. NE-89</div><ul class="card-benefits"><li>Energía, vitalidad y resistencia</li><li>Apoya el rendimiento físico</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0013777-2021</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Bulls Maxx</div><div class="card-ref">Ref. GE-29</div><ul class="card-benefits"><li>Deseo y rendimiento sexual</li><li>Energía, vitalidad y circulación</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0007153-2018</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Enano 180</div><div class="card-ref">Ref. BE-5</div><ul class="card-benefits"><li>Energía, vitalidad y rendimiento</li><li>Disminuye la sensación de cansancio</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0019151-2022</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">500 ml</span></div>
+      <div class="card-body"><div class="card-name">KLG Enano 180</div><div class="card-ref">Ref. GE-27</div><ul class="card-benefits"><li>Energía, vitalidad y rendimiento sexual</li><li>Circulación, resistencia y enfoque</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0007153-2023</span><span class="card-pres">500 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Maca Negra, Maca Roja</div><div class="card-ref">Ref. NP-129</div><ul class="card-benefits"><li>Energía y resistencia física</li><li>Equilibrio hormonal y libido</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0017751-2022</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Triple Maca</div><div class="card-ref">Ref. NH-103</div><ul class="card-benefits"><li>Energía, vitalidad y rendimiento</li><li>Equilibrio hormonal y libido</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026005-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Clorofila</div><div class="card-ref">Ref. LN-63</div><ul class="card-benefits"><li>Desintoxica el organismo</li><li>Apoya la digestión e intestinos</li><li>Oxigenación y vitalidad</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0025193-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Clorofila Natural Plast</div><div class="card-ref">Ref. NP-125</div><ul class="card-benefits"><li>Desintoxica y oxigena la sangre</li><li>Mejora digestión y piel</li><li>Refresca el aliento</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0029174-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Barr1do Art</div><div class="card-ref">Ref. LN-62</div><ul class="card-benefits"><li>Salud de las articulaciones</li><li>Reduce rigidez y molestias articulares</li><li>Movilidad y flexibilidad</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0025193-2024</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Chanca Piedra</div><div class="card-ref">Ref. NP-127</div><ul class="card-benefits"><li>Previene y elimina cálculos renales</li><li>Favorece la función del hígado</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0008686-2019</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Glucosamina Líquida x1000 ml</div><div class="card-ref">Ref. NL-208</div><ul class="card-benefits"><li>Salud articular — glucosamina, condroitín y calcio</li><li>Fortalecimiento óseo</li><li>Antioxidantes y vitaminas</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026730-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">380 ml</span></div>
+      <div class="card-body"><div class="card-name">Vino Cerebral Prosimpo</div><div class="card-ref">Ref. NL-120</div><ul class="card-benefits"><li>Memoria, concentración y rendimiento mental</li><li>Reduce cansancio físico y mental</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026730-2023</span><span class="card-pres">380 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">380 ml</span></div>
+      <div class="card-body"><div class="card-name">Femvit Ovaries Prosimpo</div><div class="card-ref">Ref. NL-114</div><ul class="card-benefits"><li>Equilibrio de hormonas femeninas</li><li>Reduce ansiedad, estrés e irritabilidad</li><li>Favorece el descanso y el sueño</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026730-2023</span><span class="card-pres">380 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">380 ml</span></div>
+      <div class="card-body"><div class="card-name">Prostamax</div><div class="card-ref">Ref. NL-117</div><ul class="card-benefits"><li>Salud de la próstata y sistema urinario</li><li>Antioxidante (licopeno, arándanos)</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0026730-2023</span><span class="card-pres">380 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">DIA-V-TIC</div><div class="card-ref">Ref. LN-204</div><ul class="card-benefits"><li>Niveles saludables de glucosa en sangre</li><li>Antioxidantes y bienestar general</li><li>Digestión y metabolismo</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-005890-2018</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Bililax</div><div class="card-ref">Ref. NP-257</div><ul class="card-benefits"><li>Optimiza la digestión</li><li>Protege el hígado</li><li>Control del colesterol</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0029174-2023</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Vitaabc</div><div class="card-ref">Ref. NH-104</div><ul class="card-benefits"><li>Refuerza las defensas</li><li>Energía y reducción del cansancio</li><li>Piel, vista y sistema nervioso</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0034568-2024</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Líquido</span><span class="badge badge-form">1000 ml</span></div>
+      <div class="card-body"><div class="card-name">Ferrohenoslin</div><div class="card-ref">Ref. GE-251</div><ul class="card-benefits"><li>Combate la anemia</li><li>Reduce el cansancio y la fatiga</li><li>Mejora el transporte de oxígeno</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0007153-2018</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+  </div><!-- /liquidos -->
+
+
+  <!-- ===== GOMAS ===== -->
+  <div class="section-header" id="gomas">
+    <span class="section-num">07</span>
+    <span class="section-title">Gomas</span>
+    <span class="section-count">Fáciles de tomar</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">30 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomas de Vinagre de Manzana Natural Health</div><div class="card-ref">Ref. NH-213</div><ul class="card-benefits"><li>Digestión y metabolismo</li><li>Control del apetito</li><li>Equilibrio de glucosa en sangre</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">30 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomas Magnesio + Melatonina Natural Health</div><div class="card-ref">Ref. NH-186</div><ul class="card-benefits"><li>Mejora la calidad del sueño</li><li>Reduce el insomnio ocasional</li><li>Bienestar del sistema nervioso</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-3192-2025</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomitas Siemprebell</div><div class="card-ref">Ref. NH-95</div><ul class="card-benefits"><li>Belleza femenina — cabello, uñas y piel</li><li>Equilibrio hormonal (fenogreco y maca)</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomas de Glucosamina Natural Health</div><div class="card-ref">Ref. NH-183</div><ul class="card-benefits"><li>Protege el cartílago</li><li>Lubricación de las articulaciones</li><li>Salud ósea</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-3192-2025</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">Gomas de Magnesio y Potasio Natural Health</div><div class="card-ref">Ref. NH-185</div><ul class="card-benefits"><li>Función muscular</li><li>Equilibrio de electrolitos</li><li>Energía y reducción de la fatiga</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Goma</span><span class="badge badge-form">60 gomas</span></div>
+      <div class="card-body"><div class="card-name">CALD con Vitamina D</div><div class="card-ref">Ref. NH-177</div><ul class="card-benefits"><li>Fortalece el sistema inmunológico</li><li>Absorción de calcio — huesos y dientes</li><li>Función muscular y bienestar general</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0030470-2024</span><span class="card-pres">60 gomas</span></div></div>
+    </div>
+
+  </div><!-- /gomas -->
+
+
+  <!-- ===== NIÑOS ===== -->
+  <div class="section-header" id="ninos">
+    <span class="section-num">08</span>
+    <span class="section-title">Niños</span>
+    <span class="section-count">Crecimiento y desarrollo</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">800 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Nutri Pluss Kids</div><div class="card-ref">Ref. NL-207</div><ul class="card-benefits"><li>Crecimiento y desarrollo saludable</li><li>Vitaminas y minerales</li><li>Energía para actividades diarias</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0013518-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">600 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Aptmax Niños</div><div class="card-ref">Ref. CM-13</div><ul class="card-benefits"><li>Crecimiento, desarrollo e inmunidad</li><li>Desarrollo cognitivo y concentración</li><li>Vitaminas y minerales esenciales</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010776-2021</span><span class="card-pres">600 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">800 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Ninosten</div><div class="card-ref">Ref. SU-209</div><ul class="card-benefits"><li>Sistema inmunológico con vitamina C y zinc</li><li>Bienestar digestivo con guayaba y jengibre</li><li>Crecimiento y desarrollo saludable</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0011637-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">500 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Ninosten Líquido</div><div class="card-ref">Ref. SU-231</div><ul class="card-benefits"><li>Fortalecimiento de huesos y dientes</li><li>Desarrollo cognitivo y concentración</li><li>Inmunidad y energía en la etapa de crecimiento</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0011706-2021</span><span class="card-pres">500 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">700 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Nutra-kist</div><div class="card-ref">Ref. IS-49</div><ul class="card-benefits"><li>Sistema inmunológico y defensas</li><li>Desarrollo, concentración — etapa escolar</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0036041-2025</span><span class="card-pres">700 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">1000 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Avena Kids</div><div class="card-ref">Ref. NA-220</div><ul class="card-benefits"><li>Avena con EPA y DHA</li><li>Desarrollo cerebral y crecimiento</li><li>Nutrición diaria y fácil digestión</li></ul><div class="card-meta"><span class="card-invima">INVIMA PSA-0004562-2024</span><span class="card-pres">1000 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">600 g polvo</span></div>
+      <div class="card-body"><div class="card-name">Creci Fuerte</div><div class="card-ref">Ref. CM-20</div><ul class="card-benefits"><li>Sistema inmunológico y digestivo</li><li>Crecimiento y desarrollo</li><li>Proteínas y factores naturales</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010776-2021</span><span class="card-pres">600 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Niños</span><span class="badge badge-form">1000 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Golkds HR</div><div class="card-ref">Ref. NP-239</div><ul class="card-benefits"><li>Fortalecimiento óseo</li><li>Apoyo al sistema inmune</li><li>Energía y prevención de anemia</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0008686-2019</span><span class="card-pres">1000 ml</span></div></div>
+    </div>
+
+  </div><!-- /niños -->
+
+
+  <!-- ===== POLVOS ===== -->
+  <div class="section-header" id="polvos">
+    <span class="section-num">09</span>
+    <span class="section-title">Polvos</span>
+    <span class="section-count">Nutrición completa</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">800 g</span></div>
+      <div class="card-body"><div class="card-name">Sumisure x800 g</div><div class="card-ref">Ref. SU-147</div><ul class="card-benefits"><li>Fortalece huesos y dientes</li><li>Defensas y sistema inmunológico</li><li>Energía y vitalidad</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0011637-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">800 g</span></div>
+      <div class="card-body"><div class="card-name">Ginkgo Biloba Nutri Pluss</div><div class="card-ref">Ref. NL-115</div><ul class="card-benefits"><li>Memoria y concentración cognitiva</li><li>Circulación sanguínea cerebral y periférica</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSAD12174011</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">800 g</span></div>
+      <div class="card-body"><div class="card-name">Cartical Nutri Pluss</div><div class="card-ref">Ref. NL-107</div><ul class="card-benefits"><li>Cartílagos y articulaciones</li><li>Movilidad, flexibilidad y cuidado articular</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0013518-2021</span><span class="card-pres">800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">800 g</span></div>
+      <div class="card-body"><div class="card-name">Cal-D3</div><div class="card-ref">Ref. NL-106 / NL-234</div><ul class="card-benefits"><li>Fortalece huesos y dientes</li><li>Absorción del calcio con vitamina D3</li><li>Útil en osteopenia y osteoporosis</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0013518-2021</span><span class="card-pres">600-800 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">600 g</span></div>
+      <div class="card-body"><div class="card-name">Calostro Bovino</div><div class="card-ref">Ref. CM-16</div><ul class="card-benefits"><li>Refuerza el sistema inmunológico</li><li>Salud intestinal y digestiva</li><li>Proteínas, anticuerpos y factores de crecimiento</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-0010776-2021</span><span class="card-pres">600 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">700 g granulado</span></div>
+      <div class="card-body"><div class="card-name">Meg V-T</div><div class="card-ref">Ref. LN-72</div><ul class="card-benefits"><li>Energía, vitalidad y rendimiento</li><li>Funcionamiento del sistema nervioso</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSA-003181-2017</span><span class="card-pres">700 g</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Polvo</span><span class="badge badge-form">1100 g</span></div>
+      <div class="card-body"><div class="card-name">Factor de Transferencia Nutripluss x1100 g</div><div class="card-ref">Ref. NL-242</div><ul class="card-benefits"><li>Refuerza el sistema inmunológico</li><li>Proteínas y nutrientes esenciales</li><li>Mejora energía y vitalidad</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0016444-2021</span><span class="card-pres">1100 g</span></div></div>
+    </div>
+
+  </div><!-- /polvos -->
+
+
+  <!-- ===== BLÍSTER ===== -->
+  <div class="section-header" id="blister">
+    <span class="section-num">10</span>
+    <span class="section-title">Blíster y Formatos Especiales</span>
+    <span class="section-count">Compactos y prácticos</span>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">30 tabletas</span></div>
+      <div class="card-body"><div class="card-name">Femivid</div><div class="card-ref">Ref. IM-40</div><ul class="card-benefits"><li>Cabello, piel y uñas con biotina</li><li>Glóbulos rojos con ácido fólico y B12</li><li>Refuerza el sistema inmunológico</li></ul><div class="card-meta"><span class="card-invima">INVIMA SD2011-0002157</span><span class="card-pres">30 tabletas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">30 cáps</span></div>
+      <div class="card-body"><div class="card-name">Reuma Flex</div><div class="card-ref">Ref. CL-8</div><ul class="card-benefits"><li>Alivia dolor articular y muscular</li><li>Manejo de artritis y artrosis</li><li>Reduce inflamación y rigidez</li></ul><div class="card-meta"><span class="card-invima">INVIMA PFT2023-0002132-R1</span><span class="card-pres">30 cáps</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">30 cáps</span></div>
+      <div class="card-body"><div class="card-name">Complejo B</div><div class="card-ref">Ref. PS-176</div><ul class="card-benefits"><li>Convierte alimentos en energía</li><li>Buen funcionamiento del sistema nervioso</li><li>Inmunidad con vitaminas y zinc</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0037262-2025</span><span class="card-pres">30 cáps</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">100 cáps</span></div>
+      <div class="card-body"><div class="card-name">Multivitaminas y Minerales</div><div class="card-ref">Ref. LN-175</div><ul class="card-benefits"><li>Sistema inmunológico con vitaminas y minerales</li><li>Energía y reducción del cansancio</li><li>Metabolismo y salud general</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0033986-2024</span><span class="card-pres">100 cáps</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">180 tabletas</span></div>
+      <div class="card-body"><div class="card-name">Perlas de Ajo Rogoff</div><div class="card-ref">Ref. IM-42</div><ul class="card-benefits"><li>Salud cardiovascular y circulación</li><li>Niveles normales de colesterol y presión</li><li>Refuerza el sistema inmunológico</li></ul><div class="card-meta"><span class="card-invima">INVIMA SD2017-0003988</span><span class="card-pres">180 tabletas</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">60 ml líquido</span></div>
+      <div class="card-body"><div class="card-name">Valeriana + Toronjil + Pasiflora</div><div class="card-ref">Ref. IM-43</div><ul class="card-benefits"><li>Concilia el sueño y favorece la relajación</li><li>Reduce estrés, ansiedad y nerviosismo</li></ul><div class="card-meta"><span class="card-invima">INVIMA PFM2020-0002729</span><span class="card-pres">60 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Gel</span><span class="badge badge-form">200 g gel</span></div>
+      <div class="card-body"><div class="card-name">Xingrass</div><div class="card-ref">Ref. CL-9</div><ul class="card-benefits"><li>Alivia dolor muscular y articular</li><li>Reduce inflamación y tensión</li><li>Ideal para masajes y recuperación</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSOC00708-20CO</span><span class="card-pres">200 g gel</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Gel</span><span class="badge badge-form">80 g gel</span></div>
+      <div class="card-body"><div class="card-name">Flexdl</div><div class="card-ref">Ref. IM-41</div><ul class="card-benefits"><li>Alivia dolores musculares y articulares</li><li>Contracturas, golpes y sobrecargas</li><li>Efecto relajante y antiinflamatorio</li></ul><div class="card-meta"><span class="card-invima">INVIMA NSOC00708-20CO</span><span class="card-pres">80 g gel</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Blíster</span><span class="badge badge-form">30 cáps</span></div>
+      <div class="card-body"><div class="card-name">Improtec</div><div class="card-ref">Ref. IM-44</div><ul class="card-benefits"><li>Salud de la próstata</li><li>Flujo urinario y reducción de inflamación</li></ul><div class="card-meta"><span class="card-invima">INVIMA SD2020-0004499</span><span class="card-pres">30 cáps</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Miel</span><span class="badge badge-form">120 ml</span></div>
+      <div class="card-body"><div class="card-name">Ucalizan Niños</div><div class="card-ref">Ref. NM-124</div><ul class="card-benefits"><li>Alivia tos y carraspera</li><li>Suaviza la garganta</li><li>Apoya las defensas con vitamina C y propóleo</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSA-0033728-2024</span><span class="card-pres">120 ml miel</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Jarabe</span><span class="badge badge-form">120 ml</span></div>
+      <div class="card-body"><div class="card-name">Bronco X Max</div><div class="card-ref">Ref. IM-37</div><ul class="card-benefits"><li>Expectorante natural</li><li>Alivia la tos seca y con flema</li><li>Calma la garganta irritada</li></ul><div class="card-meta"><span class="card-invima">INVIMA PFT2015-00023</span><span class="card-pres">120 ml</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge-row"><span class="badge badge-cat">Miel</span><span class="badge badge-form">Miel</span></div>
+      <div class="card-body"><div class="card-name">Pr Polizan</div><div class="card-ref">Ref. NM-123</div><ul class="card-benefits"><li>Refuerza el sistema inmunológico</li><li>Alivia gripa, tos y dolor de garganta</li><li>Descongestionante con eucalipto</li></ul><div class="card-meta"><span class="card-invima">INVIMA RSVA16I71614</span><span class="card-pres">Miel</span></div></div>
+    </div>
+
+  </div><!-- /blister -->
+
+</div><!-- /main -->
+
+<footer>
+  <p>Catálogo de Suplementos Naturales · Todos los productos cuentan con registro <strong>INVIMA</strong> vigente.<br>
+  Consulta a tu asesor de salud antes de iniciar cualquier suplementación.</p>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // Scroll to top button
+  window.addEventListener('scroll', () => {
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Category nav active state
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Highlight nav on scroll
+  const sections = ['virales','greensofg','tendencia','colagenos','fibras','liquidos','gomas','ninos','polvos','blister'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        document.querySelectorAll('.cat-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+
+  sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+</script>
+</body>
+</html>

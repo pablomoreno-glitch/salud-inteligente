@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asesor de Suplementos – IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g1:#1a3a2a; --g2:#2d6a4f; --g3:#40916c;
+    --g4:#74c69d; --g5:#d8f3dc; --cream:#f8f5f0;
+    --warm:#fdfcfa; --td:#1a2218; --tm:#3d5a3e; --tl:#6b8f71;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+
+  body {
+    font-family:'DM Sans',sans-serif;
+    background: var(--cream);
+    display:flex; flex-direction:column; height:100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 100%);
+    padding: 16px 20px;
+    display:flex; align-items:center; gap:12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+    flex-shrink:0;
+  }
+  .avatar {
+    width:44px; height:44px; border-radius:50%;
+    background: var(--g4);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; flex-shrink:0;
+  }
+  header h1 {
+    font-family:'Playfair Display',serif;
+    font-size:1.15rem; font-weight:700; color:#fff; line-height:1.2;
+  }
+  header p { font-size:11px; color:rgba(255,255,255,.65); margin-top:2px; font-weight:300; }
+  .status-dot {
+    width:8px; height:8px; border-radius:50%; background:#52d68a;
+    margin-left:auto; flex-shrink:0;
+    box-shadow:0 0 0 2px rgba(82,214,138,.3);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 2px rgba(82,214,138,.3)} 50%{box-shadow:0 0 0 5px rgba(82,214,138,.1)} }
+
+  /* ── CHIPS ── */
+  .chips-bar {
+    padding:10px 14px;
+    display:flex; gap:7px; flex-wrap:wrap;
+    border-bottom:1px solid #e4ece5;
+    background: var(--warm);
+    flex-shrink:0;
+  }
+  .chip {
+    font-size:12px; padding:5px 12px; border-radius:20px;
+    background:var(--g5); color:var(--g2); cursor:pointer;
+    border:1px solid #b7dfc4; font-weight:500;
+    transition:all .18s;
+  }
+  .chip:hover { background:var(--g4); color:var(--g1); }
+
+  /* ── CHAT AREA ── */
+  #chat {
+    flex:1; overflow-y:auto; padding:20px 14px;
+    display:flex; flex-direction:column; gap:14px;
+    scroll-behavior:smooth;
+  }
+
+  /* bubbles */
+  .msg { display:flex; gap:10px; align-items:flex-start; max-width:100%; }
+  .msg.user { flex-direction:row-reverse; }
+
+  .bubble {
+    max-width:82%; padding:12px 15px;
+    border-radius:18px; font-size:14px; line-height:1.55;
+    word-break:break-word;
+  }
+  .msg.bot .bubble {
+    background:var(--warm); border:1px solid #dde8de;
+    border-top-left-radius:4px; color:var(--td);
+  }
+  .msg.user .bubble {
+    background: linear-gradient(135deg,var(--g2),var(--g3));
+    color:#fff; border-top-right-radius:4px;
+  }
+
+  .bot-avatar {
+    width:32px; height:32px; border-radius:50%;
+    background:var(--g5); border:1px solid #b7dfc4;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0; margin-top:2px;
+  }
+  .user-avatar {
+    width:32px; height:32px; border-radius:50%;
+    background:var(--g3); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:600; flex-shrink:0; margin-top:2px;
+  }
+
+  /* typing indicator */
+  .typing .bubble {
+    display:flex; gap:5px; align-items:center; padding:14px 18px;
+  }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--g4); animation:bounce .9s infinite; }
+  .dot:nth-child(2){animation-delay:.18s}
+  .dot:nth-child(3){animation-delay:.36s}
+  @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+
+  /* product cards inside chat */
+  .rec-grid {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:10px; margin-top:10px;
+  }
+  .rec-card {
+    background:var(--cream); border:1px solid #dde8de;
+    border-radius:12px; overflow:hidden;
+    font-size:12px; line-height:1.4;
+  }
+  .rec-card-img {
+    width:100%; height:80px; object-fit:contain;
+    background:#f0f5f1; padding:4px;
+  }
+  .rec-card-body { padding:8px 10px 10px; }
+  .rec-card-name { font-weight:600; color:var(--g1); font-size:12.5px; margin-bottom:3px; }
+  .rec-card-ref { font-size:10px; color:var(--tl); margin-bottom:5px; }
+  .rec-card-why {
+    font-size:11.5px; color:var(--tm); padding:5px 7px;
+    background:var(--g5); border-radius:7px; margin-top:4px;
+  }
+  .rec-card-pres {
+    display:inline-block; margin-top:6px;
+    font-size:10px; font-weight:600; color:var(--g2);
+    background:var(--warm); border:1px solid #b7dfc4;
+    padding:2px 8px; border-radius:12px;
+  }
+
+  /* disclaimer */
+  .disclaimer {
+    font-size:10.5px; color:var(--tl); font-style:italic;
+    margin-top:8px; padding-top:8px; border-top:1px solid #edf2ee;
+  }
+
+  /* ── INPUT BAR ── */
+  .input-bar {
+    padding:12px 14px;
+    border-top:1px solid #e4ece5;
+    background:var(--warm);
+    display:flex; gap:10px; align-items:flex-end;
+    flex-shrink:0;
+  }
+  #userInput {
+    flex:1; resize:none; border:1.5px solid #dde8de;
+    border-radius:22px; padding:11px 16px;
+    font-family:'DM Sans',sans-serif; font-size:14px;
+    background:var(--cream); color:var(--td);
+    outline:none; max-height:120px; line-height:1.4;
+    transition:border-color .2s;
+  }
+  #userInput:focus { border-color:var(--g3); }
+  #sendBtn {
+    width:44px; height:44px; border-radius:50%;
+    background:linear-gradient(135deg,var(--g2),var(--g3));
+    border:none; cursor:pointer; color:#fff;
+    font-size:18px; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; transition:transform .15s, opacity .15s;
+  }
+  #sendBtn:hover { transform:scale(1.07); }
+  #sendBtn:disabled { opacity:.45; transform:none; cursor:not-allowed; }
+
+  /* scrollbar */
+  #chat::-webkit-scrollbar { width:4px; }
+  #chat::-webkit-scrollbar-track { background:transparent; }
+  #chat::-webkit-scrollbar-thumb { background:#c5d9c8; border-radius:4px; }
+
+  @media(max-width:480px){
+    .rec-grid{ grid-template-columns:1fr; }
+    .bubble{ max-width:92%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="avatar">🌿</div>
+  <div>
+    <h1>Asesor de Suplementos</h1>
+    <p>Describe tus síntomas o lo que buscas — te recomiendo lo ideal</p>
+  </div>
+  <div class="status-dot"></div>
+</header>
+
+<div class="chips-bar" id="chips">
+  <span class="chip" onclick="sendChip(this)">Me cuesta dormir</span>
+  <span class="chip" onclick="sendChip(this)">Quiero bajar de peso</span>
+  <span class="chip" onclick="sendChip(this)">Dolor en las articulaciones</span>
+  <span class="chip" onclick="sendChip(this)">Piel, cabello y uñas</span>
+  <span class="chip" onclick="sendChip(this)">Quiero más energía</span>
+  <span class="chip" onclick="sendChip(this)">Problemas digestivos</span>
+  <span class="chip" onclick="sendChip(this)">Estrés y ansiedad</span>
+  <span class="chip" onclick="sendChip(this)">Fortalecer huesos</span>
+  <span class="chip" onclick="sendChip(this)">Sistema inmune bajo</span>
+  <span class="chip" onclick="sendChip(this)">Suplementos para gym</span>
+</div>
+
+<div id="chat">
+  <div class="msg bot">
+    <div class="bot-avatar">🌿</div>
+    <div class="bubble">
+      ¡Hola! Soy tu asesor de bienestar natural. 👋<br><br>
+      Cuéntame <strong>qué síntomas tienes</strong>, <strong>qué meta de salud buscas</strong>, o simplemente <strong>qué quieres mejorar</strong> — y te recomendaré los suplementos más adecuados del catálogo.<br><br>
+      Puedes escribir con tus propias palabras o tocar uno de los temas de arriba. 🌱
+    </div>
+  </div>
+</div>
+
+<div class="input-bar">
+  <textarea id="userInput" rows="1" placeholder="Ej: me duelen las articulaciones y me cuesta dormir..."></textarea>
+  <button id="sendBtn" onclick="sendMessage()" aria-label="Enviar">➤</button>
+</div>
+
+<script>
+// ── PRODUCT DATABASE ──────────────────────────────────────────────────────────
+// Full catalog for the AI to reference
+const PRODUCTOS = `
+CATÁLOGO COMPLETO DE SUPLEMENTOS:
+
+=== SUEÑO / ESTRÉS / ANSIEDAD ===
+- Magnesium Complex 8 en 1 (VW-158, VW-259, VW-261): Reduce el estrés, mejora el sueño, disminuye calambres y dolores musculares.
+- Magnesium Complex 12 en 1 (VW-157, VW-262): Reduce calambres, tensión y dolor muscular, fortalece huesos y articulaciones.
+- Citrato de Magnesio y Potasio Greensofg (LN-74): Mejora el sueño, reduce estrés y ansiedad, apoya función muscular.
+- Gomas Magnesio + Melatonina Natural Health (NH-186): Mejora la calidad del sueño, reduce el insomnio ocasional.
+- Bisglicinato Natural Health (NH-230): Favorece la relajación y mejora el sueño, reduce estrés y ansiedad.
+- Glicinato de Magnesio Alphanaturals (AL-4): Reduce el estrés, mejora calidad del sueño.
+- Ashwagandha Colon Max (CM-14): Reduce estrés y ansiedad, equilibrio del cortisol, favorece el descanso.
+- Ashwagandha Natural Health (NH-90): Reduce estrés, mejora sueño y concentración, aporta energía.
+- Goma Ashwagandha + Magnesio + Vitamina C (NH-181): Reduce estrés y ansiedad, aumenta energía, apoya inmunidad.
+- Valeriana + Toronjil + Pasiflora (IM-43): Concilia el sueño, reduce estrés, ansiedad y nerviosismo.
+- Citrato de Magnesio Natural Health (NH-92): Reduce calambres y fatiga muscular, equilibrio de electrolitos.
+- Cloruro de Magnesio Natural Health (NH-93): Función muscular y nerviosa, salud ósea, reduce cansancio.
+
+=== ENERGÍA / VITALIDAD / RENDIMIENTO ===
+- L-Carnitine (VW-156): Aumenta energía y resistencia, mejora rendimiento en entrenamiento, recuperación muscular.
+- Creatine Vitalherb (VW-154): Aumenta fuerza y potencia muscular, mejora rendimiento intenso, recuperación post-entreno.
+- Creatine Vital World x350g (VW-235): Creatina micronizada, mejora fuerza, rendimiento y potencia.
+- Proteína Shilajit Vital World (VW-222): Proteína isolada de suero 90%, rendimiento y recuperación muscular.
+- Lemme Burn (QS-212): Apoya el metabolismo energético, mejora rendimiento físico y resistencia.
+- Shilajit Cápsulas (VW-160): Energía, vitalidad y resistencia, rendimiento físico y mental.
+- Shilajit Compota (LN-68), Sachet (LN-69), Líquido x1000 (NH-191): Energía y vitalidad, rendimiento físico, reduce cansancio.
+- Té Matcha Natural Health (NH-102): Energía y concentración, acelera el metabolismo, enfoque mental.
+- Vita F3 (SU-171), Torovitol (NP-130), Torofull (NE-89), Enano 180 (BE-5): Energía y vitalidad, rendimiento físico.
+- Triple Maca (NH-103), Maca Negra Maca Roja (NP-129): Energía, resistencia, equilibrio hormonal, libido.
+- KOMB (NP-128), INVICTUS (GE-211): Energía y vitalidad, rendimiento físico y mental.
+- Nerzin (NH-98): Energía con vitaminas B, apoya el sistema nervioso.
+- Vitaabc (NH-104): Refuerza defensas, energía, piel, vista y sistema nervioso.
+
+=== ARTICULACIONES / HUESOS / MOVILIDAD ===
+- Flexacil Ultra (VW-155): Articulaciones más flexibles y ágiles, confort al caminar y ejercitarse.
+- Vitamina D3 & K2 (PS-137, PS-233): Absorción del calcio, huesos y dientes, salud cardiovascular.
+- Trigosamine (IM-47): Fortalece huesos y articulaciones, reduce dolor y rigidez, mejora movilidad.
+- Reuma Flex (CL-8): Alivia dolor articular y muscular, manejo de artritis y artrosis, reduce inflamación.
+- Colágeno Peptides Vital World (VW-150): Fortalece articulaciones y huesos.
+- Colágeno con Péptidos + Proteína (VW-268): Articulaciones, huesos, recuperación muscular.
+- Glucosamina Líquida x1000ml (NL-208): Salud articular con glucosamina, condroitín y calcio.
+- Barr1do Art (LN-62): Salud de articulaciones, reduce rigidez y molestias articulares, movilidad.
+- Cartical Nutri Pluss (NL-107): Cartílagos y articulaciones, movilidad y flexibilidad.
+- Cal-D3 (NL-106, NL-234): Fortalece huesos y dientes, vitamina D3, osteopenia y osteoporosis.
+- Omega 3 Greensofg (LN-33), Omega 3,6,9 (LN-34): Reduce inflamación y dolor articular.
+- Xingrass (CL-9), Flexdl (IM-41): Gel para masajes, alivia dolor muscular y articular.
+- Pumpking Semillas de Calabaza (PS-135, PS-136): Salud de la próstata, urinaria y hormonal.
+
+=== PIEL / CABELLO / UÑAS / BELLEZA ===
+- Collagen Peptides Vital World (VW-150): Elasticidad y firmeza de la piel, fortalece cabello y uñas.
+- Liposomal Vitamina C (VW-151): Producción de colágeno, antioxidante, piel y uñas.
+- Colágeno Hidrolizado Greensofg (LN-75): Piel firme y elástica, cabello y uñas, salud muscular.
+- Con Biotina Greensofg (LN-76): Fortalece cabello, piel y uñas, reduce la caída del cabello.
+- Vitamina E + Selenio Greensofg (LN-84): Antioxidante celular, salud de la piel, envejecimiento saludable.
+- Colágeno Hidrolizado y Biotina Colon Max (CM-19): Fortalece cabello y uñas, apoya articulaciones.
+- Resveratrol Greensofg (LN-83): Potente antioxidante, piel, articulaciones y uñas, envejecimiento saludable.
+- Femivid (IM-40): Cabello, piel y uñas con biotina, ácido fólico y B12.
+- Gomitas Siemprebell (NH-95): Belleza femenina — cabello, uñas y piel, equilibrio hormonal.
+- NAD+ Resveratrol Greensofg (LN-82): Energía celular, envejecimiento saludable, antioxidante.
+- Colágeno Hidrolizado con Cúrcuma Nutri Pluss (NL-179): Piel firme, articulaciones y antioxidante.
+- Múltiples colágenos marinos e hidrolizados: VW-268, NL-111, CM-18, CM-25, CO-237, SU-142, LN-64, WN-228, etc.
+
+=== DIGESTIÓN / INTESTINO / FIBRA ===
+- FOS Probióticos y Zinc (LN-1): pH íntimo, salud vaginal, flora intestinal.
+- URO Vital World (VW-266): Salud del tracto urinario, digestión, flora intestinal.
+- Col-Nclin (NH-94), Maxi Clean (CM-21), Batido Verde (VC-161, CM-15): Limpieza intestinal, tránsito, desintoxicación.
+- Pitahaya (VC-162), Psyllium (VC-163), QB Max (NH-99): Tránsito intestinal, estreñimiento, saciedad.
+- Semilla de Aguaje (NH-101): Saciedad, control de peso, digestión, glucosa.
+- Fibraplus (IS-54), Lasskol (IS-57): Tránsito intestinal, estreñimiento, control de peso.
+- Fibra de Flor de Jamaica (VC-241): Digestión y bienestar intestinal.
+- Inositol Efervescente (CO-11), Inositol Greensofg (LN-81), Gomas de Inositol (NH-184): SOP, equilibrio hormonal, ciclo menstrual.
+- Citrato de Magnesio (múltiples): Efecto laxante suave, relajación muscular.
+- Clorofila (NP-125, LN-63, IS-52, SU-141, LN-178): Desintoxicación, digestión, oxigenación.
+- Bililax (NP-257): Digestión, protege el hígado, colesterol.
+- Drehep (LN-258): Desintoxica, mejora digestión, reduce hinchazón.
+- G4-STR1 (SU-144), G-Callen3 (PR-172): Digestión y malestar estomacal.
+
+=== CONTROL DE PESO / METABOLISMO ===
+- Lemme Burn (QS-212): Metabolismo energético, rendimiento físico.
+- Semilla de Aguaje (NH-101): Saciedad y control del apetito.
+- Té Matcha Natural Health (NH-102): Acelera el metabolismo.
+- Batido Verde Vitalys (VC-161), Maxi Clean (CM-21), Batido Verde Colon Max (CM-15): Control de peso y saciedad.
+- Psyllium (VC-163): Alto en fibra, saciedad.
+- Blood Sugar Vital World (VW-149, VW-260): Equilibrio de glucosa, metabolismo, picos de azúcar.
+- Greenberry (IS-56): Metabolismo y control de peso.
+- Ultradoll (IS-59): Control de peso, efecto diurético suave.
+- DIA-V-TIC (LN-204): Niveles saludables de glucosa.
+- Gomas de Vinagre de Manzana (NH-213): Digestión, control del apetito, glucosa.
+
+=== INMUNIDAD / DEFENSAS ===
+- Liposomal Vitamina C (VW-151): Refuerza el sistema inmunológico.
+- Vitamina D3 & K2 (PS-137, PS-233): Apoya el sistema inmunológico.
+- Betaglucano de Ganoderma (NH-91): Refuerza inmunidad, respuesta antiinflamatoria.
+- Oil of Oregano (PS-133, PS-134), Orégano Colon Max (CM-24): Antibacteriano, antimicrobiano, inmunidad.
+- Candida Cleanse (VW-153): Flora intestinal, digestión.
+- Nutra Factors (IM-46): Calostro bovino, probióticos, inmunidad.
+- Factor de Transferencia (NL-113, NL-180, NL-242): Fortalece el sistema inmunológico.
+- Proxx (IS-58): Defensas, garganta y vías respiratorias, vitamina C del camu camu.
+- Bronco X Max (IM-37), Ucalizan (NM-124), Pr Polizan (NM-123): Tos, gripa, garganta, vías respiratorias.
+
+=== CONCENTRACIÓN / MEMORIA / CEREBRO ===
+- NAD+ Resveratrol (NH-97, NH-236): Energía celular, concentración, función cognitiva.
+- Melena de León (NH-105): Memoria y concentración, salud del sistema nervioso.
+- Ginkgo Biloba Alnature (IM-167), Ginkgo Biloba Nutri Pluss (NL-115): Memoria, concentración, circulación cerebral.
+- Vino Cerebral Prosimpo (NL-120): Memoria, concentración y rendimiento mental.
+- Vitacerebrina (NL-217): Energía natural, salud cognitiva.
+- Omega 3 Greensofg (LN-33): Concentración y rendimiento mental.
+
+=== EQUILIBRIO HORMONAL / MUJER ===
+- Inositol (CO-11, LN-81, NH-184): SOP, ciclo menstrual, equilibrio hormonal.
+- Isoflavonas Greensofg (LN-168), Isoflavonas de Soya Prame (PS-245): Menopausia, síntomas premenstruales.
+- Femvit Ovaries Prosimpo (NL-114): Hormonas femeninas, ansiedad, estrés, sueño.
+- Femivid (IM-40): Biotina, ácido fólico, B12, inmunidad femenina.
+- Gomitas Siemprebell (NH-95): Belleza femenina, equilibrio hormonal.
+- Triple Maca (NH-103): Equilibrio hormonal, libido, energía.
+
+=== PRÓSTATA / SALUD MASCULINA ===
+- Pumpking Semillas de Calabaza (PS-135, PS-136): Salud de la próstata, urinaria, hormonal.
+- Improtec (IM-44): Salud de la próstata, flujo urinario.
+- Finpros (IS-55): Próstata, flujo urinario, inflamación prostática.
+- Prostamax (NL-117): Próstata, sistema urinario, antioxidante.
+- URO Vital World (VW-266): Tracto urinario, digestión, flora intestinal.
+- Citra-Pot Men's Alpha Naturals (AL-3): Testosterona con zinc, sistema inmune, energía y fertilidad.
+
+=== ANTIENVEJECIMIENTO / ANTIOXIDANTE ===
+- Resveratrol Greensofg (LN-83): Antioxidante, cardiovascular, envejecimiento saludable.
+- NAD+ Resveratrol Greensofg (LN-82): Energía celular, función cognitiva, antioxidante.
+- Vitamina E + Selenio (LN-84): Antioxidante celular, cardiovascular, piel.
+- Liposomal Vitamina C (VW-151): Antioxidante, colágeno, inmunidad.
+
+=== NIÑOS ===
+- Nutri Pluss Kids (NL-207), Aptmax Niños (CM-13), Creci Fuerte (CM-20): Crecimiento, desarrollo, inmunidad, energía.
+- Ninosten (SU-209), Ninosten Líquido (SU-231): Inmunidad, huesos, desarrollo cognitivo.
+- Avena Kids (NA-220): Desarrollo cerebral con EPA y DHA, crecimiento.
+- Nutra-kist (IS-49): Inmunidad y concentración escolar.
+- Golkds HR (NP-239): Fortalecimiento óseo, inmunidad, energía.
+- Vitcalpro (NH-240): Vitaminas y minerales para el crecimiento.
+
+=== CARDIOVASCULAR / CIRCULACIÓN ===
+- Omega 3 (LN-33, LN-34, CM-22, CM-23): Triglicéridos, circulación, corazón.
+- Perlas de Ajo Rogoff (IM-42): Cardiovascular, colesterol, circulación.
+- Ajovit (LN-60): Cardiovascular, circulación, inmunidad.
+- Circulan (IS-50): Circulación sanguínea, cardiovascular, depuración.
+- Ferrohenoslin (GE-251): Anemia, transporte de oxígeno, cansancio.
+- Hierro Aminoquelado Prosimpo (PR-227): Anemia, energía, sistema nervioso.
+
+=== HÍGADO / DESINTOXICACIÓN ===
+- Dren Hepatol (NL-112): Función del hígado, drenante, desintoxicación.
+- Bililax (NP-257): Digestión, protege el hígado, colesterol.
+- Drehep (LN-258): Desintoxica, digestión, hinchazón.
+- Alcachofa Suminat (SU-248): Salud digestiva y hepática, antioxidante.
+- Zarmit (LN-71), Extravid (LN-65): Depuración, función hepática.
+
+=== GLUCOSA / DIABETES DE APOYO ===
+- Blood Sugar Vital World (VW-149, VW-260): Equilibrio de glucosa, metabolismo, picos de azúcar.
+- DIA-V-TIC (LN-204): Niveles saludables de glucosa.
+- Gomas de Vinagre de Manzana (NH-213): Glucosa, digestión, apetito.
+
+=== DOLORES / MIGRAÑA ===
+- Migra Max Prosimpo (NL-199): Migrañas y dolores de cabeza, circulación y oxigenación cerebral.
+- Reuma Flex (CL-8): Dolor articular y muscular, artritis, artrosis.
+- Xingrass (CL-9), Flexdl (IM-41): Gel para dolor muscular y articular.
+- Caléndula Natural Medy (NM-173): Irritaciones, inflamación, cicatrización.
+`;
+
+const SYSTEM_PROMPT = `Eres un asesor de bienestar natural amigable y empático que trabaja para una tienda de suplementos naturales en Colombia. Tu rol es escuchar los síntomas o necesidades del cliente y recomendar los productos más apropiados del catálogo.
+
+REGLAS IMPORTANTES:
+1. Nunca diagnostiques enfermedades ni reemplaces a un médico. Siempre recomienda consultar un profesional de la salud para condiciones médicas.
+2. Recomienda MÁXIMO 4 productos por respuesta — los más relevantes.
+3. Sé cálido, empático y usa lenguaje colombiano natural.
+4. Para cada producto recomendado, indica: nombre, referencia (Ref.), y POR QUÉ es bueno para lo que el cliente describió.
+5. Si el cliente describe algo que podría ser una condición médica seria, recomienda ver un médico ADEMÁS de los suplementos.
+6. Responde en español colombiano natural y amigable.
+7. Cuando recomiendas productos, usa EXACTAMENTE este formato JSON al final de tu respuesta para que el sistema pueda mostrar las tarjetas de productos:
+
+RECOMENDACIONES_JSON:[{"ref":"VW-158","nombre":"Magnesium Complex 8 en 1","razon":"razón breve de por qué este producto"},{"ref":"...","nombre":"...","razon":"..."}]
+
+8. Antes del JSON, escribe tu respuesta conversacional normal explicando las recomendaciones.
+9. Si el cliente hace preguntas generales sin pedir recomendaciones, responde normalmente sin el JSON.
+
+CATÁLOGO DISPONIBLE:
+${PRODUCTOS}`;
+
+// Image map — ref → base64 (loaded from catalog)
+// We'll use placeholder colored boxes when images aren't available
+const IMG_COLORS = {
+  'VW': '#2d6a4f', 'LN': '#40916c', 'NH': '#52b788',
+  'CM': '#74c69d', 'PS': '#b7e4c7', 'IS': '#d8f3dc',
+  'NL': '#1b4332', 'GE': '#081c15', 'IM': '#2d6a4f',
+  'CO': '#40916c', 'SU': '#52b788', 'QS': '#74c69d',
+  'BE': '#95d5b2', 'NE': '#b7e4c7', 'NP': '#d8f3dc',
+  'AL': '#1b4332', 'NA': '#2d6a4f', 'WN': '#40916c',
+  'ML': '#52b788', 'PR': '#74c69d', 'VC': '#95d5b2',
+};
+
+function getImgEl(ref) {
+  const prefix = ref.split('-')[0];
+  const color = IMG_COLORS[prefix] || '#40916c';
+  // Return a styled placeholder div
+  return `<div style="width:100%;height:80px;background:${color}20;display:flex;align-items:center;justify-content:center;font-size:28px;">🌿</div>`;
+}
+
+// ── CONVERSATION STATE ────────────────────────────────────────────────────────
+const history = [];
+let isLoading = false;
+
+// ── UI HELPERS ────────────────────────────────────────────────────────────────
+const chatEl = document.getElementById('chat');
+const inputEl = document.getElementById('userInput');
+const btnEl = document.getElementById('sendBtn');
+
+function scrollBottom() {
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+function addMessage(role, content) {
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  if (role === 'bot') {
+    div.innerHTML = `<div class="bot-avatar">🌿</div><div class="bubble">${content}</div>`;
+  } else {
+    const initials = 'Tú';
+    div.innerHTML = `<div class="user-avatar">${initials}</div><div class="bubble">${content}</div>`;
+  }
+  chatEl.appendChild(div);
+  scrollBottom();
+  return div;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot typing';
+  div.id = 'typing';
+  div.innerHTML = `<div class="bot-avatar">🌿</div><div class="bubble"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
+  chatEl.appendChild(div);
+  scrollBottom();
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function parseAndRender(rawText) {
+  // Extract JSON recommendations
+  const jsonMatch = rawText.match(/RECOMENDACIONES_JSON:(\[.*?\])/s);
+  let recs = [];
+  let text = rawText;
+
+  if (jsonMatch) {
+    try {
+      recs = JSON.parse(jsonMatch[1]);
+      text = rawText.replace(/RECOMENDACIONES_JSON:\[.*?\]/s, '').trim();
+    } catch(e) {}
+  }
+
+  // Convert markdown-ish to HTML
+  text = text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+
+  let html = text;
+
+  if (recs.length > 0) {
+    html += `<div class="rec-grid">`;
+    for (const r of recs) {
+      const imgHtml = getImgEl(r.ref);
+      html += `
+        <div class="rec-card">
+          ${imgHtml}
+          <div class="rec-card-body">
+            <div class="rec-card-name">${r.nombre}</div>
+            <div class="rec-card-ref">Ref. ${r.ref}</div>
+            <div class="rec-card-why">✦ ${r.razon}</div>
+            <span class="rec-card-pres">Ver en catálogo</span>
+          </div>
+        </div>`;
+    }
+    html += `</div>`;
+    html += `<div class="disclaimer">⚕️ Estos suplementos no reemplazan la consulta médica. Ante cualquier condición de salud, consulta a tu médico o profesional de salud.</div>`;
+  }
+
+  return html;
+}
+
+// ── SEND MESSAGE ──────────────────────────────────────────────────────────────
+async function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text || isLoading) return;
+
+  inputEl.value = '';
+  inputEl.style.height = 'auto';
+  isLoading = true;
+  btnEl.disabled = true;
+
+  // Add user message to UI
+  addMessage('user', text.replace(/</g,'&lt;'));
+
+  // Add to history
+  history.push({ role: 'user', content: text });
+
+  // Show typing
+  showTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: history
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.error) throw new Error(data.error.message);
+
+    const assistantText = data.content?.[0]?.text || 'Lo siento, ocurrió un error. Por favor intenta de nuevo.';
+
+    // Add to history
+    history.push({ role: 'assistant', content: assistantText });
+
+    removeTyping();
+    const rendered = parseAndRender(assistantText);
+    addMessage('bot', rendered);
+
+  } catch (err) {
+    removeTyping();
+    addMessage('bot', `⚠️ Ocurrió un error al conectar con el asesor. Por favor verifica tu conexión e intenta de nuevo.<br><small style="color:var(--tl)">${err.message}</small>`);
+  }
+
+  isLoading = false;
+  btnEl.disabled = false;
+  inputEl.focus();
+}
+
+function sendChip(el) {
+  inputEl.value = el.textContent;
+  sendMessage();
+}
+
+// Auto-resize textarea
+inputEl.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+inputEl.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</script>
+</body>
+</html>
