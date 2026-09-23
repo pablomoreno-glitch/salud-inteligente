@@ -7,7 +7,10 @@ API escalable para catálogo de suplementos naturales con asesor inteligente bas
 ```
 salud-inteligente/
 ├── public/                     ← sitio estático que publica Netlify
-│   ├── index.html              ← catálogo completo con botón flotante del asesor IA
+│   ├── index.html              ← catálogo completo (productos e imágenes)
+│   ├── catalogo.css            ← diseño mobile-first del catálogo y del panel del asesor
+│   ├── catalogo.js             ← subsecciones por necesidad, navegación y buscador
+│   ├── asesor-panel.js         ← abrir/cerrar el asesor (✕, fuera, Escape, botón atrás)
 │   └── asesor.html             ← chat del asesor (llama a /api/chat)
 ├── netlify/
 │   └── functions/

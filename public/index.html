@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#1a3a2a">
 <title>Catálogo de Suplementos Naturales 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -61,6 +62,7 @@ footer strong{color:var(--green-light)}
 @media(max-width:600px){.hero{padding:50px 20px 40px}.product-grid{grid-template-columns:1fr 1fr;gap:12px}.main{padding:24px 12px 60px}.card-img{height:140px}}
 @media(max-width:380px){.product-grid{grid-template-columns:1fr}}
 </style>
+<link rel="stylesheet" href="catalogo.css">
 </head>
 <body>
 
@@ -74,20 +76,29 @@ footer strong{color:var(--green-light)}
   </div>
 </div>
 
-<nav class="cat-nav" id="catNav">
-  <button class="cat-btn active" onclick="scrollToSection('virales')">⭐ Virales</button>
-  <button class="cat-btn" onclick="scrollToSection('greensofg')">🌿 Greensofg</button>
-  <button class="cat-btn" onclick="scrollToSection('tendencia')">🔥 Tendencia</button>
-  <button class="cat-btn" onclick="scrollToSection('colagenos')">💎 Colágenos</button>
-  <button class="cat-btn" onclick="scrollToSection('fibras')">🌾 Fibras</button>
-  <button class="cat-btn" onclick="scrollToSection('liquidos')">💧 Líquidos</button>
-  <button class="cat-btn" onclick="scrollToSection('gomas')">🍬 Gomas</button>
-  <button class="cat-btn" onclick="scrollToSection('ninos')">👶 Niños</button>
-  <button class="cat-btn" onclick="scrollToSection('polvos')">🥄 Polvos</button>
-  <button class="cat-btn" onclick="scrollToSection('blister')">💊 Blíster</button>
+<div class="topbar" id="topbar">
+  <div class="search-wrap">
+    <span class="search-ico" aria-hidden="true">🔍</span>
+    <input id="search" type="search" placeholder="Buscar producto, referencia o beneficio…" autocomplete="off" enterkeyhint="search" aria-label="Buscar en el catálogo">
+    <button id="searchClear" type="button" aria-label="Borrar búsqueda" hidden>✕</button>
+  </div>
+  <nav class="cat-nav" id="catNav" aria-label="Categorías">
+  <button type="button" class="cat-btn active" data-target="virales">⭐ Virales</button>
+  <button type="button" class="cat-btn" data-target="greensofg">🌿 Greensofg</button>
+  <button type="button" class="cat-btn" data-target="tendencia">🔥 Tendencia</button>
+  <button type="button" class="cat-btn" data-target="colagenos">💎 Colágenos</button>
+  <button type="button" class="cat-btn" data-target="fibras">🌾 Fibras</button>
+  <button type="button" class="cat-btn" data-target="liquidos">💧 Líquidos</button>
+  <button type="button" class="cat-btn" data-target="gomas">🍬 Gomas</button>
+  <button type="button" class="cat-btn" data-target="ninos">👶 Niños</button>
+  <button type="button" class="cat-btn" data-target="polvos">🥄 Polvos</button>
+  <button type="button" class="cat-btn" data-target="blister">💊 Blíster</button>
 </nav>
+  <div class="sub-nav" id="subNav" aria-label="Subsecciones"></div>
+</div>
 
 <div class="main">
+  <p class="no-results" id="noResults" hidden>No encontramos productos con esa búsqueda. Prueba con otra palabra o pregúntale al asesor 🌿.</p>
   
   <div class="section-header" id="virales">
     <span class="section-num">01</span>
@@ -2276,129 +2287,9 @@ footer strong{color:var(--green-light)}
 </footer>
 
 <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<script>
-window.addEventListener('scroll',()=>{
-  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>400);
-});
-function scrollToSection(id){
-  const el=document.getElementById(id);
-  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-}
-const sections=['virales','greensofg','tendencia','colagenos','fibras','liquidos','gomas','ninos','polvos','blister'];
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const idx=sections.indexOf(entry.target.id);
-      document.querySelectorAll('.cat-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
-    }
-  });
-},{threshold:0.15,rootMargin:'-80px 0px -60% 0px'});
-sections.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
-</script>
+<script src="catalogo.js"></script>
 
-<!-- FLOATING ADVISOR BUTTON -->
-<style>
-#advisorToggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 6px 24px rgba(45,106,79,.45);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  transition: transform .2s, box-shadow .2s;
-  animation: advisorPop 0.5s 1.5s cubic-bezier(.34,1.56,.64,1) both;
-}
-@keyframes advisorPop {
-  from { transform: scale(0); opacity:0; }
-  to   { transform: scale(1); opacity:1; }
-}
-#advisorToggle:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(45,106,79,.55); }
-#advisorToggle .badge-notif {
-  position: absolute;
-  top: 0; right: 0;
-  width: 18px; height: 18px;
-  background: #e63946; color:#fff;
-  border-radius: 50%; font-size: 11px; font-weight:700;
-  display: flex; align-items:center; justify-content:center;
-  border: 2px solid var(--cream, #f8f5f0);
-}
-#advisorToggle .tooltip {
-  position: absolute;
-  right: 72px;
-  background: #1a3a2a;
-  color: #d8f3dc;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 20px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateX(8px);
-  transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
-}
-#advisorToggle:hover .tooltip { opacity: 1; transform: translateX(0); }
-
-/* Panel overlay */
-#advisorOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.35);
-  z-index: 9998;
-  display: none;
-  animation: fadeIn .2s ease;
-}
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-/* Advisor panel */
-#advisorPanel {
-  position: fixed;
-  right: 0; top: 0; bottom: 0;
-  width: min(420px, 100vw);
-  z-index: 9999;
-  background: #f8f5f0;
-  box-shadow: -4px 0 40px rgba(0,0,0,.2);
-  transform: translateX(100%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
-  display: flex;
-  flex-direction: column;
-}
-#advisorPanel.open {
-  transform: translateX(0);
-}
-#advisorPanel iframe {
-  flex: 1;
-  border: none;
-  width: 100%;
-  height: 100%;
-}
-#advisorClose {
-  position: absolute;
-  top: 14px; left: -48px;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: #fff;
-  border: none; cursor: pointer;
-  font-size: 18px;
-  display: flex; align-items:center; justify-content:center;
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  z-index: 10000;
-  transition: background .15s;
-}
-#advisorClose:hover { background: #fee2e2; }
-</style>
+<!-- FLOATING ADVISOR BUTTON (estilos en catalogo.css) -->
 
 <button id="advisorToggle" onclick="openAdvisor()" aria-label="Abrir asesor de suplementos">
   🌿
@@ -2408,35 +2299,19 @@ sections.forEach(id=>{const el=document.getElementById(id);if(el)observer.observ
 
 <div id="advisorOverlay" onclick="closeAdvisor()"></div>
 
-<div id="advisorPanel">
-  <button id="advisorClose" onclick="closeAdvisor()" aria-label="Cerrar">✕</button>
+<div id="advisorPanel" role="dialog" aria-modal="true" aria-labelledby="advisorTitle" aria-hidden="true">
+  <div class="advisor-bar">
+    <div class="advisor-bar-ico">🌿</div>
+    <div class="advisor-bar-txt">
+      <strong id="advisorTitle">Asesor de Suplementos</strong>
+      <span><i class="advisor-dot"></i>En línea · IA</span>
+    </div>
+    <button id="advisorClose" type="button" onclick="closeAdvisor()" aria-label="Cerrar asesor">✕</button>
+  </div>
   <iframe id="advisorFrame" src="" title="Asesor de Suplementos IA" allow=""></iframe>
 </div>
 
-<script>
-let advisorOpened = false;
-function openAdvisor() {
-  const panel = document.getElementById('advisorPanel');
-  const overlay = document.getElementById('advisorOverlay');
-  const frame = document.getElementById('advisorFrame');
-  if (!advisorOpened) {
-    frame.src = 'asesor.html';
-    advisorOpened = true;
-  }
-  panel.classList.add('open');
-  overlay.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-  // Remove notification badge after first open
-  const badge = document.querySelector('#advisorToggle .badge-notif');
-  if (badge) badge.style.display = 'none';
-}
-function closeAdvisor() {
-  document.getElementById('advisorPanel').classList.remove('open');
-  document.getElementById('advisorOverlay').style.display = 'none';
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdvisor(); });
-</script>
+<script src="asesor-panel.js"></script>
 
 </body>
 </html>

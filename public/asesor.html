@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a3a2a">
+<script>if (/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embedded');</script>
 <title>Asesor de Suplementos Naturales</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -23,12 +25,15 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    height: 100dvh;
   }
+  /* Dentro del catálogo el panel ya muestra su propia barra con el botón de cerrar */
+  .embedded header { display: none; }
 
   /* HEADER */
   header {
     background: var(--g1);
-    padding: 14px 20px;
+    padding: calc(14px + env(safe-area-inset-top)) 20px 14px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -69,6 +74,14 @@
     transition: all .15s; font-family: 'DM Sans', sans-serif;
   }
   .chip:hover { background: var(--g4); color: var(--g1); }
+  @media (max-width: 600px) {
+    .chips {
+      flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+      padding: 9px 12px; overscroll-behavior-x: contain;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex-shrink: 0; white-space: nowrap; font-size: 12.5px; padding: 7px 13px; }
+  }
 
   /* CHAT */
   #chat {
@@ -137,14 +150,14 @@
 
   /* Aviso de salud (INVIMA) */
   .health-notice {
-    flex-shrink: 0; padding: 7px 14px;
+    flex-shrink: 0; padding: 6px 14px;
     background: var(--g5); border-top: 1px solid var(--g6);
     font-size: 10.5px; line-height: 1.4; color: var(--tm); text-align: center;
   }
 
   /* INPUT */
   .input-bar {
-    padding: 11px 14px; border-top: 1px solid var(--border);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border);
     background: var(--warm); display: flex; gap: 9px;
     align-items: flex-end; flex-shrink: 0;
   }
@@ -169,7 +182,12 @@
 
   @media (max-width: 480px) {
     .recs { grid-template-columns: 1fr; }
-    .bubble { max-width: 92%; font-size: 13px; }
+    .bubble { max-width: 86%; font-size: 14px; }
+    #chat { padding: 14px 10px; }
+    /* 16px evita que iPhone haga zoom al escribir */
+    #inp { font-size: 16px; padding: 10px 14px; }
+    #btn { width: 44px; height: 44px; }
+    .health-notice { font-size: 10px; padding: 5px 12px; }
   }
 </style>
 </head>
@@ -217,7 +235,7 @@
 </div>
 
 <div class="input-bar">
-  <textarea id="inp" rows="1" placeholder="Ej: me duelen las articulaciones y tengo insomnio..."></textarea>
+  <textarea id="inp" rows="1" placeholder="Ej: dolor de rodillas e insomnio…"></textarea>
   <button id="btn" onclick="send()" aria-label="Enviar">➤</button>
 </div>
 
