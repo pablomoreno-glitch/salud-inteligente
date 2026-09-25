@@ -1,0 +1,19 @@
+# Run on a server that already has a Caddy in front (the laVillaSB VPS).
+#
+# That Caddy joins nothing of ours: instead our gateway joins its Docker network,
+# so its Caddyfile can proxy api.saludinteligente.lat to salud_gateway:8110.
+# The storefront is served by Netlify, so the frontend container is not started.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build
+
+services:
+  gateway:
+    networks: [salud, edge]
+
+  frontend:
+    profiles: ["vps-storefront"]
+
+networks:
+  edge:
+    name: ${EDGE_NETWORK:-lavillasb_lavilla}
+    external: true

@@ -1,6 +1,9 @@
-# Production overrides for the API host (VPS).
+# Production overrides for the API host (VPS): no published ports, no insecure defaults.
 #
-#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# Own server (this stack brings its own Caddy for TLS):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.caddy.yml up -d --build
+# Server shared with laVillaSB (its Caddy terminates TLS and proxies to our gateway):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build
 #
 # Differences from local:
 # - No service publishes a host port; Caddy (80/443) is the only public process.
@@ -38,7 +41,8 @@ services:
     ports: !reset []
     environment:
       INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY}
+      # Optional at boot: without it the advisor answers 500 and everything else works.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
 
   gateway:
     ports: !reset []
@@ -54,25 +58,3 @@ services:
 
   frontend:
     ports: !reset []
-
-  caddy:
-    image: caddy:2-alpine
-    container_name: salud_caddy
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    environment:
-      ROOT_DOMAIN: ${ROOT_DOMAIN:?set ROOT_DOMAIN}
-      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL}
-    volumes:
-      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on: [gateway, frontend]
-    restart: unless-stopped
-    networks: [salud]
-
-volumes:
-  caddy_data:
-  caddy_config:

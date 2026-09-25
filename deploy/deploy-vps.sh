@@ -25,7 +25,7 @@ APP_DIR="${APP_DIR:-/opt/salud-inteligente}"
 ADMIN_EMAIL="${ADMIN_EMAIL:-admin@${ROOT_DOMAIN}}"
 
 SSH=(ssh -o StrictHostKeyChecking=accept-new "${VPS_USER}@${VPS_HOST}")
-COMPOSE="docker compose -f docker-compose.yml -f docker-compose.prod.yml"
+COMPOSE="docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.caddy.yml"
 
 log() { printf '\n\033[1;34m==>\033[0m %s\n' "$1"; }
 
