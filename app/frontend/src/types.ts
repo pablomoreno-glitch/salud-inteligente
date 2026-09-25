@@ -262,6 +262,20 @@ export interface ContactMessage {
   created_at: string;
 }
 
+export interface OrderNotification {
+  id: number;
+  order_code: string | null;
+  recipient: string;
+  status: "sent" | "failed" | "skipped";
+  error: string | null;
+  created_at: string;
+}
+
+export interface NotificationStatus {
+  sms_configured: boolean;
+  order_sms_to: string;
+}
+
 export interface AdminUser {
   id: number;
   name: string;

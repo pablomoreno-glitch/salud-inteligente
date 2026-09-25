@@ -55,6 +55,8 @@ async def client_with_env_contacts(tmp_path, monkeypatch):
     monkeypatch.setenv("INTERNAL_TOKEN", TEST_INTERNAL_TOKEN)
     monkeypatch.setenv("BUSINESS_WHATSAPP", "573001234567")
     monkeypatch.setenv("BUSINESS_EMAIL", "hola@saludinteligente.lat")
+    # docker compose passes unset variables as empty strings
+    monkeypatch.setenv("BUSINESS_CITY", "")
 
     _reset_app_modules()
     main = importlib.import_module("src.main")

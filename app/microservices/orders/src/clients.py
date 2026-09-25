@@ -73,3 +73,28 @@ async def get_whatsapp_number() -> str | None:
     except httpx.HTTPError as exc:
         logger.warning("No se pudo obtener el WhatsApp del negocio: %s", exc)
         return None
+
+
+async def notify_order_created(order: dict) -> None:
+    """Tell the notifications service about a new order (it texts the business).
+
+    Runs after the response is sent. Never raises: an SMS problem must never
+    affect a customer's order.
+    """
+    event = {
+        "order_code": order["code"],
+        "customer_name": order["customer_name"],
+        "customer_phone": order["customer_phone"],
+        "customer_city": order["customer_city"],
+        "items": [{"name": i["name"], "quantity": i["quantity"]} for i in order["items"]],
+        "total": order["total"],
+        "has_unpriced": order["has_unpriced"],
+    }
+    try:
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.post(
+                f"{settings.NOTIFICATIONS_URL}/events/order-created", json=event, headers=_headers()
+            )
+            response.raise_for_status()
+    except Exception as exc:  # noqa: BLE001 - fire-and-forget by design
+        logger.warning("No se pudo notificar el pedido %s: %s", order["code"], exc)

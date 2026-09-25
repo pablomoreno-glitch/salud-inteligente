@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     CATALOG_URL: str = "http://catalog:9202"
     INVENTORY_URL: str = "http://inventory:9203"
     BUSINESS_URL: str = "http://business:9201"
+    NOTIFICATIONS_URL: str = "http://notifications:9206"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

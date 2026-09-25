@@ -6,3 +6,4 @@ CREATE DATABASE salud_catalog;
 CREATE DATABASE salud_inventory;
 CREATE DATABASE salud_orders;
 CREATE DATABASE salud_advisor;
+CREATE DATABASE salud_notifications;

@@ -23,6 +23,11 @@ Each group is independently verifiable; the owner of each group is noted.
 - [x] 3.1 orders: carts, checkout with catalog snapshot, stock reservation and compensation, WhatsApp link, lifecycle, tracking, metrics, tests with mocked upstreams.
 - [x] 3.2 advisor: Claude client, catalog context cache, RECS parsing and validation, legacy error contract, stats, tests with a mocked Anthropic API.
 
+## 3b. Notifications (coordinator, owner request 2026-09-25)
+
+- [x] 3.3 notifications service: SMS to +57 301 8000324 for every new order via Twilio, delivery log, admin endpoints, tests with a mocked Twilio API.
+- [x] 3.4 Business WhatsApp +57 301 8000324 as the default contact channel; blank contact variables return `null`.
+
 ## 4. Gateway (executor C)
 
 - [x] 4.1 Laravel 12 skeleton with Sanctum, Postgres, Dockerfile and entrypoint (migrate, seed admin only if missing).

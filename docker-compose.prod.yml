@@ -30,6 +30,10 @@ services:
     ports: !reset []
     environment:
       INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  notifications:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
   advisor:
     ports: !reset []
     environment:

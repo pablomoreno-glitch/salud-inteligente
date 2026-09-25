@@ -270,6 +270,22 @@ export const endpoints: ApiEndpoint[] = [
     group: "Administración",
     admin: true,
   },
+  {
+    method: "GET",
+    path: "/admin/notifications",
+    description: "SMS enviados al negocio por cada pedido nuevo (Twilio).",
+    example: `{ "items": [{ "order_code": "SI-000001", "status": "sent" }], "total": 1 }`,
+    group: "Administración",
+    admin: true,
+  },
+  {
+    method: "GET",
+    path: "/admin/notifications/status",
+    description: "Indica si Twilio está configurado y a qué número llegan los SMS.",
+    example: `{ "sms_configured": true, "order_sms_to": "+573018000324" }`,
+    group: "Administración",
+    admin: true,
+  },
 ];
 
 export function groupedEndpoints(): Record<string, ApiEndpoint[]> {

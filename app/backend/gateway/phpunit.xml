@@ -38,6 +38,7 @@
         <env name="SERVICE_INVENTORY_URL" value="http://inventory.test"/>
         <env name="SERVICE_ORDERS_URL" value="http://orders.test"/>
         <env name="SERVICE_ADVISOR_URL" value="http://advisor.test"/>
+        <env name="SERVICE_NOTIFICATIONS_URL" value="http://notifications.test"/>
         <env name="FRONTEND_ORIGINS" value="http://localhost:3200"/>
     </php>
 </phpunit>

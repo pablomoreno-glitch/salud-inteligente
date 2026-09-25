@@ -11,12 +11,41 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useDashboard } from "./queries";
+import { useDashboard, useOrderSms } from "./queries";
 import { formatDate, formatNumber, formatPercent, formatPrice } from "../lib/format";
 import { ErrorState } from "../components/ErrorState";
 import { Skeleton } from "../components/Skeleton";
 
 const RANGES = [7, 30, 90];
+
+const SMS_STATUS_LABEL = { sent: "enviado", failed: "falló", skipped: "no enviado" } as const;
+
+function OrderSmsCard() {
+  const sms = useOrderSms();
+  return (
+    <div className="rounded-card border border-line bg-white p-4">
+      <h2 className="text-body-lg font-semibold text-ink">SMS de pedidos</h2>
+      {sms.data ? (
+        <div className="mt-3 space-y-1 text-body text-ink">
+          <p>
+            {sms.data.status.sms_configured
+              ? `Cada pedido nuevo llega por SMS al ${sms.data.status.order_sms_to}.`
+              : "Twilio aún no está configurado: los pedidos no generan SMS."}
+          </p>
+          <p className="text-muted">
+            {sms.data.last
+              ? `Último: ${sms.data.last.order_code ?? "sin pedido"}, ${SMS_STATUS_LABEL[sms.data.last.status]}`
+              : "Aún no se ha enviado ninguno."}
+          </p>
+        </div>
+      ) : (
+        <div className="mt-3">
+          {sms.isLoading ? <Skeleton className="h-10 w-full" /> : <Unavailable />}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function KpiTile({ label, value }: { label: string; value: string }) {
   return (
@@ -216,7 +245,7 @@ export function Dashboard() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         <div className="rounded-card border border-line bg-white p-4">
           <h2 className="text-body-lg font-semibold text-ink">Alertas de stock</h2>
           {inventory ? (
@@ -267,6 +296,8 @@ export function Dashboard() {
             </div>
           )}
         </div>
+
+        <OrderSmsCard />
       </div>
     </div>
   );

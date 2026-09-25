@@ -5,6 +5,7 @@ INTERNAL_HEADERS = {"X-Internal-Token": "test-internal-token"}
 CATALOG_URL = "http://catalog.test"
 INVENTORY_URL = "http://inventory.test"
 BUSINESS_URL = "http://business.test"
+NOTIFICATIONS_URL = "http://notifications.test"
 
 
 def make_product(ref="VW-158", price=45000, is_active=True, name="Magnesium Complex 8 en 1", slug=None):
@@ -69,6 +70,10 @@ async def create_cart_with_item(client, respx_mock, ref="VW-158", quantity=1, pr
 async def checkout_order(client, respx_mock, token, ref="VW-158", **overrides):
     mock_reserve_ok(respx_mock)
     mock_whatsapp(respx_mock)
+    if not any(r.name == "notify" for r in respx_mock.routes):
+        respx_mock.post(f"{NOTIFICATIONS_URL}/events/order-created", name="notify").mock(
+            return_value=httpx.Response(201, json={"status": "sent"})
+        )
     payload = {
         "cart_token": token,
         "customer_name": "María Pérez",

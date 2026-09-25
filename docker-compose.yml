@@ -51,8 +51,8 @@ services:
     environment:
       <<: *service-env
       DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_business
-      BUSINESS_WHATSAPP: ${BUSINESS_WHATSAPP:-}
-      BUSINESS_PHONE: ${BUSINESS_PHONE:-}
+      BUSINESS_WHATSAPP: ${BUSINESS_WHATSAPP:-573018000324}
+      BUSINESS_PHONE: ${BUSINESS_PHONE:-+57 301 8000324}
       BUSINESS_EMAIL: ${BUSINESS_EMAIL:-}
       BUSINESS_ADDRESS: ${BUSINESS_ADDRESS:-}
       BUSINESS_CITY: ${BUSINESS_CITY:-}
@@ -89,6 +89,22 @@ services:
       CATALOG_URL: http://catalog:9202
       INVENTORY_URL: http://inventory:9203
       BUSINESS_URL: http://business:9201
+      NOTIFICATIONS_URL: http://notifications:9206
+
+  notifications:
+    <<: *service-common
+    build: ./app/microservices/notifications
+    container_name: salud_notifications
+    ports: ["9206:9206"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_notifications
+      # SMS to the business on every new order. Without these, messages are recorded as "skipped".
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-}
+      TWILIO_MESSAGING_SERVICE_SID: ${TWILIO_MESSAGING_SERVICE_SID:-}
+      ORDER_SMS_TO: ${ORDER_SMS_TO:-+573018000324}
 
   advisor:
     <<: *service-common
@@ -126,6 +142,7 @@ services:
       SERVICE_INVENTORY_URL: http://inventory:9203
       SERVICE_ORDERS_URL: http://orders:9204
       SERVICE_ADVISOR_URL: http://advisor:9205
+      SERVICE_NOTIFICATIONS_URL: http://notifications:9206
       FRONTEND_ORIGINS: ${FRONTEND_ORIGINS:-http://localhost:3200,http://localhost:5173}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@saludinteligente.lat}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-SaludAdmin2026!}

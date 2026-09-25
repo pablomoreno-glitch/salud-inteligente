@@ -29,7 +29,8 @@ Browser
 | Domain | `app/microservices/inventory` | 9203 | Stock levels, availability, reservations, movements |
 | Domain | `app/microservices/orders` | 9204 | Carts, checkout, orders, order status, sales metrics |
 | Domain | `app/microservices/advisor` | 9205 | AI advisor over Claude, recommendation parsing, advisor stats |
-| Infrastructure | PostgreSQL 16 | 5632 (host) | Databases `salud_gateway`, `salud_business`, `salud_catalog`, `salud_inventory`, `salud_orders`, `salud_advisor` |
+| Domain | `app/microservices/notifications` | 9206 | SMS to the business phone for every new order (Twilio), delivery log |
+| Infrastructure | PostgreSQL 16 | 5632 (host) | Databases `salud_gateway`, `salud_business`, `salud_catalog`, `salud_inventory`, `salud_orders`, `salud_advisor`, `salud_notifications` |
 
 Ports are chosen to avoid the laVillaSB and radioSanyo stacks that run on the same machine.
 
@@ -245,6 +246,19 @@ Revenue counts orders in `confirmed`, `shipped` or `delivered` within the range,
 Errors keep the legacy contract: `400` invalid body, `500` missing `ANTHROPIC_API_KEY` (generic message), `502` upstream failure (logged without the key).
 The model is `CLAUDE_MODEL` (default `claude-sonnet-5`), `max_tokens` 1024, `anthropic-version: 2023-06-01`.
 The system prompt keeps every rule of `docs/spec.md` section 4 and the `RECS:[...]` convention; the service strips the block from `reply`, keeps at most 4 recommendations and drops refs that do not exist.
+
+### 4.6 notifications (9206)
+
+| Method and path | Access | Notes |
+| --- | --- | --- |
+| `POST /events/order-created` | internal | `{order_code, customer_name, customer_phone, customer_city, items: [{name, quantity}], total, has_unpriced}`; texts `ORDER_SMS_TO` (default `+573018000324`) through the Twilio Messages API and returns the stored notification (`201`) |
+| `GET /notifications?limit=&offset=` | internal | `{items, total}` newest first; `status` in `sent`, `failed`, `skipped` |
+| `GET /status` | internal | `{sms_configured, order_sms_to}` |
+
+`orders` calls `POST /events/order-created` as a background task after the checkout response, so SMS problems never affect an order.
+Without Twilio credentials every message is stored as `skipped`; Twilio errors are stored as `failed` with Twilio's error code, never with credentials.
+The body is capped at 300 characters (two SMS segments).
+The admin reads them through `GET /api/admin/notifications` and `GET /api/admin/notifications/status`.
 
 ## 5. Gateway routes (Laravel, prefix `/api`)
 

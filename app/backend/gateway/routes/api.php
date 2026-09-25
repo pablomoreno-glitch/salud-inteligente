@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\BusinessController as AdminBusinessController
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\InventoryController as AdminInventoryController;
 use App\Http\Controllers\Api\Admin\MessageController as AdminMessageController;
+use App\Http\Controllers\Api\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Api\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Api\AdvisorController;
@@ -105,4 +106,7 @@ Route::middleware(['auth:sanctum', EnsureAdmin::class])->group(function () {
         ->where('id', '[0-9]+');
 
     Route::patch('/admin/business', [AdminBusinessController::class, 'update']);
+
+    Route::get('/admin/notifications', [AdminNotificationController::class, 'index']);
+    Route::get('/admin/notifications/status', [AdminNotificationController::class, 'status']);
 });

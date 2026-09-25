@@ -29,6 +29,24 @@ class AdminProxyTest extends TestCase
         Http::assertSent(fn ($request) => str_contains($request->url(), 'include_inactive=true'));
     }
 
+    public function test_admin_can_list_order_sms_notifications(): void
+    {
+        Http::fake(['notifications.test/*' => Http::response(['items' => [['order_code' => 'SI-000001', 'status' => 'sent']], 'total' => 1], 200)]);
+
+        $this->withToken($this->adminToken())
+            ->getJson('/api/admin/notifications')
+            ->assertOk()
+            ->assertJsonPath('items.0.status', 'sent');
+
+        Http::assertSent(fn ($request) => str_starts_with($request->url(), 'http://notifications.test/notifications')
+            && $request->hasHeader('X-Internal-Token', 'test-internal-token'));
+    }
+
+    public function test_notifications_are_admin_only(): void
+    {
+        $this->getJson('/api/admin/notifications')->assertUnauthorized();
+    }
+
     public function test_admin_can_patch_a_product_by_ref(): void
     {
         Http::fake(['*' => Http::response(['ref' => 'VW-158', 'price' => 45000], 200)]);

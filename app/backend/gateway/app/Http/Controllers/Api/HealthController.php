@@ -18,6 +18,7 @@ class HealthController extends Controller
             'inventory' => config('services.internal.inventory_url'),
             'orders' => config('services.internal.orders_url'),
             'advisor' => config('services.internal.advisor_url'),
+            'notifications' => config('services.internal.notifications_url'),
         ];
 
         $reachable = array_filter($services);

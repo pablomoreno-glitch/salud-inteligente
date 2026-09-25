@@ -13,6 +13,7 @@ Navegador ──> React (Vite + Tailwind)  ──/api──>  Gateway Laravel 12
               nginx en local (3200)                 público de la API)     inventory  (9203)
                                                                            orders     (9204)
                                                                            advisor    (9205) ──> Claude
+                                                                           notifications (9206) ──> Twilio SMS
                                                           PostgreSQL 16 (una base de datos por servicio)
 ```
 
@@ -25,6 +26,7 @@ Navegador ──> React (Vite + Tailwind)  ──/api──>  Gateway Laravel 12
 | Inventario | `app/microservices/inventory` | Existencias, disponibilidad y reservas |
 | Pedidos | `app/microservices/orders` | Carritos, pedidos, estados y métricas de ventas |
 | Asesor | `app/microservices/advisor` | Asesor IA sobre el catálogo en vivo, sin diagnósticos |
+| Notificaciones | `app/microservices/notifications` | SMS al negocio por cada pedido nuevo (Twilio) |
 
 La especificación completa (propuesta, diseño con el contrato de la API, especificaciones y tareas) está en `openspec/changes/microservices-platform/`.
 
@@ -43,7 +45,12 @@ docker compose up -d --build
 | http://localhost:3200/admin | Panel de administración (`admin@saludinteligente.lat` / `SaludAdmin2026!` en local) |
 | http://localhost:3200/api | Documentación interactiva de la API |
 | http://localhost:8110/api/v1/health | Estado del gateway y de cada servicio |
-| http://localhost:9202/docs | OpenAPI de un servicio (9201 a 9205) |
+| http://localhost:9202/docs | OpenAPI de un servicio (9201 a 9206) |
+
+## WhatsApp y SMS
+
+- El botón "Enviar pedido por WhatsApp" abre un chat con el +57 301 8000324 con el pedido ya escrito (`BUSINESS_WHATSAPP`).
+- Cada pedido nuevo envía un SMS al mismo número con Twilio. Configura `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` y `TWILIO_FROM_NUMBER` en `.env`; mientras falten, el pedido funciona igual y el SMS queda como "no enviado" en el panel.
 
 ## Pruebas
 

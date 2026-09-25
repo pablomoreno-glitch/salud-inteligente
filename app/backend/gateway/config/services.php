@@ -51,6 +51,7 @@ return [
         'inventory_url' => env('SERVICE_INVENTORY_URL'),
         'orders_url' => env('SERVICE_ORDERS_URL'),
         'advisor_url' => env('SERVICE_ADVISOR_URL'),
+        'notifications_url' => env('SERVICE_NOTIFICATIONS_URL'),
         'internal_token' => env('INTERNAL_TOKEN'),
     ],
 

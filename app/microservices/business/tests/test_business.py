@@ -36,6 +36,7 @@ async def test_contacts_are_filled_from_env_vars(client_with_env_contacts):
     assert body["whatsapp"] == "573001234567"
     assert body["email"] == "hola@saludinteligente.lat"
     assert body["phone"] is None
+    assert body["city"] is None  # blank env var, not ""
 
 
 async def test_services_have_icons(client):

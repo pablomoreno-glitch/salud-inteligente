@@ -5,6 +5,8 @@ import type {
   AdminOrderListItem,
   AdminProductRow,
   ContactMessage,
+  NotificationStatus,
+  OrderNotification,
   Order,
   OrderStatus,
   StockRow,
@@ -14,6 +16,19 @@ export function useDashboard(days: number) {
   return useQuery({
     queryKey: ["admin", "dashboard", days],
     queryFn: () => api.get<AdminDashboard>(`/admin/dashboard?days=${days}`, true),
+  });
+}
+
+export function useOrderSms() {
+  return useQuery({
+    queryKey: ["admin", "notifications"],
+    queryFn: async () => {
+      const [status, latest] = await Promise.all([
+        api.get<NotificationStatus>("/admin/notifications/status", true),
+        api.get<{ items: OrderNotification[]; total: number }>("/admin/notifications?limit=1", true),
+      ]);
+      return { status, last: latest.items[0] ?? null, total: latest.total };
+    },
   });
 }
 

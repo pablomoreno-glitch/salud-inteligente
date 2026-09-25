@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
 
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Query
 from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -11,6 +11,7 @@ from src.clients import (
     StockConflict,
     get_products_by_refs,
     get_whatsapp_number,
+    notify_order_created,
     release_stock,
     reserve_stock,
 )
@@ -244,7 +245,9 @@ async def clear_cart(token: str, db: AsyncSession = Depends(get_db)):
 
 
 @app.post("/orders", status_code=201)
-async def checkout(payload: CheckoutRequest, db: AsyncSession = Depends(get_db)):
+async def checkout(
+    payload: CheckoutRequest, background: BackgroundTasks, db: AsyncSession = Depends(get_db)
+):
     name = (payload.customer_name or "").strip()
     city = (payload.customer_city or "").strip()
     notes = (payload.notes or "").strip() or None
@@ -340,7 +343,9 @@ async def checkout(payload: CheckoutRequest, db: AsyncSession = Depends(get_db))
             whatsapp_number, code, order_items_data, total, has_unpriced, name, city
         )
 
-    return {"order": serialize_order(order), "whatsapp_url": whatsapp_url}
+    serialized = serialize_order(order)
+    background.add_task(notify_order_created, serialized)
+    return {"order": serialized, "whatsapp_url": whatsapp_url}
 
 
 @app.get("/orders/track/{code}")

@@ -5,6 +5,7 @@ os.environ.setdefault("INTERNAL_TOKEN", "test-internal-token")
 os.environ.setdefault("CATALOG_URL", "http://catalog.test")
 os.environ.setdefault("INVENTORY_URL", "http://inventory.test")
 os.environ.setdefault("BUSINESS_URL", "http://business.test")
+os.environ.setdefault("NOTIFICATIONS_URL", "http://notifications.test")
 
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
