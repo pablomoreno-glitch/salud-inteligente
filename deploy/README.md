@@ -5,7 +5,7 @@ The storefront runs on Netlify, the API runs on one VPS, and the domain `saludin
 | Piece | Where | Notes |
 | --- | --- | --- |
 | Storefront (React build of `app/frontend`) | Netlify | Built on every push to the production branch; see `netlify.toml` |
-| Gateway, five FastAPI services, Postgres | VPS with Docker Compose behind Caddy | `docker-compose.yml` + `docker-compose.prod.yml` |
+| Gateway, six FastAPI services, Postgres | VPS with Docker Compose behind Caddy | `docker-compose.yml` + `docker-compose.prod.yml` + `docker-compose.caddy.yml` or `docker-compose.shared.yml` |
 | DNS | Porkbun | Apex and `www` already point at Netlify; `api` must point at the VPS |
 
 ## How the pieces talk
@@ -22,6 +22,33 @@ browser --https--> saludinteligente.lat (Netlify CDN, React SPA)
 
 Only Caddy listens on the public interface of the VPS.
 Postgres, the gateway and every microservice stay on the internal Docker network.
+
+## Current setup: shared with laVillaSB
+
+Today the API runs on the laVillaSB VPS (`2.28.14.216`), next to lavillasb.com, in `/opt/salud-inteligente`:
+
+- The stack starts with `docker compose -p salud -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build`.
+- No Salud container publishes a port. laVillaSB's Caddy terminates TLS and proxies `api.saludinteligente.lat` to `salud_gateway:8110`, because the gateway also joins the `lavillasb_lavilla` network.
+- On that shared network the gateway reaches our own containers by their unique names (`salud_postgres`, `salud_catalog`, ...), never by short names that belong to laVillaSB.
+- Secrets live in `/opt/salud-inteligente/.env` (generated on the server, `chmod 600`).
+
+Publishing the API once the DNS record `api` -> `2.28.14.216` exists:
+
+```bash
+VPS_HOST=2.28.14.216 bash deploy/attach-to-lavilla-caddy.sh
+```
+
+It backs up laVillaSB's Caddyfile, appends the site block, validates it inside the running Caddy (restoring the backup on failure) and reloads it.
+The same block should be committed to the laVillaSB repository so its own deploys keep it.
+
+Updating the API after new commits on this repository:
+
+```bash
+git archive --format=tar dev | ssh root@2.28.14.216 'tar -x -C /opt/salud-inteligente'
+ssh root@2.28.14.216 'cd /opt/salud-inteligente && docker compose -p salud -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build'
+```
+
+The rest of this guide describes a dedicated server for Salud Inteligente, for when it outgrows the shared one.
 
 ## 1. Get a VPS
 
