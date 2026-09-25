@@ -19,9 +19,11 @@ REGLAS IMPORTANTES:
 2. Recomienda MÁXIMO 3 o 4 productos — los más relevantes para lo que describe el cliente.
 3. Sé cálido, empático y usa lenguaje colombiano natural y cercano.
 4. Para cada producto explica brevemente POR QUÉ es bueno para lo que describió el cliente.
-5. SIEMPRE termina tu respuesta con el bloque JSON en este formato exacto (sin espacios extra):
+5. CADA VEZ que menciones uno o más productos del catálogo (porque los recomiendas o porque el cliente pregunta por uno en particular, por ejemplo "¿hay QB Max?"), termina tu respuesta con el bloque JSON en este formato exacto (sin espacios extra), con todos los productos que mencionaste:
 RECS:[{"ref":"VW-158","nombre":"Magnesium Complex 8 en 1","razon":"Reduce el estrés y mejora la calidad del sueño"},{"ref":"CM-14","nombre":"Ashwagandha Colon Max","razon":"Equilibra el cortisol, ideal para ansiedad y descanso"}]
-6. Si el cliente saluda o hace preguntas generales sin síntomas, responde con amabilidad y pide que describa qué busca. En ese caso NO incluyas el bloque RECS.
+   Cada producto del bloque RECS aparece al cliente como una tarjeta con su precio, su disponibilidad y un botón para agregarlo al carrito.
+6. Si el cliente saluda o hace preguntas generales sin mencionar productos ni síntomas, responde con amabilidad y pide que describa qué busca. En ese caso NO incluyas el bloque RECS.
+6b. Si preguntan por disponibilidad o precio de un producto, nunca digas que no tienes acceso al inventario: incluye el producto en RECS y dile que en la tarjeta ve si está disponible y puede agregarlo al carrito directamente. Si el catálogo trae el precio, menciónalo; si no, di que el precio se confirma con el pedido.
 7. Responde siempre en español colombiano.
 8. No atribuyas a un producto beneficios sin respaldo (por ejemplo, aumento de tamaño corporal o crecimiento de pestañas por colágeno).
 
@@ -115,3 +117,47 @@ def enrich_recommendations(raw_recs: list[dict], products_by_ref: dict[str, dict
         if len(enriched) >= MAX_RECOMMENDATIONS:
             break
     return enriched
+
+
+REF_PATTERN = re.compile(r"\b([A-Z]{2}-\d{1,4})\b")
+
+
+def _normalize(text: str) -> str:
+    import unicodedata
+
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"\s+", " ", text)
+
+
+def mentioned_products(reply: str, products_by_ref: dict[str, dict]) -> list[dict]:
+    """Fallback when the model forgets the RECS block: find catalog products named in the reply.
+
+    Refs such as "NH-99" are matched exactly; product names are matched on whole words,
+    accent-insensitive, longest names first so "Shilajit Compota" wins over "Shilajit".
+    Results keep the order in which they appear in the text.
+    """
+    found: dict[str, int] = {}
+    for match in REF_PATTERN.finditer(reply):
+        if match.group(1) in products_by_ref:
+            found.setdefault(match.group(1), match.start())
+
+    text = _normalize(reply)
+    taken: list[tuple[int, int]] = []
+    names = sorted(
+        ((ref, _normalize(p.get("name") or "")) for ref, p in products_by_ref.items()),
+        key=lambda item: -len(item[1]),
+    )
+    for ref, name in names:
+        if len(name) < 5 or ref in found:
+            continue
+        match = re.search(r"(?<![a-z0-9])" + re.escape(name) + r"(?![a-z0-9])", text)
+        if not match:
+            continue
+        span = match.span()
+        if any(span[0] < end and start < span[1] for start, end in taken):
+            continue  # part of a longer product name already matched
+        taken.append(span)
+        found[ref] = span[0]
+
+    ordered = sorted(found, key=found.get)
+    return [{"ref": ref, "razon": None} for ref in ordered]

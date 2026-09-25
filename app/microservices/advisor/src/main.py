@@ -11,11 +11,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.advisor import (
     build_system_prompt,
     enrich_recommendations,
+    mentioned_products,
     parse_recommendations,
     validate_messages,
 )
 from src.catalog_cache import catalog_cache
-from src.clients import AnthropicError, call_anthropic
+from src.clients import AnthropicError, call_anthropic, fetch_availability
 from src.config import settings
 from src.database import get_db, init_db
 from src.errors import register_error_handlers
@@ -70,7 +71,13 @@ async def chat(request: Request, db: AsyncSession = Depends(get_db)):
         raise HTTPException(502, GENERIC_UPSTREAM_ERROR)
 
     reply, raw_recs = parse_recommendations(raw_reply)
+    if not raw_recs:
+        # The model named products but forgot the RECS block: still show them as cards.
+        raw_recs = mentioned_products(reply, products_by_ref)
     recommendations = enrich_recommendations(raw_recs, products_by_ref)
+    availability = await fetch_availability([r["ref"] for r in recommendations])
+    for rec in recommendations:
+        rec["availability"] = availability.get(rec["ref"], "available")
 
     event = AdvisorEvent(
         message_count=len(messages),

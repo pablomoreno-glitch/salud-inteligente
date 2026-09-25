@@ -3,6 +3,7 @@ import os
 os.environ.setdefault("DATABASE_URL", "sqlite+aiosqlite://")
 os.environ.setdefault("INTERNAL_TOKEN", "test-internal-token")
 os.environ.setdefault("CATALOG_URL", "http://catalog.test")
+os.environ.setdefault("INVENTORY_URL", "http://inventory.test")
 os.environ.setdefault("ANTHROPIC_API_KEY", "test-anthropic-key")
 os.environ.setdefault("CLAUDE_MODEL", "claude-sonnet-5")
 

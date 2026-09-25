@@ -162,9 +162,12 @@ export interface AdvisorRecommendation {
   ref: string;
   slug: string;
   name: string;
-  reason: string;
+  /** Null when the product was only mentioned in the reply, not explicitly recommended. */
+  reason: string | null;
   image_url: string;
   price: number | null;
+  /** Missing on conversations saved before availability existed. */
+  availability?: AvailabilityStatus;
 }
 
 export interface AdvisorChatResponse {
