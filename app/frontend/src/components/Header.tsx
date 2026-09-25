@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Leaf, Menu, Search, ShoppingCart, Sparkles, X } from "lucide-react";
+import { Menu, Search, ShoppingCart, Sparkles, X } from "lucide-react";
 import { useAdvisor } from "../context/advisor";
 import { useCart } from "../lib/cart";
 
@@ -31,7 +31,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line bg-paper">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link to="/" className="flex min-w-0 shrink items-center gap-1.5 sm:gap-2">
-          <Leaf size={22} strokeWidth={1.75} className="shrink-0 text-leaf" />
+          <img src="/media/site/logo-mark.webp" alt="" width={30} height={30} className="h-[30px] w-[30px] shrink-0 object-contain" />
           <span className="truncate font-display text-base font-bold text-forest sm:text-lg">
             Salud Inteligente
           </span>

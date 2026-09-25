@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { AdvisorDrawer } from "./AdvisorDrawer";
+import { CookieConsent, CookieSettingsButton } from "./CookieConsent";
 
 export function Layout() {
   return (
@@ -12,6 +13,8 @@ export function Layout() {
       </main>
       <Footer />
       <AdvisorDrawer />
+      <CookieConsent />
+      <CookieSettingsButton />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from "react";
 import { api, ApiError } from "../lib/api";
 import type { AdvisorChatResponse } from "../types";
+import { functionalAllowed } from "../lib/consent";
 import { AdvisorContext, type AdvisorContextValue, type AdvisorDisplayMessage } from "./advisor";
 
 const STORAGE_KEY = "si_advisor_conversation";
@@ -26,6 +27,11 @@ function loadConversation(): AdvisorDisplayMessage[] {
 
 function saveConversation(messages: AdvisorDisplayMessage[]) {
   try {
+    // Keeping the conversation is a "functional" convenience the visitor can decline.
+    if (!functionalAllowed()) {
+      sessionStorage.removeItem(STORAGE_KEY);
+      return;
+    }
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   } catch {
     // ignore storage failures

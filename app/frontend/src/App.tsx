@@ -7,6 +7,7 @@ import { Product } from "./pages/Product";
 import { Cart } from "./pages/Cart";
 import { OrderConfirmation } from "./pages/OrderConfirmation";
 import { About } from "./pages/About";
+import { Cookies } from "./pages/Cookies";
 import { ApiDocs } from "./pages/ApiDocs";
 import { NotFound } from "./pages/NotFound";
 import { AdminAuthProvider } from "./admin/AdminAuthContext";
@@ -47,6 +48,7 @@ export function App() {
           <Route path="/pedido/:code" element={<OrderConfirmation />} />
           <Route path="/nosotros" element={<About />} />
           <Route path="/api" element={<ApiDocs />} />
+          <Route path="/cookies" element={<Cookies />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
