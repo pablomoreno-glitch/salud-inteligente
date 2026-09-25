@@ -16,6 +16,11 @@ Que el cliente de una distribuidora pueda:
 
 ## 2. Arquitectura actual
 
+> **Actualización (rama `dev`):** las fases 3, 4 y 5 del roadmap se implementaron como una plataforma de microservicios (React + gateway Laravel + servicios FastAPI + PostgreSQL).
+> El catálogo vive ahora en el servicio `catalog` (fuente única de datos) y el asesor en el servicio `advisor`.
+> El contrato de la API y el diseño están en `openspec/changes/microservices-platform/design.md`; el resumen, en el `README.md`.
+> Lo que sigue describe el sitio estático original, que se conserva para rollback.
+
 ```
 Navegador                         Netlify                          Anthropic
 ─────────                         ───────                          ─────────

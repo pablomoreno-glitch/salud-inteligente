@@ -1,0 +1,36 @@
+# Caddy terminates TLS on the VPS and is the only process bound to the public
+# interface. Certificates come from Let's Encrypt and renew automatically.
+#
+# The storefront itself is served by Netlify on the apex domain and proxies
+# /api/* here, so browsers talk to this host same-origin through Netlify.
+# Direct API consumers (and the /api developer page's examples) use this host.
+{
+	email {$ACME_EMAIL}
+	admin off
+}
+
+api.{$ROOT_DOMAIN} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	# Only the gateway is exposed; every microservice stays on the internal network.
+	reverse_proxy gateway:8110
+}
+
+# Fallback storefront served from the VPS (same React build as Netlify).
+# Point the apex DNS here if Netlify ever needs to be bypassed.
+storefront.{$ROOT_DOMAIN} {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		-Server
+	}
+	reverse_proxy frontend:80
+}

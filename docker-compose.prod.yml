@@ -1,0 +1,74 @@
+# Production overrides for the API host (VPS).
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Differences from local:
+# - No service publishes a host port; Caddy (80/443) is the only public process.
+# - Secrets come from .env on the host (see deploy/env.example); there are no
+#   insecure defaults for the internal token, admin password or app key.
+# - The gateway runs with APP_ENV=production.
+
+services:
+  postgres:
+    ports: !reset []
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+
+  business:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  catalog:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  inventory:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  orders:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  advisor:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY}
+
+  gateway:
+    ports: !reset []
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${GATEWAY_APP_KEY:?set GATEWAY_APP_KEY}
+      APP_URL: https://api.${ROOT_DOMAIN:?set ROOT_DOMAIN}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?set ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
+      FRONTEND_ORIGINS: https://${ROOT_DOMAIN},https://www.${ROOT_DOMAIN},https://storefront.${ROOT_DOMAIN}
+
+  frontend:
+    ports: !reset []
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: salud_caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      ROOT_DOMAIN: ${ROOT_DOMAIN:?set ROOT_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [gateway, frontend]
+    restart: unless-stopped
+    networks: [salud]
+
+volumes:
+  caddy_data:
+  caddy_config:
