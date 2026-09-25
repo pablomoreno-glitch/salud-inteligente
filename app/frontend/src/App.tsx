@@ -28,6 +28,9 @@ const Inventory = lazy(() =>
 const Products = lazy(() =>
   import("./admin/Products").then((m) => ({ default: m.Products })),
 );
+const Account = lazy(() =>
+  import("./admin/Account").then((m) => ({ default: m.Account })),
+);
 const Messages = lazy(() =>
   import("./admin/Messages").then((m) => ({ default: m.Messages })),
 );
@@ -91,6 +94,14 @@ export function App() {
             element={
               <Suspense fallback={<AdminFallback />}>
                 <Messages />
+              </Suspense>
+            }
+          />
+          <Route
+            path="cuenta"
+            element={
+              <Suspense fallback={<AdminFallback />}>
+                <Account />
               </Suspense>
             }
           />

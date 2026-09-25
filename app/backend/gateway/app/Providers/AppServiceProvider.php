@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         'tracking' => 30,
         'advisor' => 15,
         'admin-login' => 5,
+        'admin-password' => 5,
     ];
 
     public function register(): void

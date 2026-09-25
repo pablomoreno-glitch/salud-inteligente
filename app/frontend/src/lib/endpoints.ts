@@ -271,6 +271,14 @@ export const endpoints: ApiEndpoint[] = [
     admin: true,
   },
   {
+    method: "PUT",
+    path: "/admin/password",
+    description: "Cambia la contraseña del administrador (pide la actual y cierra las otras sesiones).",
+    example: `{ "message": "Contraseña actualizada." }`,
+    group: "Administración",
+    admin: true,
+  },
+  {
     method: "GET",
     path: "/admin/notifications",
     description: "SMS enviados al negocio por cada pedido nuevo (Twilio).",
