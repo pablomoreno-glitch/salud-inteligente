@@ -1,50 +1,70 @@
 # salud-inteligente
 
-API escalable para catálogo de suplementos naturales con asesor inteligente basado en IA. Construida con Netlify Functions y tienda HTML dinámica. Diseñada para distribuidoras en Colombia.
+Plataforma API-first para una tienda de suplementos naturales con asesor inteligente basado en IA (Claude).
+Diseñada para distribuidoras y clientes en Colombia.
 
-## Estructura
+La arquitectura sigue la de laVillaSB: un gateway en Laravel delante de microservicios FastAPI, con una tienda en React.
+
+## Arquitectura
 
 ```
-salud-inteligente/
-├── public/                     ← sitio estático que publica Netlify
-│   ├── index.html              ← catálogo completo (productos e imágenes)
-│   ├── catalogo.css            ← diseño mobile-first del catálogo y del panel del asesor
-│   ├── catalogo.js             ← subsecciones por necesidad, navegación y buscador
-│   ├── asesor-panel.js         ← abrir/cerrar el asesor (✕, fuera, Escape, botón atrás)
-│   └── asesor.html             ← chat del asesor (llama a /api/chat)
-├── netlify/
-│   └── functions/
-│       └── chat.js             ← backend: catálogo + prompt + llamada a la API de Claude
-├── docs/
-│   ├── DEPLOY_NETLIFY.md       ← guía paso a paso de publicación
-│   └── catalogo_pedido.pdf     ← PDF del pedido
-├── archive/                    ← versiones anteriores (referencia, no se publican)
-├── netlify.toml                ← config: publish=public, /api/* → functions
-├── .env.example                ← variables de entorno necesarias
-└── package.json
+Navegador ──> React (Vite + Tailwind)  ──/api──>  Gateway Laravel 12  ──>  business   (9201)
+              Netlify en producción                (8110, único punto      catalog    (9202)
+              nginx en local (3200)                 público de la API)     inventory  (9203)
+                                                                           orders     (9204)
+                                                                           advisor    (9205) ──> Claude
+                                                                           notifications (9206) ──> Twilio SMS
+                                                          PostgreSQL 16 (una base de datos por servicio)
 ```
 
-## Cómo funciona
+| Componente | Carpeta | Responsabilidad |
+| --- | --- | --- |
+| Tienda y panel | `app/frontend` | Catálogo, página de cada producto, carrito, pedidos, asesor IA, página de la API (`/api`) y panel `/admin` |
+| Gateway | `app/backend/gateway` | Rutas permitidas, autenticación de administrador (Sanctum), límites de uso, métricas del panel |
+| Negocio | `app/microservices/business` | Perfil, canales de contacto, servicios, imágenes y mensajes de contacto |
+| Catálogo | `app/microservices/catalog` | Categorías, necesidades y productos (fuente única de datos) |
+| Inventario | `app/microservices/inventory` | Existencias, disponibilidad y reservas |
+| Pedidos | `app/microservices/orders` | Carritos, pedidos, estados y métricas de ventas |
+| Asesor | `app/microservices/advisor` | Asesor IA sobre el catálogo en vivo, sin diagnósticos |
+| Notificaciones | `app/microservices/notifications` | SMS al negocio por cada pedido nuevo (Twilio) |
 
-1. El cliente abre el catálogo (`public/index.html`).
-2. Al pulsar el botón 🌿 se abre `asesor.html` dentro de un panel.
-3. El chat envía los mensajes a `/api/chat`, que Netlify redirige a `netlify/functions/chat.js`.
-4. La función agrega el catálogo y las reglas del asesor, y llama a la API de Claude con la key guardada en el servidor (`ANTHROPIC_API_KEY`). La key nunca llega al navegador.
+La especificación completa (propuesta, diseño con el contrato de la API, especificaciones y tareas) está en `openspec/changes/microservices-platform/`.
 
 ## Desarrollo local
 
+Requisitos: Docker con Compose v2.
+
 ```bash
-npm install
-cp .env.example .env   # y pon tu API key real
-npm run dev            # abre http://localhost:8888
+# En .env (ignorado por Git): ANTHROPIC_API_KEY y las variables de deploy/env.example que necesites
+docker compose up -d --build
 ```
+
+| URL | Qué es |
+| --- | --- |
+| http://localhost:3200 | Tienda |
+| http://localhost:3200/admin | Panel de administración (`admin@saludinteligente.lat` / `SaludAdmin2026!` en local) |
+| http://localhost:3200/api | Documentación interactiva de la API |
+| http://localhost:8110/api/v1/health | Estado del gateway y de cada servicio |
+| http://localhost:9202/docs | OpenAPI de un servicio (9201 a 9206) |
+
+## WhatsApp y SMS
+
+- El botón "Enviar pedido por WhatsApp" abre un chat con el +57 301 8000324 con el pedido ya escrito (`BUSINESS_WHATSAPP`).
+- Cada pedido nuevo envía un SMS al mismo número con Twilio. Configura `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` y `TWILIO_FROM_NUMBER` en `.env`; mientras falten, el pedido funciona igual y el SMS queda como "no enviado" en el panel.
+
+## Pruebas
+
+| Capa | Comando |
+| --- | --- |
+| Cada microservicio | `cd app/microservices/<servicio> && pip install -r requirements-dev.txt && python -m pytest -q` |
+| Gateway | `cd app/backend/gateway && composer install && php artisan test` |
+| Frontend | `cd app/frontend && npm ci && npm run lint && npm run test && npm run build` |
 
 ## Despliegue
 
-Ver [docs/DEPLOY_NETLIFY.md](docs/DEPLOY_NETLIFY.md). Resumen: conectar el repo en Netlify, publish directory `public`, y crear la variable `ANTHROPIC_API_KEY`.
+La tienda se publica en Netlify (`netlify.toml`) y la API en un VPS con Docker y Caddy en `api.saludinteligente.lat`.
+Guía paso a paso: [deploy/README.md](deploy/README.md).
 
-## Próximos pasos
+## Sitio anterior
 
-- [ ] Sacar el catálogo de productos a un archivo de datos (JSON) compartido por el catálogo y el asesor
-- [ ] Separar CSS/JS e imágenes del `index.html` (hoy trae las imágenes embebidas en base64, ~4.5 MB)
-- [ ] Flujo de pedido por WhatsApp
+El sitio estático original (`public/` y `netlify/functions/chat.js`) se conserva para poder volver a él; ver "Rollback" en la guía de despliegue.

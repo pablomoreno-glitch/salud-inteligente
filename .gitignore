@@ -16,3 +16,14 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Frontend and gateway build artifacts
+dist/
+*.tsbuildinfo
+vendor/

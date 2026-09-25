@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid #3f7d58;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Advisor popup entrance: the only motion answering "open the advisor". */
+@keyframes advisor-pop {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes advisor-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.advisor-modal { animation: advisor-pop 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+.advisor-backdrop { animation: advisor-fade 0.2s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .advisor-modal, .advisor-backdrop { animation: none; }
+}
+
+/* Cookie card: the logo beats twice as it lands, then the Macreat signature writes itself. */
+@keyframes cookie-card-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cookie-heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.12); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.08); }
+  70% { transform: scale(1); }
+}
+@keyframes cookie-halo {
+  0% { box-shadow: 0 0 0 0 rgba(63, 125, 88, 0.35); }
+  100% { box-shadow: 0 0 0 28px rgba(63, 125, 88, 0); }
+}
+@keyframes cookie-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.cookie-backdrop { animation: advisor-fade 0.25s ease-out; }
+.cookie-card { animation: cookie-card-in 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+.cookie-logo img { animation: cookie-heartbeat 1.4s ease-in-out 0.35s 1 both; }
+.cookie-halo { animation: cookie-halo 1.4s ease-out 0.35s 2; }
+.cookie-signature { animation: cookie-write 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.9s both; }
+@media (prefers-reduced-motion: reduce) {
+  .cookie-backdrop, .cookie-card, .cookie-logo img, .cookie-halo, .cookie-signature { animation: none; }
+}

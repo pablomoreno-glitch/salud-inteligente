@@ -1,0 +1,60 @@
+# Production overrides for the API host (VPS): no published ports, no insecure defaults.
+#
+# Own server (this stack brings its own Caddy for TLS):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.caddy.yml up -d --build
+# Server shared with laVillaSB (its Caddy terminates TLS and proxies to our gateway):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build
+#
+# Differences from local:
+# - No service publishes a host port; Caddy (80/443) is the only public process.
+# - Secrets come from .env on the host (see deploy/env.example); there are no
+#   insecure defaults for the internal token, admin password or app key.
+# - The gateway runs with APP_ENV=production.
+
+services:
+  postgres:
+    ports: !reset []
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+
+  business:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  catalog:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  inventory:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  orders:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  notifications:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+  advisor:
+    ports: !reset []
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+      # Optional at boot: without it the advisor answers 500 and everything else works.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+
+  gateway:
+    ports: !reset []
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${GATEWAY_APP_KEY:?set GATEWAY_APP_KEY}
+      APP_URL: https://api.${ROOT_DOMAIN:?set ROOT_DOMAIN}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?set INTERNAL_TOKEN}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?set ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
+      FRONTEND_ORIGINS: https://${ROOT_DOMAIN},https://www.${ROOT_DOMAIN},https://storefront.${ROOT_DOMAIN}
+
+  frontend:
+    ports: !reset []

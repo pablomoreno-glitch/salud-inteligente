@@ -1,0 +1,56 @@
+schema: spec-driven
+
+context: |
+  Project: Salud Inteligente, a supplement catalog with an AI advisor (Claude) on Netlify.
+  Current stack: static site in public/ (index.html catalog with base64 images, asesor.html chat, catalogo.js/css, asesor-panel.js).
+  Current backend: one Netlify Function, netlify/functions/chat.js, calling the Anthropic Messages API. Routing via netlify.toml.
+  Product spec: docs/spec.md documents the architecture, /api/chat contract, advisor system-prompt rules, and a 6-phase roadmap.
+  Target architecture (planned, next SDD change): React + Vite + Tailwind frontend, Laravel 12 (PHP 8.3) API gateway with Sanctum, FastAPI (Python 3.12) microservices, PostgreSQL 16, Docker Compose.
+  Testing today: no test runner exists. Planned: pytest (FastAPI services), PHPUnit (Laravel gateway), Vitest (React frontend).
+  Style: end-user content stays in Colombian Spanish and must preserve the INVIMA health disclaimer; generated SDD artifacts stay in English.
+
+strict_tdd: false
+# No test runner exists yet anywhere in the current static-site codebase (no package.json test script,
+# no pytest/PHPUnit/Vitest config). Per the no-runner fallback rule, Strict TDD stays disabled until the
+# planned pytest/PHPUnit/Vitest runners land during the microservices re-architecture change. Re-evaluate
+# and flip to true once any of those runners is committed to the repo.
+
+testing:
+  test_runner: "none configured yet"
+  frameworks: "none today; planned: pytest (FastAPI microservices), PHPUnit (Laravel gateway), Vitest (React frontend)"
+  unit: false
+  integration: false
+  e2e: false
+  coverage: false
+  linter: "none configured yet"
+  type_checker: "none configured yet"
+  formatter: "none configured yet"
+
+rules:
+  proposal:
+    - State the user-visible impact and affected boundaries (catalog, advisor chat, future gateway, future microservices).
+    - Include a rollback plan for any step of the Netlify Functions to Laravel gateway plus FastAPI services migration.
+    - Preserve the INVIMA health disclaimer and non-diagnostic advisor behavior across any redesign.
+  specs:
+    - Use Given/When/Then scenarios.
+    - Use RFC 2119 keywords such as MUST, SHALL, SHOULD, and MAY.
+    - Keep advisor safety rules explicit in any advisor-related delta (max 3-4 recommendations, no unsupported product claims, no medical diagnosis).
+  design:
+    - Document architecture decisions with rationale, including the migration path from Netlify Functions to a Laravel gateway plus FastAPI services.
+    - Include sequence diagrams for the frontend to Laravel gateway to FastAPI service to Claude API flow.
+  tasks:
+    - Group tasks by phase and use hierarchical numbering.
+    - Keep tasks independently verifiable and within the 400-line review budget where practical.
+  apply:
+    tdd: false
+    # Flip to true once pytest, PHPUnit, or Vitest runners exist in the target stack.
+    guidelines:
+      - Follow existing code patterns; do not modify public/, netlify/, or docs/ unless the active change explicitly targets them.
+      - Reproduce user-facing advisor or catalog issues in an E2E-like workflow before fixing them.
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive specification deltas.

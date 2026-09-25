@@ -1,0 +1,25 @@
+# TLS for a server dedicated to Salud Inteligente: Caddy is the only public process.
+# Used together with docker-compose.prod.yml (see its header).
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: salud_caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      ROOT_DOMAIN: ${ROOT_DOMAIN:?set ROOT_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [gateway, frontend]
+    restart: unless-stopped
+    networks: [salud]
+
+volumes:
+  caddy_data:
+  caddy_config:

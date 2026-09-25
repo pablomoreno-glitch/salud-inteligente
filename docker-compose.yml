@@ -1,0 +1,171 @@
+# Salud Inteligente - local stack.
+# Ports avoid the laVillaSB (3000, 5432, 8010, 9000-9007) and radioSanyo (3100, 5532, 9102)
+# stacks that run on the same machine. Only the frontend and the gateway need to be
+# reachable from the host; the service ports are published for debugging and /docs.
+#
+#   docker compose up -d --build
+#   open http://localhost:3200
+
+x-service-env: &service-env
+  INTERNAL_TOKEN: ${INTERNAL_TOKEN:-local-internal-token}
+
+x-service-common: &service-common
+  restart: unless-stopped
+  networks: [salud]
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  # ============================================================
+  # INFRASTRUCTURE
+  # ============================================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: salud_postgres
+    environment:
+      POSTGRES_USER: salud
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-salud}
+      POSTGRES_DB: salud
+    ports:
+      - "5632:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./deploy/postgres/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U salud -d salud"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    networks: [salud]
+
+  # ============================================================
+  # DOMAIN MICROSERVICES (FastAPI)
+  # ============================================================
+  business:
+    <<: *service-common
+    build: ./app/microservices/business
+    container_name: salud_business
+    ports: ["9201:9201"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_business
+      BUSINESS_WHATSAPP: ${BUSINESS_WHATSAPP:-573018000324}
+      BUSINESS_PHONE: ${BUSINESS_PHONE:-+57 301 8000324}
+      BUSINESS_EMAIL: ${BUSINESS_EMAIL:-}
+      BUSINESS_ADDRESS: ${BUSINESS_ADDRESS:-}
+      BUSINESS_CITY: ${BUSINESS_CITY:-}
+      BUSINESS_HOURS: ${BUSINESS_HOURS:-}
+      BUSINESS_INSTAGRAM: ${BUSINESS_INSTAGRAM:-}
+      BUSINESS_FACEBOOK: ${BUSINESS_FACEBOOK:-}
+
+  catalog:
+    <<: *service-common
+    build: ./app/microservices/catalog
+    container_name: salud_catalog
+    ports: ["9202:9202"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_catalog
+
+  inventory:
+    <<: *service-common
+    build: ./app/microservices/inventory
+    container_name: salud_inventory
+    ports: ["9203:9203"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_inventory
+
+  orders:
+    <<: *service-common
+    build: ./app/microservices/orders
+    container_name: salud_orders
+    ports: ["9204:9204"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_orders
+      CATALOG_URL: http://catalog:9202
+      INVENTORY_URL: http://inventory:9203
+      BUSINESS_URL: http://business:9201
+      NOTIFICATIONS_URL: http://notifications:9206
+
+  notifications:
+    <<: *service-common
+    build: ./app/microservices/notifications
+    container_name: salud_notifications
+    ports: ["9206:9206"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_notifications
+      # SMS to the business on every new order. Without these, messages are recorded as "skipped".
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-}
+      TWILIO_MESSAGING_SERVICE_SID: ${TWILIO_MESSAGING_SERVICE_SID:-}
+      ORDER_SMS_TO: ${ORDER_SMS_TO:-+573018000324}
+
+  advisor:
+    <<: *service-common
+    build: ./app/microservices/advisor
+    container_name: salud_advisor
+    ports: ["9205:9205"]
+    environment:
+      <<: *service-env
+      DATABASE_URL: postgresql+asyncpg://salud:${POSTGRES_PASSWORD:-salud}@postgres:5432/salud_advisor
+      CATALOG_URL: http://catalog:9202
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-sonnet-5}
+
+  # ============================================================
+  # API GATEWAY (Laravel)
+  # ============================================================
+  gateway:
+    build: ./app/backend/gateway
+    container_name: salud_gateway
+    ports: ["8110:8110"]
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "false"
+      APP_KEY: ${GATEWAY_APP_KEY:-base64:g9QErmSAESOvize+GUVnQYPce16ELn4ixDZOB5PT3z4=}
+      APP_URL: http://localhost:8110
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_DATABASE: salud_gateway
+      DB_USERNAME: salud
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-salud}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:-local-internal-token}
+      SERVICE_BUSINESS_URL: http://business:9201
+      SERVICE_CATALOG_URL: http://catalog:9202
+      SERVICE_INVENTORY_URL: http://inventory:9203
+      SERVICE_ORDERS_URL: http://orders:9204
+      SERVICE_ADVISOR_URL: http://advisor:9205
+      SERVICE_NOTIFICATIONS_URL: http://notifications:9206
+      FRONTEND_ORIGINS: ${FRONTEND_ORIGINS:-http://localhost:3200,http://localhost:5173}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@saludinteligente.lat}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-SaludAdmin2026!}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [salud]
+
+  # ============================================================
+  # FRONTEND (React + Vite, served by nginx, proxies /api to the gateway)
+  # ============================================================
+  frontend:
+    build: ./app/frontend
+    container_name: salud_frontend
+    ports: ["3200:80"]
+    depends_on: [gateway]
+    restart: unless-stopped
+    networks: [salud]
+
+volumes:
+  postgres_data:
+
+networks:
+  salud:
+    name: salud
