@@ -19,6 +19,24 @@ async def fetch_active_products() -> list[dict]:
         return response.json().get("items", [])
 
 
+async def fetch_availability(refs: list[str]) -> dict[str, str]:
+    """Public availability (available | low | out) per ref. Never raises: an inventory
+    outage must not break the chat, so unknown refs are simply left out."""
+    if not refs:
+        return {}
+    try:
+        async with httpx.AsyncClient(timeout=CATALOG_TIMEOUT) as client:
+            response = await client.get(
+                f"{settings.INVENTORY_URL}/availability",
+                params={"refs": ",".join(refs)},
+                headers={"X-Internal-Token": settings.INTERNAL_TOKEN},
+            )
+            response.raise_for_status()
+            return {row["ref"]: row["status"] for row in response.json()}
+    except Exception:  # noqa: BLE001 - availability is a nicety; the chat must still answer
+        return {}
+
+
 class AnthropicError(Exception):
     """Raised when the Anthropic Messages API cannot be reached or returns an error."""
 

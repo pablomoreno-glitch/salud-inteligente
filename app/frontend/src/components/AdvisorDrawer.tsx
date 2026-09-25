@@ -6,11 +6,13 @@ import { renderAdvisorMarkdown } from "../lib/markdown";
 import { formatPrice } from "../lib/format";
 import { useSetCartItem } from "../lib/cart";
 import { DISCLAIMER_TEXT } from "./Disclaimer";
+import { AvailabilityPill } from "./AvailabilityPill";
 import type { AdvisorRecommendation } from "../types";
 
 function RecommendationCard({ recommendation }: { recommendation: AdvisorRecommendation }) {
   const setCartItem = useSetCartItem();
   const [added, setAdded] = useState(false);
+  const soldOut = recommendation.availability === "out";
 
   return (
     <div className="flex gap-3 rounded-card border border-line bg-white p-3">
@@ -26,8 +28,13 @@ function RecommendationCard({ recommendation }: { recommendation: AdvisorRecomme
         <p className="line-clamp-2 text-body font-semibold text-ink">
           {recommendation.name}
         </p>
-        <p className="line-clamp-2 text-meta text-muted">{recommendation.reason}</p>
-        <p className="text-body font-medium text-ink">{formatPrice(recommendation.price)}</p>
+        {recommendation.reason && (
+          <p className="line-clamp-2 text-meta text-muted">{recommendation.reason}</p>
+        )}
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-body font-medium text-ink">{formatPrice(recommendation.price)}</p>
+          {recommendation.availability && <AvailabilityPill status={recommendation.availability} />}
+        </div>
         <div className="mt-1 flex items-center gap-3">
           <Link
             to={`/producto/${recommendation.slug}`}
@@ -37,15 +44,20 @@ function RecommendationCard({ recommendation }: { recommendation: AdvisorRecomme
           </Link>
           <button
             type="button"
+            disabled={soldOut || setCartItem.isPending}
             onClick={() =>
               setCartItem.mutate(
                 { ref: recommendation.ref, quantity: 1, source: "advisor" },
                 { onSuccess: () => setAdded(true) },
               )
             }
-            className="rounded-pill border border-forest px-3 py-1 text-meta font-medium text-forest transition-colors hover:bg-forest hover:text-white"
+            className={
+              added
+                ? "rounded-pill border border-forest bg-forest px-3 py-1 text-meta font-medium text-white"
+                : "rounded-pill border border-forest px-3 py-1 text-meta font-medium text-forest transition-colors hover:bg-forest hover:text-white disabled:cursor-not-allowed disabled:border-line disabled:text-muted disabled:hover:bg-transparent"
+            }
           >
-            {added ? "Agregado" : "Agregar"}
+            {soldOut ? "Agotado" : added ? "Agregado al carrito ✓" : "Agregar al carrito"}
           </button>
         </div>
       </div>

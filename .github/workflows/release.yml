@@ -1,0 +1,70 @@
+# Publishes the Docker images of every component to GitHub Packages (ghcr.io)
+# when a GitHub release is published. Images are tagged with the release
+# version (v1.2.3 -> 1.2.3) and "latest", and are linked to this repository.
+name: Release images
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag for the images, e.g. 1.0.0"
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  tests:
+    uses: ./.github/workflows/ci.yml
+
+  images:
+    name: Image ${{ matrix.name }}
+    needs: tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: gateway, context: app/backend/gateway, description: "Laravel API gateway" }
+          - { name: business, context: app/microservices/business, description: "Business profile, contacts and messages service" }
+          - { name: catalog, context: app/microservices/catalog, description: "Product catalog service" }
+          - { name: inventory, context: app/microservices/inventory, description: "Stock and availability service" }
+          - { name: orders, context: app/microservices/orders, description: "Carts, orders and sales metrics service" }
+          - { name: advisor, context: app/microservices/advisor, description: "AI advisor service (Claude)" }
+          - { name: notifications, context: app/microservices/notifications, description: "Order SMS notifications service (Twilio)" }
+          - { name: frontend, context: app/frontend, description: "React storefront and admin panel served by nginx" }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Version
+        id: version
+        run: |
+          raw="${{ github.event.release.tag_name || inputs.version }}"
+          echo "value=${raw#v}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/salud-${{ matrix.name }}:${{ steps.version.outputs.value }}
+            ghcr.io/${{ github.repository_owner }}/salud-${{ matrix.name }}:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.title=salud-${{ matrix.name }}
+            org.opencontainers.image.description=${{ matrix.description }}
+            org.opencontainers.image.version=${{ steps.version.outputs.value }}
+            org.opencontainers.image.licenses=UNLICENSED
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
