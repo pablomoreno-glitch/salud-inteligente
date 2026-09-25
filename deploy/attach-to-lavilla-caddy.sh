@@ -65,8 +65,14 @@ BLOCK
   echo "Block added (backup: $backup)."
 fi
 
-docker exec "$caddy" caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
-echo "Caddy reloaded."
+# laVillaSB runs Caddy with `admin off`, so a hot reload is refused; the config
+# was validated above, so a restart (about a second of downtime) is safe.
+if docker exec "$caddy" caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
+  echo "Caddy reloaded."
+else
+  docker restart "$caddy" >/dev/null
+  echo "Caddy restarted (its admin API is off)."
+fi
 REMOTE
 
 echo "Waiting for the certificate and the API over TLS..."
