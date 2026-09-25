@@ -84,6 +84,8 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])
 Route::middleware(['auth:sanctum', EnsureAdmin::class])->group(function () {
     Route::get('/admin/me', [AdminAuthController::class, 'me']);
     Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
+    Route::put('/admin/password', [AdminAuthController::class, 'changePassword'])
+        ->middleware('throttle:admin-password');
 
     Route::get('/admin/dashboard', [DashboardController::class, 'index']);
 

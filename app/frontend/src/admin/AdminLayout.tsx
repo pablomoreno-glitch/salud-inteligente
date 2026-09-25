@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import {
+  KeyRound,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -19,6 +20,7 @@ const LINKS = [
   { to: "/admin/inventario", label: "Inventario", icon: Warehouse },
   { to: "/admin/productos", label: "Productos", icon: Package },
   { to: "/admin/mensajes", label: "Mensajes", icon: MessageSquare },
+  { to: "/admin/cuenta", label: "Mi cuenta", icon: KeyRound },
 ];
 
 export function AdminLayout() {

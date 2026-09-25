@@ -43,6 +43,37 @@ class AdminAuthController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Sesion cerrada']);
+        return response()->json(['message' => 'Sesión cerrada']);
+    }
+
+    /**
+     * Change the signed-in admin's password. Requires the current one, keeps
+     * this session open and signs out every other device.
+     */
+    public function changePassword(Request $request): JsonResponse
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:12', 'max:128', 'confirmed', 'different:current_password'],
+        ], [
+            'password.min' => 'La nueva contraseña debe tener al menos 12 caracteres.',
+            'password.confirmed' => 'La confirmación no coincide con la nueva contraseña.',
+            'password.different' => 'La nueva contraseña debe ser distinta de la actual.',
+        ]);
+
+        $user = $request->user();
+
+        if (! Hash::check($request->string('current_password'), $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => ['La contraseña actual no es correcta.'],
+            ]);
+        }
+
+        $user->password = Hash::make($request->string('password'));
+        $user->save();
+
+        $user->tokens()->where('id', '!=', $user->currentAccessToken()->id)->delete();
+
+        return response()->json(['message' => 'Contraseña actualizada.']);
     }
 }
