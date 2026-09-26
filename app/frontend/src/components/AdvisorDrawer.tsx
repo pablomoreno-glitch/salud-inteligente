@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Send, Sparkles, X } from "lucide-react";
 import { useAdvisor } from "../context/advisor";
 import { renderAdvisorMarkdown } from "../lib/markdown";
@@ -9,25 +9,43 @@ import { DISCLAIMER_TEXT } from "./Disclaimer";
 import { AvailabilityPill } from "./AvailabilityPill";
 import type { AdvisorRecommendation } from "../types";
 
-function RecommendationCard({ recommendation }: { recommendation: AdvisorRecommendation }) {
+function RecommendationCard({
+  recommendation,
+  onOpenProduct,
+}: {
+  recommendation: AdvisorRecommendation;
+  onOpenProduct: () => void;
+}) {
   const setCartItem = useSetCartItem();
   const [added, setAdded] = useState(false);
   const soldOut = recommendation.availability === "out";
 
   return (
     <div className="flex gap-3 rounded-card border border-line bg-white p-3">
-      <img
-        src={recommendation.image_url}
-        alt={recommendation.name}
-        width={64}
-        height={64}
-        loading="lazy"
-        className="h-16 w-16 shrink-0 rounded-control bg-white object-contain"
-      />
+      <Link
+        to={`/producto/${recommendation.slug}`}
+        onClick={onOpenProduct}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="shrink-0"
+      >
+        <img
+          src={recommendation.image_url}
+          alt=""
+          width={64}
+          height={64}
+          loading="lazy"
+          className="h-16 w-16 rounded-control bg-white object-contain transition-transform hover:scale-105"
+        />
+      </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <p className="line-clamp-2 text-body font-semibold text-ink">
+        <Link
+          to={`/producto/${recommendation.slug}`}
+          onClick={onOpenProduct}
+          className="line-clamp-2 text-body font-semibold text-ink hover:text-leaf"
+        >
           {recommendation.name}
-        </p>
+        </Link>
         {recommendation.reason && (
           <p className="line-clamp-2 text-meta text-muted">{recommendation.reason}</p>
         )}
@@ -38,6 +56,7 @@ function RecommendationCard({ recommendation }: { recommendation: AdvisorRecomme
         <div className="mt-1 flex items-center gap-3">
           <Link
             to={`/producto/${recommendation.slug}`}
+            onClick={onOpenProduct}
             className="text-meta font-medium text-leaf underline-offset-2 hover:underline"
           >
             Ver producto
@@ -88,6 +107,16 @@ export function AdvisorDrawer() {
     useAdvisor();
   const [draft, setDraft] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
+  const lastPathname = useRef(pathname);
+
+  // The popup covers the whole page: if the route changes (a product link, the back
+  // button), close it so the visitor sees the page they just opened.
+  useEffect(() => {
+    if (pathname === lastPathname.current) return;
+    lastPathname.current = pathname;
+    close();
+  }, [pathname, close]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -198,7 +227,7 @@ export function AdvisorDrawer() {
               {message.recommendations && message.recommendations.length > 0 && (
                 <div className="grid gap-2 sm:grid-cols-2">
                   {message.recommendations.map((rec) => (
-                    <RecommendationCard key={rec.ref} recommendation={rec} />
+                    <RecommendationCard key={rec.ref} recommendation={rec} onOpenProduct={close} />
                   ))}
                 </div>
               )}
