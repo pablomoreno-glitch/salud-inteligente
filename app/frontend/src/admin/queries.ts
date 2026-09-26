@@ -67,12 +67,11 @@ export function useUpdateOrderStatus() {
   });
 }
 
-export function useAdminInventory(params: { status?: string; q?: string }) {
-  const query = new URLSearchParams();
-  if (params.status) query.set("status", params.status);
-  if (params.q) query.set("q", params.q);
+/** Every stock row that exists (products never tracked have none). */
+export function useAdminInventory() {
+  const query = new URLSearchParams({ limit: "500" });
   return useQuery({
-    queryKey: ["admin", "inventory", params],
+    queryKey: ["admin", "inventory"],
     queryFn: () =>
       api.get<{ items: StockRow[]; total: number }>(
         `/admin/inventory?${query.toString()}`,
@@ -99,13 +98,11 @@ export function useUpdateStock() {
   });
 }
 
-export function useAdminProducts(params: { q?: string; category?: string }) {
-  const query = new URLSearchParams();
-  query.set("include_inactive", "true");
-  if (params.q) query.set("q", params.q);
-  if (params.category) query.set("category", params.category);
+/** The whole catalog (active and inactive). Filtering happens on the page, so it is instant. */
+export function useAdminProducts() {
+  const query = new URLSearchParams({ include_inactive: "true", limit: "1000" });
   return useQuery({
-    queryKey: ["admin", "products", params],
+    queryKey: ["admin", "products"],
     queryFn: () =>
       api.get<{ items: AdminProductRow[]; total: number }>(
         `/admin/products?${query.toString()}`,
