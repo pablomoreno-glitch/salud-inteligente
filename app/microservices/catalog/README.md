@@ -27,6 +27,18 @@ FastAPI microservice for the Salud Inteligente product catalog: categories, need
 
 On first start, if the `products` table is empty, the service loads `seed/catalog.json` (10 categories, 10 needs, 209 products).
 
+## Updating prices in an existing database
+
+The seed only runs on an empty database, so prices added to `seed/catalog.json` later are not applied automatically. `src/sync_prices.py` copies them into a running installation. It only writes `products.price`; orders, inventory and every other column are left alone.
+
+```bash
+# after deploying the new image (git pull + docker compose ... up -d --build)
+docker exec salud_catalog python -m src.sync_prices            # dry run, writes nothing
+docker exec salud_catalog python -m src.sync_prices --apply    # fill prices that are still empty
+```
+
+By default a product whose price in the database differs from the JSON (for example one edited in the admin panel) is reported and left as is. Add `--overwrite` to replace those too. The run is a single transaction and can be repeated safely.
+
 ## Running tests
 
 ```bash
