@@ -137,7 +137,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "magnesium-complex-8-en-1-vw-158.webp",
-   "sort_order": 0
+   "sort_order": 0,
+   "price": 65000
   },
   {
    "ref": "VW-259",
@@ -160,7 +161,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "toplux-magnesium-complex-8-en-1-vw-259.webp",
-   "sort_order": 1
+   "sort_order": 1,
+   "price": 118000
   },
   {
    "ref": "VW-261",
@@ -183,7 +185,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "magnesio-complex-8-en-1-bolsa-vw-261.webp",
-   "sort_order": 2
+   "sort_order": 2,
+   "price": 60000
   },
   {
    "ref": "VW-157",
@@ -206,7 +209,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "magnesium-complex-12-en-1-vw-157.webp",
-   "sort_order": 3
+   "sort_order": 3,
+   "price": 70000
   },
   {
    "ref": "VW-262",
@@ -229,7 +233,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "magnesio-complex-12-en-1-bolsa-vw-262.webp",
-   "sort_order": 4
+   "sort_order": 4,
+   "price": 65000
   },
   {
    "ref": "VW-149",
@@ -253,7 +258,8 @@
     "Glucosa/Azúcar En Sangre"
    ],
    "image": "blood-sugar-vital-world-vw-149.webp",
-   "sort_order": 5
+   "sort_order": 5,
+   "price": 65000
   },
   {
    "ref": "VW-260",
@@ -277,7 +283,8 @@
     "Glucosa/Azúcar En Sangre"
    ],
    "image": "blood-sugar-bolsa-vw-260.webp",
-   "sort_order": 6
+   "sort_order": 6,
+   "price": 60000
   },
   {
    "ref": "VW-268",
@@ -298,7 +305,8 @@
    "presentation": "623 g",
    "advisor_tags": [],
    "image": "colageno-con-peptidos-proteina-vw-268.webp",
-   "sort_order": 7
+   "sort_order": 7,
+   "price": 110000
   },
   {
    "ref": "VW-150",
@@ -322,7 +330,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "collagen-peptides-vital-world-vw-150.webp",
-   "sort_order": 8
+   "sort_order": 8,
+   "price": 83000
   },
   {
    "ref": "VW-151",
@@ -347,7 +356,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "liposomal-vitamina-c-vw-151.webp",
-   "sort_order": 9
+   "sort_order": 9,
+   "price": 60000
   },
   {
    "ref": "QS-212",
@@ -370,7 +380,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "lemme-burn-qs-212.webp",
-   "sort_order": 10
+   "sort_order": 10,
+   "price": 153000
   },
   {
    "ref": "VW-266",
@@ -393,7 +404,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "uro-vital-world-vw-266.webp",
-   "sort_order": 11
+   "sort_order": 11,
+   "price": 80000
   },
   {
    "ref": "LN-1",
@@ -416,7 +428,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "fos-probioticos-y-zinc-ln-1.webp",
-   "sort_order": 12
+   "sort_order": 12,
+   "price": 65000
   },
   {
    "ref": "PS-133",
@@ -439,7 +452,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "oil-of-oregano-frasco-ps-133.webp",
-   "sort_order": 13
+   "sort_order": 13,
+   "price": 57000
   },
   {
    "ref": "PS-134",
@@ -462,7 +476,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "oil-of-oregano-bolsa-ps-134.webp",
-   "sort_order": 14
+   "sort_order": 14,
+   "price": 54000
   },
   {
    "ref": "CM-24",
@@ -484,7 +499,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "oregano-capsulas-colon-max-cm-24.webp",
-   "sort_order": 15
+   "sort_order": 15,
+   "price": 57000
   },
   {
    "ref": "PS-135",
@@ -507,7 +523,8 @@
     "Próstata/Salud Masculina"
    ],
    "image": "pumpking-semillas-de-calabaza-frasco-ps-135.webp",
-   "sort_order": 16
+   "sort_order": 16,
+   "price": 60000
   },
   {
    "ref": "PS-136",
@@ -530,7 +547,8 @@
     "Próstata/Salud Masculina"
    ],
    "image": "pumpking-semillas-de-calabaza-bolsa-ps-136.webp",
-   "sort_order": 17
+   "sort_order": 17,
+   "price": 57000
   },
   {
    "ref": "VW-153",
@@ -553,7 +571,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "candida-cleanse-vital-world-vw-153.webp",
-   "sort_order": 18
+   "sort_order": 18,
+   "price": 60000
   },
   {
    "ref": "PS-137",
@@ -576,7 +595,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "vitamina-d3-amp-k2-bolsa-ps-137.webp",
-   "sort_order": 19
+   "sort_order": 19,
+   "price": 45000
   },
   {
    "ref": "PS-233",
@@ -599,7 +619,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "vitamina-d3-amp-k2-frasco-ps-233.webp",
-   "sort_order": 20
+   "sort_order": 20,
+   "price": 47000
   },
   {
    "ref": "VW-155",
@@ -622,7 +643,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "flexacil-ultra-vw-155.webp",
-   "sort_order": 21
+   "sort_order": 21,
+   "price": 149000
   },
   {
    "ref": "VW-154",
@@ -645,7 +667,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "creatine-vitalherb-vw-154.webp",
-   "sort_order": 22
+   "sort_order": 22,
+   "price": 110000
   },
   {
    "ref": "VW-235",
@@ -668,7 +691,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "creatine-vital-world-x350-g-vw-235.webp",
-   "sort_order": 23
+   "sort_order": 23,
+   "price": 90000
   },
   {
    "ref": "VW-222",
@@ -690,7 +714,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "proteina-shilajit-vital-world-vw-222.webp",
-   "sort_order": 24
+   "sort_order": 24,
+   "price": 149000
   },
   {
    "ref": "VW-156",
@@ -713,7 +738,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "l-carnitine-vw-156.webp",
-   "sort_order": 25
+   "sort_order": 25,
+   "price": 64000
   },
   {
    "ref": "VW-160",
@@ -736,7 +762,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "shilajit-capsulas-vw-160.webp",
-   "sort_order": 26
+   "sort_order": 26,
+   "price": 67000
   },
   {
    "ref": "LN-68",
@@ -759,7 +786,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "shilajit-compota-ln-68.webp",
-   "sort_order": 27
+   "sort_order": 27,
+   "price": 45000
   },
   {
    "ref": "LN-69",
@@ -782,7 +810,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "shilajit-sachet-ln-69.webp",
-   "sort_order": 28
+   "sort_order": 28,
+   "price": 45000
   },
   {
    "ref": "NH-191",
@@ -805,7 +834,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "shilajit-natural-health-liquido-x1000-nh-191.webp",
-   "sort_order": 29
+   "sort_order": 29,
+   "price": 59000
   },
   {
    "ref": "NH-184",
@@ -828,7 +858,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "gomas-de-inositol-natural-health-nh-184.webp",
-   "sort_order": 30
+   "sort_order": 30,
+   "price": 60000
   },
   {
    "ref": "CO-11",
@@ -852,7 +883,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "inositol-efervescente-co-11.webp",
-   "sort_order": 31
+   "sort_order": 31,
+   "price": 85000
   },
   {
    "ref": "LN-81",
@@ -876,7 +908,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "inositol-greensofg-ln-81.webp",
-   "sort_order": 32
+   "sort_order": 32,
+   "price": 60000
   },
   {
    "ref": "LN-83",
@@ -900,7 +933,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "resveratrol-greensofg-ln-83.webp",
-   "sort_order": 33
+   "sort_order": 33,
+   "price": 57000
   },
   {
    "ref": "LN-82",
@@ -924,7 +958,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "nad-resveratrol-greensofg-ln-82.webp",
-   "sort_order": 34
+   "sort_order": 34,
+   "price": 77000
   },
   {
    "ref": "LN-74",
@@ -947,7 +982,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "citrato-de-magnesio-y-potasio-greensofg-ln-74.webp",
-   "sort_order": 35
+   "sort_order": 35,
+   "price": 65000
   },
   {
    "ref": "LN-75",
@@ -970,7 +1006,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "colageno-hidrolizado-greensofg-ln-75.webp",
-   "sort_order": 36
+   "sort_order": 36,
+   "price": 45000
   },
   {
    "ref": "LN-84",
@@ -994,7 +1031,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "vitamina-e-selenio-greensofg-ln-84.webp",
-   "sort_order": 37
+   "sort_order": 37,
+   "price": 75000
   },
   {
    "ref": "LN-76",
@@ -1017,7 +1055,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "con-biotina-greensofg-ln-76.webp",
-   "sort_order": 38
+   "sort_order": 38,
+   "price": 57000
   },
   {
    "ref": "LN-168",
@@ -1040,7 +1079,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "isoflavonas-greensofg-ln-168.webp",
-   "sort_order": 39
+   "sort_order": 39,
+   "price": 60000
   },
   {
    "ref": "LN-178",
@@ -1061,7 +1101,8 @@
    "presentation": "100 cáps",
    "advisor_tags": [],
    "image": "clorofila-greensofg-ln-178.webp",
-   "sort_order": 40
+   "sort_order": 40,
+   "price": 60000
   },
   {
    "ref": "LN-33",
@@ -1084,7 +1125,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "omega-3-greensofg-ln-33.webp",
-   "sort_order": 41
+   "sort_order": 41,
+   "price": 65000
   },
   {
    "ref": "LN-34",
@@ -1106,7 +1148,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "omega-3-6-9-greensofg-ln-34.webp",
-   "sort_order": 42
+   "sort_order": 42,
+   "price": 54000
   },
   {
    "ref": "CM-14",
@@ -1129,7 +1172,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "ashwagandha-colon-max-cm-14.webp",
-   "sort_order": 43
+   "sort_order": 43,
+   "price": 60000
   },
   {
    "ref": "NH-90",
@@ -1152,7 +1196,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "ashwagandha-natural-health-nh-90.webp",
-   "sort_order": 44
+   "sort_order": 44,
+   "price": 60000
   },
   {
    "ref": "NH-181",
@@ -1175,7 +1220,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "goma-ashwagandha-magnesio-vitamina-c-nh-181.webp",
-   "sort_order": 45
+   "sort_order": 45,
+   "price": 60000
   },
   {
    "ref": "CM-22",
@@ -1195,7 +1241,8 @@
    "presentation": "100 cáps",
    "advisor_tags": [],
    "image": "omega-3-colon-max-cm-22.webp",
-   "sort_order": 46
+   "sort_order": 46,
+   "price": 63000
   },
   {
    "ref": "CM-23",
@@ -1216,7 +1263,8 @@
    "presentation": "30 cáps",
    "advisor_tags": [],
    "image": "omega-3-colon-max-x30-cm-23.webp",
-   "sort_order": 47
+   "sort_order": 47,
+   "price": 25000
   },
   {
    "ref": "NH-97",
@@ -1239,7 +1287,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "nad-con-resveratrol-natural-health-nh-97.webp",
-   "sort_order": 48
+   "sort_order": 48,
+   "price": 73000
   },
   {
    "ref": "NH-236",
@@ -1262,7 +1311,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "nad-con-resveratrol-liquido-1000-ml-nh-236.webp",
-   "sort_order": 49
+   "sort_order": 49,
+   "price": 45000
   },
   {
    "ref": "NH-102",
@@ -1286,7 +1336,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "te-matcha-natural-health-nh-102.webp",
-   "sort_order": 50
+   "sort_order": 50,
+   "price": 45000
   },
   {
    "ref": "NH-105",
@@ -1309,7 +1360,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "melena-de-leon-natural-health-nh-105.webp",
-   "sort_order": 51
+   "sort_order": 51,
+   "price": 45000
   },
   {
    "ref": "NH-91",
@@ -1332,7 +1384,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "betaglucano-de-ganoderma-nh-91.webp",
-   "sort_order": 52
+   "sort_order": 52,
+   "price": 57000
   },
   {
    "ref": "IM-167",
@@ -1355,7 +1408,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "ginkgo-biloba-alnature-im-167.webp",
-   "sort_order": 53
+   "sort_order": 53,
+   "price": 40000
   },
   {
    "ref": "IM-47",
@@ -1378,7 +1432,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "trigosamine-im-47.webp",
-   "sort_order": 54
+   "sort_order": 54,
+   "price": 39000
   },
   {
    "ref": "PS-245",
@@ -1401,7 +1456,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "isoflavonas-de-soya-prame-ps-245.webp",
-   "sort_order": 55
+   "sort_order": 55,
+   "price": 22000
   },
   {
    "ref": "NH-182",
@@ -1422,7 +1478,8 @@
    "presentation": "60 gomas",
    "advisor_tags": [],
    "image": "gomas-de-colageno-hidrolizado-natural-health-nh-182.webp",
-   "sort_order": 56
+   "sort_order": 56,
+   "price": 56000
   },
   {
    "ref": "CM-19",
@@ -1444,7 +1501,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "colageno-hidrolizado-y-biotina-colon-max-cm-19.webp",
-   "sort_order": 57
+   "sort_order": 57,
+   "price": 62000
   },
   {
    "ref": "NL-179",
@@ -1467,7 +1525,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "colageno-hidrolizado-con-curcuma-nutri-pluss-nl-179.webp",
-   "sort_order": 58
+   "sort_order": 58,
+   "price": 45000
   },
   {
    "ref": "NL-111",
@@ -1487,7 +1546,8 @@
    "presentation": "800 g",
    "advisor_tags": [],
    "image": "colageno-nutri-pluss-nl-111.webp",
-   "sort_order": 59
+   "sort_order": 59,
+   "price": 29000
   },
   {
    "ref": "CM-18",
@@ -1508,7 +1568,8 @@
    "presentation": "500 g",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-x500-g-cm-18.webp",
-   "sort_order": 60
+   "sort_order": 60,
+   "price": 45000
   },
   {
    "ref": "CM-25",
@@ -1529,7 +1590,8 @@
    "presentation": "500 g",
    "advisor_tags": [],
    "image": "peptidos-de-colageno-de-pescado-cm-25.webp",
-   "sort_order": 61
+   "sort_order": 61,
+   "price": 42000
   },
   {
    "ref": "CO-237",
@@ -1549,7 +1611,8 @@
    "presentation": "1000 g",
    "advisor_tags": [],
    "image": "colagecol-colageno-hidrolizado-1000-g-co-237.webp",
-   "sort_order": 62
+   "sort_order": 62,
+   "price": 40000
   },
   {
    "ref": "CO-10",
@@ -1570,7 +1633,8 @@
    "presentation": "Polvo",
    "advisor_tags": [],
    "image": "colagecol-colageno-hidrolizado-co-10.webp",
-   "sort_order": 63
+   "sort_order": 63,
+   "price": 35000
   },
   {
    "ref": "SU-142",
@@ -1591,7 +1655,8 @@
    "presentation": "800 g",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-suminat-800-g-su-142.webp",
-   "sort_order": 64
+   "sort_order": 64,
+   "price": 49000
   },
   {
    "ref": "SU-201",
@@ -1612,7 +1677,8 @@
    "presentation": "250 g",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-250-g-hr-su-201.webp",
-   "sort_order": 65
+   "sort_order": 65,
+   "price": 32000
   },
   {
    "ref": "LN-64",
@@ -1633,7 +1699,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-x1000-ml-ln-64.webp",
-   "sort_order": 66
+   "sort_order": 66,
+   "price": 38000
   },
   {
    "ref": "WN-228",
@@ -1653,7 +1720,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-x1000-ml-world-nutrition-wn-228.webp",
-   "sort_order": 67
+   "sort_order": 67,
+   "price": 38000
   },
   {
    "ref": "NS-165",
@@ -1674,7 +1742,8 @@
    "presentation": "750 ml",
    "advisor_tags": [],
    "image": "colageno-natural-strong-ns-165.webp",
-   "sort_order": 68
+   "sort_order": 68,
+   "price": 33000
   },
   {
    "ref": "IS-48",
@@ -1694,7 +1763,8 @@
    "presentation": "700 g",
    "advisor_tags": [],
    "image": "colaget-is-48.webp",
-   "sort_order": 69
+   "sort_order": 69,
+   "price": 52000
   },
   {
    "ref": "IS-51",
@@ -1715,7 +1785,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "colaget-impronaturals-is-51.webp",
-   "sort_order": 70
+   "sort_order": 70,
+   "price": 37000
   },
   {
    "ref": "IM-39",
@@ -1736,7 +1807,8 @@
    "presentation": "60 cáps",
    "advisor_tags": [],
    "image": "colageno-caja-capsulas-alnature-im-39.webp",
-   "sort_order": 71
+   "sort_order": 71,
+   "price": 30000
   },
   {
    "ref": "NL-108",
@@ -1757,7 +1829,8 @@
    "presentation": "600 g",
    "advisor_tags": [],
    "image": "colag-cel-con-peptidos-nl-108.webp",
-   "sort_order": 72
+   "sort_order": 72,
+   "price": 54000
   },
   {
    "ref": "NL-193",
@@ -1778,7 +1851,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-con-curcuma-biotina-niacina-nl-193.webp",
-   "sort_order": 73
+   "sort_order": 73,
+   "price": 27000
   },
   {
    "ref": "NL-110",
@@ -1799,7 +1873,8 @@
    "presentation": "1100 g",
    "advisor_tags": [],
    "image": "colageno-marino-x1100-g-nl-110.webp",
-   "sort_order": 74
+   "sort_order": 74,
+   "price": 70000
   },
   {
    "ref": "NL-109",
@@ -1820,7 +1895,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "colageno-marino-liquido-1000-ml-nl-109.webp",
-   "sort_order": 75
+   "sort_order": 75,
+   "price": 34000
   },
   {
    "ref": "CM-238",
@@ -1841,7 +1917,8 @@
    "presentation": "800 g",
    "advisor_tags": [],
    "image": "colageno-marino-hidrolizado-dorada-plus-cm-238.webp",
-   "sort_order": 76
+   "sort_order": 76,
+   "price": 73000
   },
   {
    "ref": "NL-205",
@@ -1862,7 +1939,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "colageno-marino-prosimpo-nl-205.webp",
-   "sort_order": 77
+   "sort_order": 77,
+   "price": 29000
   },
   {
    "ref": "NH-225",
@@ -1882,7 +1960,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "colageno-hidrolizado-marino-x1000-ml-nh-225.webp",
-   "sort_order": 78
+   "sort_order": 78,
+   "price": 39000
   },
   {
    "ref": "SU-143",
@@ -1903,7 +1982,8 @@
    "presentation": "700 g",
    "advisor_tags": [],
    "image": "colageno-marino-700-g-su-143.webp",
-   "sort_order": 79
+   "sort_order": 79,
+   "price": 77000
   },
   {
    "ref": "NH-94",
@@ -1926,7 +2006,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "col-nclin-nh-94.webp",
-   "sort_order": 80
+   "sort_order": 80,
+   "price": 31000
   },
   {
    "ref": "CM-21",
@@ -1949,7 +2030,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "maxi-clean-cm-21.webp",
-   "sort_order": 81
+   "sort_order": 81,
+   "price": 24000
   },
   {
    "ref": "VC-161",
@@ -1972,7 +2054,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "batido-verde-vitalys-company-vc-161.webp",
-   "sort_order": 82
+   "sort_order": 82,
+   "price": 25000
   },
   {
    "ref": "VC-241",
@@ -1992,7 +2075,8 @@
    "presentation": "Polvo",
    "advisor_tags": [],
    "image": "fibra-de-flor-de-jamaica-vc-241.webp",
-   "sort_order": 83
+   "sort_order": 83,
+   "price": 31000
   },
   {
    "ref": "VC-162",
@@ -2015,7 +2099,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "pitahaya-vc-162.webp",
-   "sort_order": 84
+   "sort_order": 84,
+   "price": 31000
   },
   {
    "ref": "VC-163",
@@ -2038,7 +2123,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "psyllium-vc-163.webp",
-   "sort_order": 85
+   "sort_order": 85,
+   "price": 48000
   },
   {
    "ref": "CM-15",
@@ -2060,7 +2146,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "batido-verde-colon-max-cm-15.webp",
-   "sort_order": 86
+   "sort_order": 86,
+   "price": 21000
   },
   {
    "ref": "NH-101",
@@ -2084,7 +2171,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "semilla-de-aguaje-nh-101.webp",
-   "sort_order": 87
+   "sort_order": 87,
+   "price": 25000
   },
   {
    "ref": "NH-99",
@@ -2106,7 +2194,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "qb-max-nh-99.webp",
-   "sort_order": 88
+   "sort_order": 88,
+   "price": 28000
   },
   {
    "ref": "IS-54",
@@ -2128,7 +2217,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "fibraplus-is-54.webp",
-   "sort_order": 89
+   "sort_order": 89,
+   "price": 29000
   },
   {
    "ref": "IS-57",
@@ -2151,7 +2241,8 @@
     "Digestión/Intestino/Flora"
    ],
    "image": "lasskol-is-57.webp",
-   "sort_order": 90
+   "sort_order": 90,
+   "price": 29000
   },
   {
    "ref": "SU-171",
@@ -2172,7 +2263,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "vita-f3-su-171.webp",
-   "sort_order": 91
+   "sort_order": 91,
+   "price": 29000
   },
   {
    "ref": "GE-31",
@@ -2192,7 +2284,8 @@
    "presentation": "1100 ml",
    "advisor_tags": [],
    "image": "text-ultra-ge-31.webp",
-   "sort_order": 92
+   "sort_order": 92,
+   "price": 32000
   },
   {
    "ref": "GE-229",
@@ -2213,7 +2306,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "tex-ultra-500-ml-ge-229.webp",
-   "sort_order": 93
+   "sort_order": 93,
+   "price": 29000
   },
   {
    "ref": "NP-130",
@@ -2235,7 +2329,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "torovitol-np-130.webp",
-   "sort_order": 94
+   "sort_order": 94,
+   "price": 26000
   },
   {
    "ref": "NE-89",
@@ -2255,7 +2350,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "torofull-ne-89.webp",
-   "sort_order": 95
+   "sort_order": 95,
+   "price": 33000
   },
   {
    "ref": "GE-29",
@@ -2277,7 +2373,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "bulls-maxx-ge-29.webp",
-   "sort_order": 96
+   "sort_order": 96,
+   "price": 26000
   },
   {
    "ref": "LN-170",
@@ -2298,7 +2395,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "torosam-ln-170.webp",
-   "sort_order": 97
+   "sort_order": 97,
+   "price": 29000
   },
   {
    "ref": "NE-88",
@@ -2318,7 +2416,8 @@
    "presentation": "1100 ml",
    "advisor_tags": [],
    "image": "full-max-ne-88.webp",
-   "sort_order": 98
+   "sort_order": 98,
+   "price": 26000
   },
   {
    "ref": "GE-30",
@@ -2338,7 +2437,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "mi-polla-ge-30.webp",
-   "sort_order": 99
+   "sort_order": 99,
+   "price": 26000
   },
   {
    "ref": "BE-5",
@@ -2360,7 +2460,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "enano-180-be-5.webp",
-   "sort_order": 100
+   "sort_order": 100,
+   "price": 26000
   },
   {
    "ref": "GE-27",
@@ -2380,7 +2481,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "klg-enano-180-ge-27.webp",
-   "sort_order": 101
+   "sort_order": 101,
+   "price": 29000
   },
   {
    "ref": "GE-28",
@@ -2400,7 +2502,8 @@
    "presentation": "160 ml",
    "advisor_tags": [],
    "image": "klg-enano-180-sobres-ge-28.webp",
-   "sort_order": 102
+   "sort_order": 102,
+   "price": 20000
   },
   {
    "ref": "NE-87",
@@ -2421,7 +2524,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "eromax-ne-87.webp",
-   "sort_order": 103
+   "sort_order": 103,
+   "price": 29000
   },
   {
    "ref": "NE-200",
@@ -2442,7 +2546,8 @@
    "presentation": "15 sobres",
    "advisor_tags": [],
    "image": "eromax-sachet-ne-200.webp",
-   "sort_order": 104
+   "sort_order": 104,
+   "price": 20000
   },
   {
    "ref": "LN-61",
@@ -2463,7 +2568,8 @@
    "presentation": "15 sachets",
    "advisor_tags": [],
    "image": "apk-maxx-ln-61.webp",
-   "sort_order": 105
+   "sort_order": 105,
+   "price": 20000
   },
   {
    "ref": "BE-6",
@@ -2484,7 +2590,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "rompe-chit-be-6.webp",
-   "sort_order": 106
+   "sort_order": 106,
+   "price": 26000
   },
   {
    "ref": "BE-7",
@@ -2505,7 +2612,8 @@
    "presentation": "15 sachets",
    "advisor_tags": [],
    "image": "rompe-chit-sachet-be-7.webp",
-   "sort_order": 107
+   "sort_order": 107,
+   "price": 20000
   },
   {
    "ref": "NP-126",
@@ -2525,7 +2633,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "ptenciol-np-126.webp",
-   "sort_order": 108
+   "sort_order": 108,
+   "price": 26000
   },
   {
    "ref": "NP-129",
@@ -2547,7 +2656,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "maca-negra-maca-roja-np-129.webp",
-   "sort_order": 109
+   "sort_order": 109,
+   "price": 59000
   },
   {
    "ref": "NH-103",
@@ -2570,7 +2680,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "triple-maca-nh-103.webp",
-   "sort_order": 110
+   "sort_order": 110,
+   "price": 59000
   },
   {
    "ref": "NP-128",
@@ -2593,7 +2704,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "komb-np-128.webp",
-   "sort_order": 111
+   "sort_order": 111,
+   "price": 26000
   },
   {
    "ref": "PS-190",
@@ -2613,7 +2725,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "mero-liv-living-natural-ps-190.webp",
-   "sort_order": 112
+   "sort_order": 112,
+   "price": 29000
   },
   {
    "ref": "IS-189",
@@ -2633,7 +2746,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "tumba-k3-impro-natural-is-189.webp",
-   "sort_order": 113
+   "sort_order": 113,
+   "price": 24000
   },
   {
    "ref": "GE-211",
@@ -2656,7 +2770,8 @@
     "Energía/Rendimiento Físico"
    ],
    "image": "invictus-ge-211.webp",
-   "sort_order": 114
+   "sort_order": 114,
+   "price": 29000
   },
   {
    "ref": "WN-164",
@@ -2676,7 +2791,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "zeus-wn-164.webp",
-   "sort_order": 115
+   "sort_order": 115,
+   "price": 26000
   },
   {
    "ref": "NE-86",
@@ -2696,7 +2812,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "100-pre-max-ne-86.webp",
-   "sort_order": 116
+   "sort_order": 116,
+   "price": 26000
   },
   {
    "ref": "LN-73",
@@ -2717,7 +2834,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "biome-ln-73.webp",
-   "sort_order": 117
+   "sort_order": 117,
+   "price": 29000
   },
   {
    "ref": "LN-70",
@@ -2738,7 +2856,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "vino-cbrcel-ln-70.webp",
-   "sort_order": 118
+   "sort_order": 118,
+   "price": 26000
   },
   {
    "ref": "NH-196",
@@ -2759,7 +2878,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "melanvit-nh-196.webp",
-   "sort_order": 119
+   "sort_order": 119,
+   "price": 45000
   },
   {
    "ref": "ML-267",
@@ -2778,7 +2898,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "complexx-b-ml-267.webp",
-   "sort_order": 120
+   "sort_order": 120,
+   "price": 23000
   },
   {
    "ref": "NP-131",
@@ -2798,7 +2919,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "vita-francesa-np-131.webp",
-   "sort_order": 121
+   "sort_order": 121,
+   "price": 24000
   },
   {
    "ref": "GE-195",
@@ -2819,7 +2941,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "vita-advance-ge-195.webp",
-   "sort_order": 122
+   "sort_order": 122,
+   "price": 26000
   },
   {
    "ref": "NH-104",
@@ -2840,7 +2963,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "vitaabc-nh-104.webp",
-   "sort_order": 123
+   "sort_order": 123,
+   "price": 45000
   },
   {
    "ref": "NH-98",
@@ -2861,7 +2985,8 @@
    "presentation": "2×120 ml",
    "advisor_tags": [],
    "image": "nerzin-nh-98.webp",
-   "sort_order": 124
+   "sort_order": 124,
+   "price": 24000
   },
   {
    "ref": "GE-251",
@@ -2884,7 +3009,8 @@
     "Cardiovascular/Anemia"
    ],
    "image": "ferrohenoslin-ge-251.webp",
-   "sort_order": 125
+   "sort_order": 125,
+   "price": 34000
   },
   {
    "ref": "WN-250",
@@ -2904,7 +3030,8 @@
    "presentation": "1100 ml",
    "advisor_tags": [],
    "image": "7-colagenos-wn-250.webp",
-   "sort_order": 126
+   "sort_order": 126,
+   "price": 39000
   },
   {
    "ref": "LN-258",
@@ -2927,7 +3054,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "drehep-ln-258.webp",
-   "sort_order": 127
+   "sort_order": 127,
+   "price": 32000
   },
   {
    "ref": "SU-248",
@@ -2949,7 +3077,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "alcachofa-suminat-su-248.webp",
-   "sort_order": 128
+   "sort_order": 128,
+   "price": 27000
   },
   {
    "ref": "NP-257",
@@ -2973,7 +3102,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "bililax-np-257.webp",
-   "sort_order": 129
+   "sort_order": 129,
+   "price": 32000
   },
   {
    "ref": "NL-217",
@@ -2996,7 +3126,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "vitacerebrina-nl-217.webp",
-   "sort_order": 130
+   "sort_order": 130,
+   "price": 26000
   },
   {
    "ref": "SU-138",
@@ -3017,7 +3148,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "al-petit-su-138.webp",
-   "sort_order": 131
+   "sort_order": 131,
+   "price": 44000
   },
   {
    "ref": "NL-197",
@@ -3038,7 +3170,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "vita-c-brin-prosimpo-nl-197.webp",
-   "sort_order": 132
+   "sort_order": 132,
+   "price": 24000
   },
   {
    "ref": "PR-227",
@@ -3061,7 +3194,8 @@
     "Cardiovascular/Anemia"
    ],
    "image": "hierro-aminoquelado-prosimpo-pr-227.webp",
-   "sort_order": 133
+   "sort_order": 133,
+   "price": 24000
   },
   {
    "ref": "NL-120",
@@ -3083,7 +3217,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "vino-cerebral-prosimpo-nl-120.webp",
-   "sort_order": 134
+   "sort_order": 134,
+   "price": 24000
   },
   {
    "ref": "NL-199",
@@ -3105,7 +3240,8 @@
     "Migraña/Dolor"
    ],
    "image": "migra-max-prosimpo-nl-199.webp",
-   "sort_order": 135
+   "sort_order": 135,
+   "price": 24000
   },
   {
    "ref": "NL-114",
@@ -3128,7 +3264,8 @@
     "Equilibrio Hormonal/Mujer"
    ],
    "image": "femvit-ovaries-prosimpo-nl-114.webp",
-   "sort_order": 136
+   "sort_order": 136,
+   "price": 24000
   },
   {
    "ref": "NL-112",
@@ -3151,7 +3288,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "dren-hepatol-nl-112.webp",
-   "sort_order": 137
+   "sort_order": 137,
+   "price": 24000
   },
   {
    "ref": "NL-117",
@@ -3173,7 +3311,8 @@
     "Próstata/Salud Masculina"
    ],
    "image": "prostamax-nl-117.webp",
-   "sort_order": 138
+   "sort_order": 138,
+   "price": 24000
   },
   {
    "ref": "NL-122",
@@ -3194,7 +3333,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "vitamina-c-prosimpo-nl-122.webp",
-   "sort_order": 139
+   "sort_order": 139,
+   "price": 24000
   },
   {
    "ref": "NL-192",
@@ -3215,7 +3355,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "clorofila-con-extracto-de-te-espinaca-apio-nl-192.webp",
-   "sort_order": 140
+   "sort_order": 140,
+   "price": 23000
   },
   {
    "ref": "NP-125",
@@ -3236,7 +3377,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "clorofila-natural-plast-np-125.webp",
-   "sort_order": 141
+   "sort_order": 141,
+   "price": 32000
   },
   {
    "ref": "LN-63",
@@ -3257,7 +3399,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "clorofila-ln-63.webp",
-   "sort_order": 142
+   "sort_order": 142,
+   "price": 38000
   },
   {
    "ref": "IS-52",
@@ -3278,7 +3421,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "colatril-is-52.webp",
-   "sort_order": 143
+   "sort_order": 143,
+   "price": 27000
   },
   {
    "ref": "SU-141",
@@ -3299,7 +3443,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "cloromid-suminat-su-141.webp",
-   "sort_order": 144
+   "sort_order": 144,
+   "price": 29000
   },
   {
    "ref": "LN-62",
@@ -3322,7 +3467,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "barr1do-art-ln-62.webp",
-   "sort_order": 145
+   "sort_order": 145,
+   "price": 29000
   },
   {
    "ref": "IS-50",
@@ -3345,7 +3491,8 @@
     "Cardiovascular/Anemia"
    ],
    "image": "circulan-is-50.webp",
-   "sort_order": 146
+   "sort_order": 146,
+   "price": 29000
   },
   {
    "ref": "LN-60",
@@ -3368,7 +3515,8 @@
     "Cardiovascular/Anemia"
    ],
    "image": "ajovit-ln-60.webp",
-   "sort_order": 147
+   "sort_order": 147,
+   "price": 29000
   },
   {
    "ref": "SU-232",
@@ -3388,7 +3536,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "chank-edra-500-ml-su-232.webp",
-   "sort_order": 148
+   "sort_order": 148,
+   "price": 27000
   },
   {
    "ref": "NP-127",
@@ -3408,7 +3557,8 @@
    "presentation": "1000 ml",
    "advisor_tags": [],
    "image": "chanca-piedra-np-127.webp",
-   "sort_order": 149
+   "sort_order": 149,
+   "price": 32000
   },
   {
    "ref": "IS-53",
@@ -3428,7 +3578,8 @@
    "presentation": "500 ml",
    "advisor_tags": [],
    "image": "dizolpiedra-is-53.webp",
-   "sort_order": 150
+   "sort_order": 150,
+   "price": 27000
   },
   {
    "ref": "IS-55",
@@ -3451,7 +3602,8 @@
     "Próstata/Salud Masculina"
    ],
    "image": "finpros-is-55.webp",
-   "sort_order": 151
+   "sort_order": 151,
+   "price": 34000
   },
   {
    "ref": "IS-56",
@@ -3474,7 +3626,8 @@
     "Control De Peso/Metabolismo"
    ],
    "image": "greenberry-is-56.webp",
-   "sort_order": 152
+   "sort_order": 152,
+   "price": 29000
   },
   {
    "ref": "IS-59",
@@ -3496,7 +3649,8 @@
     "Control De Peso/Metabolismo"
    ],
    "image": "ultradoll-is-59.webp",
-   "sort_order": 153
+   "sort_order": 153,
+   "price": 29000
   },
   {
    "ref": "IS-58",
@@ -3519,7 +3673,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "proxx-is-58.webp",
-   "sort_order": 154
+   "sort_order": 154,
+   "price": 25000
   },
   {
    "ref": "NL-208",
@@ -3542,7 +3697,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "glucosamina-liquida-x1000-ml-nl-208.webp",
-   "sort_order": 155
+   "sort_order": 155,
+   "price": 35000
   },
   {
    "ref": "LN-204",
@@ -3566,7 +3722,8 @@
     "Glucosa/Azúcar En Sangre"
    ],
    "image": "dia-v-tic-ln-204.webp",
-   "sort_order": 156
+   "sort_order": 156,
+   "price": 24000
   },
   {
    "ref": "NH-213",
@@ -3590,7 +3747,8 @@
     "Glucosa/Azúcar En Sangre"
    ],
    "image": "gomas-de-vinagre-de-manzana-natural-health-nh-213.webp",
-   "sort_order": 157
+   "sort_order": 157,
+   "price": 28000
   },
   {
    "ref": "NH-186",
@@ -3613,7 +3771,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "gomas-magnesio-melatonina-natural-health-nh-186.webp",
-   "sort_order": 158
+   "sort_order": 158,
+   "price": 56000
   },
   {
    "ref": "NH-95",
@@ -3636,7 +3795,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "gomitas-siemprebell-nh-95.webp",
-   "sort_order": 159
+   "sort_order": 159,
+   "price": 45000
   },
   {
    "ref": "NH-183",
@@ -3657,7 +3817,8 @@
    "presentation": "60 gomas",
    "advisor_tags": [],
    "image": "gomas-de-glucosamina-natural-health-nh-183.webp",
-   "sort_order": 160
+   "sort_order": 160,
+   "price": 56000
   },
   {
    "ref": "NH-185",
@@ -3678,7 +3839,8 @@
    "presentation": "60 gomas",
    "advisor_tags": [],
    "image": "gomas-de-magnesio-y-potasio-natural-health-nh-185.webp",
-   "sort_order": 161
+   "sort_order": 161,
+   "price": 57000
   },
   {
    "ref": "NH-177",
@@ -3699,7 +3861,8 @@
    "presentation": "60 gomas",
    "advisor_tags": [],
    "image": "cald-con-vitamina-d-nh-177.webp",
-   "sort_order": 162
+   "sort_order": 162,
+   "price": 44000
   },
   {
    "ref": "NL-207",
@@ -3722,7 +3885,8 @@
     "Niños"
    ],
    "image": "nutri-pluss-kids-nl-207.webp",
-   "sort_order": 163
+   "sort_order": 163,
+   "price": 29000
   },
   {
    "ref": "CM-13",
@@ -3745,7 +3909,8 @@
     "Niños"
    ],
    "image": "aptmax-ninos-cm-13.webp",
-   "sort_order": 164
+   "sort_order": 164,
+   "price": 44000
   },
   {
    "ref": "SU-209",
@@ -3768,7 +3933,8 @@
     "Niños"
    ],
    "image": "ninosten-su-209.webp",
-   "sort_order": 165
+   "sort_order": 165,
+   "price": 44000
   },
   {
    "ref": "SU-231",
@@ -3791,7 +3957,8 @@
     "Niños"
    ],
    "image": "ninosten-liquido-500-ml-su-231.webp",
-   "sort_order": 166
+   "sort_order": 166,
+   "price": 35000
   },
   {
    "ref": "IS-49",
@@ -3813,7 +3980,8 @@
     "Niños"
    ],
    "image": "nutra-kist-is-49.webp",
-   "sort_order": 167
+   "sort_order": 167,
+   "price": 44000
   },
   {
    "ref": "NA-220",
@@ -3836,7 +4004,8 @@
     "Niños"
    ],
    "image": "avena-kids-na-220.webp",
-   "sort_order": 168
+   "sort_order": 168,
+   "price": 44000
   },
   {
    "ref": "CM-20",
@@ -3859,7 +4028,8 @@
     "Niños"
    ],
    "image": "creci-fuerte-cm-20.webp",
-   "sort_order": 169
+   "sort_order": 169,
+   "price": 44000
   },
   {
    "ref": "NH-240",
@@ -3880,7 +4050,8 @@
     "Niños"
    ],
    "image": "vitcalpro-nh-240.webp",
-   "sort_order": 170
+   "sort_order": 170,
+   "price": 35000
   },
   {
    "ref": "NP-239",
@@ -3903,7 +4074,8 @@
     "Niños"
    ],
    "image": "golkds-hr-np-239.webp",
-   "sort_order": 171
+   "sort_order": 171,
+   "price": 35000
   },
   {
    "ref": "CM-26",
@@ -3924,7 +4096,8 @@
    "presentation": "600 g",
    "advisor_tags": [],
    "image": "sure-cm-26.webp",
-   "sort_order": 172
+   "sort_order": 172,
+   "price": 38000
   },
   {
    "ref": "SU-148",
@@ -3945,7 +4118,8 @@
    "presentation": "250 g",
    "advisor_tags": [],
    "image": "sumisure-x250-g-su-148.webp",
-   "sort_order": 173
+   "sort_order": 173,
+   "price": 18000
   },
   {
    "ref": "SU-147",
@@ -3966,7 +4140,8 @@
    "presentation": "800 g",
    "advisor_tags": [],
    "image": "sumisure-x800-g-su-147.webp",
-   "sort_order": 174
+   "sort_order": 174,
+   "price": 38000
   },
   {
    "ref": "NL-115",
@@ -3988,7 +4163,8 @@
     "Concentración/Memoria/Cerebro"
    ],
    "image": "ginkgo-biloba-nutri-pluss-nl-115.webp",
-   "sort_order": 175
+   "sort_order": 175,
+   "price": 29000
   },
   {
    "ref": "NL-107",
@@ -4010,7 +4186,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "cartical-nutri-pluss-nl-107.webp",
-   "sort_order": 176
+   "sort_order": 176,
+   "price": 40000
   },
   {
    "ref": "NL-188",
@@ -4031,7 +4208,8 @@
    "presentation": "800 g",
    "advisor_tags": [],
    "image": "vita-c-bri-nutri-pluss-nl-188.webp",
-   "sort_order": 177
+   "sort_order": 177,
+   "price": 29000
   },
   {
    "ref": "NL-234",
@@ -4054,7 +4232,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "cal-d3-x800-g-nl-234.webp",
-   "sort_order": 178
+   "sort_order": 178,
+   "price": 38000
   },
   {
    "ref": "NL-106",
@@ -4077,7 +4256,8 @@
     "Articulaciones/Huesos/Movilidad"
    ],
    "image": "cal-d3-nl-106.webp",
-   "sort_order": 179
+   "sort_order": 179,
+   "price": 35000
   },
   {
    "ref": "LN-72",
@@ -4097,7 +4277,8 @@
    "presentation": "700 g",
    "advisor_tags": [],
    "image": "meg-v-t-ln-72.webp",
-   "sort_order": 180
+   "sort_order": 180,
+   "price": 29000
   },
   {
    "ref": "NH-174",
@@ -4118,7 +4299,8 @@
    "presentation": "1000 g",
    "advisor_tags": [],
    "image": "vita-granulada-nh-174.webp",
-   "sort_order": 181
+   "sort_order": 181,
+   "price": 29000
   },
   {
    "ref": "SU-146",
@@ -4139,7 +4321,8 @@
    "presentation": "250 g",
    "advisor_tags": [],
    "image": "maknat-maca-su-146.webp",
-   "sort_order": 182
+   "sort_order": 182,
+   "price": 47000
   },
   {
    "ref": "CM-16",
@@ -4160,7 +4343,8 @@
    "presentation": "600 g",
    "advisor_tags": [],
    "image": "calostro-bovino-cm-16.webp",
-   "sort_order": 183
+   "sort_order": 183,
+   "price": 43000
   },
   {
    "ref": "NA-244",
@@ -4181,7 +4365,8 @@
    "presentation": "700 g",
    "advisor_tags": [],
    "image": "calostro-bovino-700-g-natubella-na-244.webp",
-   "sort_order": 184
+   "sort_order": 184,
+   "price": 43000
   },
   {
    "ref": "SU-139",
@@ -4202,7 +4387,8 @@
    "presentation": "250 g",
    "advisor_tags": [],
    "image": "calcio-en-polvo-suminat-250-g-su-139.webp",
-   "sort_order": 185
+   "sort_order": 185,
+   "price": 18000
   },
   {
    "ref": "NL-180",
@@ -4224,7 +4410,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "factor-de-transferencia-nutri-pluss-800-g-nl-180.webp",
-   "sort_order": 186
+   "sort_order": 186,
+   "price": 29000
   },
   {
    "ref": "NL-242",
@@ -4247,7 +4434,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "factor-de-transferencia-nutripluss-x1100-g-nl-242.webp",
-   "sort_order": 187
+   "sort_order": 187,
+   "price": 40000
   },
   {
    "ref": "IM-40",
@@ -4271,7 +4459,8 @@
     "Piel/Cabello/Uñas/Belleza"
    ],
    "image": "femivid-im-40.webp",
-   "sort_order": 188
+   "sort_order": 188,
+   "price": 15000
   },
   {
    "ref": "CL-8",
@@ -4295,7 +4484,8 @@
     "Migraña/Dolor"
    ],
    "image": "reuma-flex-cl-8.webp",
-   "sort_order": 189
+   "sort_order": 189,
+   "price": 27000
   },
   {
    "ref": "IM-45",
@@ -4316,7 +4506,8 @@
    "presentation": "20 tabletas",
    "advisor_tags": [],
    "image": "multicevita-im-45.webp",
-   "sort_order": 190
+   "sort_order": 190,
+   "price": 12000
   },
   {
    "ref": "PS-176",
@@ -4337,7 +4528,8 @@
    "presentation": "30 cáps",
    "advisor_tags": [],
    "image": "complejo-b-ps-176.webp",
-   "sort_order": 191
+   "sort_order": 191,
+   "price": 18000
   },
   {
    "ref": "LN-175",
@@ -4358,7 +4550,8 @@
    "presentation": "100 cáps",
    "advisor_tags": [],
    "image": "multivitaminas-y-minerales-ln-175.webp",
-   "sort_order": 192
+   "sort_order": 192,
+   "price": 66000
   },
   {
    "ref": "IM-44",
@@ -4380,7 +4573,8 @@
     "Próstata/Salud Masculina"
    ],
    "image": "improtec-im-44.webp",
-   "sort_order": 193
+   "sort_order": 193,
+   "price": 25000
   },
   {
    "ref": "IM-42",
@@ -4403,7 +4597,8 @@
     "Cardiovascular/Anemia"
    ],
    "image": "perlas-de-ajo-rogoff-im-42.webp",
-   "sort_order": 194
+   "sort_order": 194,
+   "price": 18000
   },
   {
    "ref": "IM-43",
@@ -4425,7 +4620,8 @@
     "Sueño/Estrés/Ansiedad"
    ],
    "image": "valeriana-toronjil-pasiflora-im-43.webp",
-   "sort_order": 195
+   "sort_order": 195,
+   "price": 17000
   },
   {
    "ref": "CL-9",
@@ -4449,7 +4645,8 @@
     "Migraña/Dolor"
    ],
    "image": "xingrass-cl-9.webp",
-   "sort_order": 196
+   "sort_order": 196,
+   "price": 24000
   },
   {
    "ref": "NM-173",
@@ -4470,7 +4667,8 @@
    "presentation": "360 ml",
    "advisor_tags": [],
    "image": "calendula-natural-medy-nm-173.webp",
-   "sort_order": 197
+   "sort_order": 197,
+   "price": 23000
   },
   {
    "ref": "PR-172",
@@ -4491,7 +4689,8 @@
    "presentation": "380 ml",
    "advisor_tags": [],
    "image": "g-callen3-prosimpo-pr-172.webp",
-   "sort_order": 198
+   "sort_order": 198,
+   "price": 36000
   },
   {
    "ref": "SU-144",
@@ -4512,7 +4711,8 @@
    "presentation": "360 ml",
    "advisor_tags": [],
    "image": "g4-str1-su-144.webp",
-   "sort_order": 199
+   "sort_order": 199,
+   "price": 36000
   },
   {
    "ref": "LN-65",
@@ -4534,7 +4734,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "extravid-ln-65.webp",
-   "sort_order": 200
+   "sort_order": 200,
+   "price": 26000
   },
   {
    "ref": "LN-71",
@@ -4557,7 +4758,8 @@
     "Hígado/Desintoxicación"
    ],
    "image": "zarmit-ln-71.webp",
-   "sort_order": 201
+   "sort_order": 201,
+   "price": 24000
   },
   {
    "ref": "NM-263",
@@ -4578,7 +4780,8 @@
    "presentation": "360 ml",
    "advisor_tags": [],
    "image": "zarzaparrilla-natural-medy-nm-263.webp",
-   "sort_order": 202
+   "sort_order": 202,
+   "price": 23000
   },
   {
    "ref": "NM-124",
@@ -4601,7 +4804,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "ucalizan-ninos-nm-124.webp",
-   "sort_order": 203
+   "sort_order": 203,
+   "price": 28000
   },
   {
    "ref": "IM-37",
@@ -4624,7 +4828,8 @@
     "Inmunidad/Defensas"
    ],
    "image": "bronco-x-max-im-37.webp",
-   "sort_order": 204
+   "sort_order": 204,
+   "price": 29000
   },
   {
    "ref": "NM-123",
@@ -4645,7 +4850,8 @@
    "presentation": "Miel",
    "advisor_tags": [],
    "image": "pr-polizan-nm-123.webp",
-   "sort_order": 205
+   "sort_order": 205,
+   "price": 28000
   },
   {
    "ref": "LN-66",
@@ -4666,7 +4872,8 @@
    "presentation": "60 ml",
    "advisor_tags": [],
    "image": "lim-pichn-60-ml-ln-66.webp",
-   "sort_order": 206
+   "sort_order": 206,
+   "price": 25000
   },
   {
    "ref": "LN-67",
@@ -4687,7 +4894,8 @@
    "presentation": "30 g",
    "advisor_tags": [],
    "image": "lim-pichn-polvo-ln-67.webp",
-   "sort_order": 207
+   "sort_order": 207,
+   "price": 22000
   },
   {
    "ref": "IM-41",
@@ -4711,7 +4919,8 @@
     "Migraña/Dolor"
    ],
    "image": "flexdl-im-41.webp",
-   "sort_order": 208
+   "sort_order": 208,
+   "price": 20000
   },
   {
    "ref": "NV-001",
