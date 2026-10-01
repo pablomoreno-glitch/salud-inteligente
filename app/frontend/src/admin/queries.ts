@@ -107,15 +107,6 @@ export function useAdminProducts() {
   });
 }
 
-export function useUpdateMargin() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (margin_percent: number) =>
-      api.put<{ margin_percent: number; products_repriced: number }>("/admin/pricing", { margin_percent }, true),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "products"] }),
-  });
-}
-
 export function useUpdateProduct() {
   const queryClient = useQueryClient();
   return useMutation({

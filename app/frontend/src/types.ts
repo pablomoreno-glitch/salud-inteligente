@@ -267,7 +267,6 @@ export interface AdminProductRow extends Product {
 export interface AdminProductList {
   items: AdminProductRow[];
   total: number;
-  margin_percent: number;
 }
 
 export interface ContactMessage {

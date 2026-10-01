@@ -1,25 +1,35 @@
 import { useMemo, useState } from "react";
 import { Check, X } from "lucide-react";
-import { useAdminProducts, useUpdateMargin, useUpdateProduct } from "./queries";
+import { useAdminProducts, useUpdateProduct } from "./queries";
 import { matchesSearch } from "./filters";
 import type { AdminProductRow } from "../types";
 import { formatPrice } from "../lib/format";
 import { ErrorState } from "../components/ErrorState";
 import { Skeleton } from "../components/Skeleton";
 
-function CostCell({ product }: { product: AdminProductRow }) {
+/** Editable peso amount: the supplier cost or our selling price. Saves with Enter or the button. */
+function MoneyCell({
+  product,
+  field,
+  label,
+}: {
+  product: AdminProductRow;
+  field: "cost_price" | "price";
+  label: string;
+}) {
   const updateProduct = useUpdateProduct();
-  const [value, setValue] = useState(product.cost_price ? String(product.cost_price) : "");
+  const current = product[field];
+  const [value, setValue] = useState(current ? String(current) : "");
   const [saved, setSaved] = useState(false);
 
   const parsed = value.trim() === "" ? null : Number(value);
   const invalid = parsed === null || !Number.isInteger(parsed) || parsed <= 0;
-  const dirty = parsed !== (product.cost_price ?? null);
+  const dirty = parsed !== (current ?? null);
 
   function save() {
     if (invalid || !dirty || parsed === null) return;
     updateProduct.mutate(
-      { ref: product.ref, cost_price: parsed },
+      { ref: product.ref, [field]: parsed },
       { onSuccess: () => { setSaved(true); setTimeout(() => setSaved(false), 1500); } },
     );
   }
@@ -34,10 +44,10 @@ function CostCell({ product }: { product: AdminProductRow }) {
           min={1}
           step={100}
           value={value}
+          placeholder="Sin precio"
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={(event) => event.key === "Enter" && save()}
-          aria-label={`Precio proveedor de ${product.name}`}
-          placeholder="Sin costo"
+          aria-label={`${label} de ${product.name}`}
           aria-invalid={dirty && invalid}
           className={`w-28 rounded-control border py-1.5 pl-5 pr-2 text-body outline-none focus-visible:border-leaf ${
             dirty && invalid ? "border-danger" : "border-line"
@@ -60,48 +70,15 @@ function CostCell({ product }: { product: AdminProductRow }) {
   );
 }
 
-function MarginCard({ margin }: { margin: number }) {
-  const updateMargin = useUpdateMargin();
-  const [value, setValue] = useState(String(margin));
-  const parsed = Number(value);
-  const valid = Number.isInteger(parsed) && parsed >= 0 && parsed <= 500;
-  const example = 10000;
-
+function Profit({ product }: { product: AdminProductRow }) {
+  if (!product.cost_price || !product.price) {
+    return <span className="text-meta text-muted">Falta el precio proveedor</span>;
+  }
+  const profit = product.price - product.cost_price;
   return (
-    <div className="mt-4 flex flex-wrap items-end gap-4 rounded-card border border-line bg-white p-4">
-      <div>
-        <label htmlFor="margin" className="block text-body font-semibold text-ink">Margen de ganancia</label>
-        <p className="text-meta text-muted">Precio de venta = precio proveedor + margen, redondeado a $500.</p>
-        <div className="mt-2 flex items-center gap-2">
-          <input
-            id="margin"
-            type="number"
-            min={0}
-            max={500}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            className="w-20 rounded-control border border-line px-2 py-1.5 text-center text-body"
-          />
-          <span className="text-body text-ink">%</span>
-          <button
-            type="button"
-            onClick={() => updateMargin.mutate(parsed)}
-            disabled={!valid || parsed === margin || updateMargin.isPending}
-            className="rounded-pill bg-forest px-4 py-1.5 text-meta font-medium text-white disabled:opacity-40"
-          >
-            {updateMargin.isPending ? "Aplicando..." : "Aplicar a todos"}
-          </button>
-        </div>
-      </div>
-      {valid && (
-        <p className="text-meta text-muted">
-          Ejemplo: un producto que te cuesta {formatPrice(example)} se vende en{" "}
-          {formatPrice(Math.ceil((example * (1 + parsed / 100)) / 500) * 500)}.
-        </p>
-      )}
-      {updateMargin.isSuccess && (
-        <p className="text-meta text-leaf">Se actualizaron {updateMargin.data.products_repriced} precios.</p>
-      )}
+    <div className={profit < 0 ? "text-danger" : "text-ink"}>
+      <p className="font-semibold">{formatPrice(profit)}</p>
+      <p className="text-meta">{product.margin_percent}% sobre el costo</p>
     </div>
   );
 }
@@ -129,14 +106,13 @@ function ProductRow({ product, onEdit }: { product: AdminProductRow; onEdit: (p:
         <p className="text-meta">{product.category.name}</p>
       </td>
       <td className="px-4 py-3">
-        <CostCell key={`${product.ref}-${product.cost_price}`} product={product} />
+        <MoneyCell key={`c-${product.ref}-${product.cost_price}`} product={product} field="cost_price" label="Precio proveedor" />
       </td>
-      <td className="px-4 py-3 font-semibold text-ink">{formatPrice(product.price)}</td>
-      <td className="px-4 py-3 text-body text-muted" title={product.market_source ?? "Sin precio público encontrado"}>
-        {product.market_price ? formatPrice(product.market_price) : "-"}
+      <td className="px-4 py-3">
+        <MoneyCell key={`p-${product.ref}-${product.price}`} product={product} field="price" label="Precio de venta" />
       </td>
-      <td className="px-4 py-3 text-body text-ink">
-        {product.margin_percent !== null ? `${product.margin_percent}%` : <span className="text-meta text-muted">Precio de mercado</span>}
+      <td className="px-4 py-3 text-body">
+        <Profit product={product} />
       </td>
       <td className="px-4 py-3">
         <label className="inline-flex cursor-pointer items-center gap-2 text-body">
@@ -233,11 +209,9 @@ export function Products() {
       {products.data && (
         <>
           <p className="mt-1 text-body text-muted">
-            {all.length} productos. Los {withCost} que tienen precio proveedor se venden con el margen; los{" "}
-            {all.length - withCost} restantes usan la mediana del precio de mercado hasta que les pongas un precio
-            proveedor.
+            {all.length} productos. Edita el precio proveedor (lo que pagas) y el precio de venta (lo que cobra la
+            tienda); la ganancia se calcula sola. {all.length - withCost} productos aún no tienen precio proveedor.
           </p>
-          <MarginCard margin={products.data.margin_percent} />
         </>
       )}
 
@@ -289,8 +263,7 @@ export function Products() {
                 <th className="px-4 py-3">Marca</th>
                 <th className="px-4 py-3">Precio proveedor</th>
                 <th className="px-4 py-3">Precio de venta</th>
-                <th className="px-4 py-3" title="Precio al público encontrado en línea">Precio público</th>
-                <th className="px-4 py-3">Margen</th>
+                <th className="px-4 py-3">Ganancia</th>
                 <th className="px-4 py-3">En la tienda</th>
               </tr>
             </thead>
@@ -300,7 +273,7 @@ export function Products() {
               ))}
               {visible.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-muted">No hay productos con esos filtros.</td>
+                  <td colSpan={6} className="px-4 py-8 text-center text-muted">No hay productos con esos filtros.</td>
                 </tr>
               )}
             </tbody>
@@ -308,7 +281,7 @@ export function Products() {
         )}
       </div>
       {products.data && (
-        <p className="mt-2 text-meta text-muted">Mostrando {visible.length} de {all.length}. "Precio público" es el precio al público encontrado en línea, como referencia.</p>
+        <p className="mt-2 text-meta text-muted">Mostrando {visible.length} de {all.length}. Escribe un precio y pulsa Enter o Guardar.</p>
       )}
 
       {editing && <EditPanel product={editing} onClose={() => setEditing(null)} />}

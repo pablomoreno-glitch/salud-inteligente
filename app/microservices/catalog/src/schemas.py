@@ -49,7 +49,7 @@ class ProductOut(BaseModel):
 
 
 class AdminProductOut(ProductOut):
-    """Internal view: adds what we pay and the resulting margin. Never exposed publicly."""
+    """Internal view: adds what we pay and the resulting margin over cost. Never exposed publicly."""
 
     cost_price: int | None
     supplier_store_price: int | None
@@ -60,16 +60,6 @@ class AdminProductOut(ProductOut):
 class AdminProductListOut(BaseModel):
     items: list[AdminProductOut]
     total: int
-    margin_percent: int
-
-
-class PricingOut(BaseModel):
-    margin_percent: int
-    products_repriced: int = 0
-
-
-class PricingPatch(BaseModel):
-    margin_percent: int = Field(ge=0, le=500)
 
 
 class ProductListOut(BaseModel):

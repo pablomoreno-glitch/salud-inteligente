@@ -4,8 +4,7 @@ from pathlib import Path
 from sqlalchemy import func, select
 
 from .database import AsyncSessionLocal
-from .models import Category, Need, PricingSettings, Product
-from .pricing import DEFAULT_MARGIN_PERCENT, sale_price
+from .models import Category, Need, Product
 from .text import normalize
 
 SEED_FILE = Path(__file__).resolve().parent.parent / "seed" / "catalog.json"
@@ -34,9 +33,6 @@ async def seed_if_empty() -> None:
                 )
             )
 
-        margin = data.get("pricing", {}).get("margin_percent", DEFAULT_MARGIN_PERCENT)
-        session.add(PricingSettings(id=1, margin_percent=margin))
-
         for item in data["needs"]:
             session.add(Need(slug=item["slug"], name=item["name"]))
 
@@ -59,8 +55,7 @@ async def seed_if_empty() -> None:
                     advisor_tags=item.get("advisor_tags", []),
                     image=item.get("image"),
                     description=None,
-                    # With a supplier cost, the price is always cost + margin.
-                    price=sale_price(item.get("cost_price"), margin) or item.get("price"),
+                    price=item.get("price"),
                     brand=item.get("brand"),
                     cost_price=item.get("cost_price"),
                     supplier_store_price=item.get("supplier_store_price"),

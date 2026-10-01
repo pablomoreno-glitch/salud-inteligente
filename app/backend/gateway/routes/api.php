@@ -100,8 +100,6 @@ Route::middleware(['auth:sanctum', EnsureAdmin::class])->group(function () {
         ->where('ref', '[A-Za-z0-9-]+');
 
     Route::get('/admin/products', [AdminProductController::class, 'index']);
-    Route::get('/admin/pricing', [AdminProductController::class, 'pricing']);
-    Route::put('/admin/pricing', [AdminProductController::class, 'updatePricing']);
     Route::patch('/admin/products/{ref}', [AdminProductController::class, 'update'])
         ->where('ref', '[A-Za-z0-9-]+');
 

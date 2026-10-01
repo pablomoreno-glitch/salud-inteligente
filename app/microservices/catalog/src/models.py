@@ -54,11 +54,3 @@ class Product(Base):
     category: Mapped[Category] = relationship(lazy="joined")
     need: Mapped[Need] = relationship(lazy="joined")
 
-
-class PricingSettings(Base):
-    """Single row: the fixed profit margin applied to every supplier cost."""
-
-    __tablename__ = "pricing_settings"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, default=1)
-    margin_percent: Mapped[int] = mapped_column(Integer, default=40)
