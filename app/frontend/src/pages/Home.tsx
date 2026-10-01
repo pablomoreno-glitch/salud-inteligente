@@ -138,7 +138,7 @@ export function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <h2 className="font-display text-h3 font-bold text-ink">Lo más pedido</h2>
+        <h2 className="font-display text-h3 font-bold text-ink">Destacados</h2>
         {viral.isLoading && <ProductGridSkeleton count={4} />}
         {viral.isError && (
           <ErrorState onRetry={() => viral.refetch()} message="No pudimos cargar los productos." />

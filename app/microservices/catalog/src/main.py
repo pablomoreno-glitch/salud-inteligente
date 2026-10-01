@@ -7,8 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from .database import get_db, init_db
 from .descriptions import build_description
 from .errors import install_error_handlers
-from .models import Category, Need, Product
+from .models import Category, Need, PricingSettings, Product
+from .pricing import DEFAULT_MARGIN_PERCENT, real_margin_percent, sale_price
 from .schemas import (
+    AdminProductListOut,
+    AdminProductOut,
+    PricingOut,
+    PricingPatch,
     CategoryOut,
     CategoryRef,
     NeedOut,
@@ -40,8 +45,6 @@ async def health() -> dict:
 
 
 def need_image_url(slug: str) -> str:
-    if slug == "otros":
-        return "/media/site/hero.webp"
     return f"/media/site/need-{slug}.webp"
 
 
@@ -61,10 +64,27 @@ def to_product_out(product: Product) -> ProductOut:
         advisor_tags=product.advisor_tags or [],
         image_url=f"/media/products/{product.image}" if product.image else "",
         price=product.price,
+        brand=product.brand,
+        market_price=product.market_price,
         is_viral=product.is_viral,
         is_trending=product.is_trending,
         is_active=product.is_active,
     )
+
+
+def to_admin_product_out(product: Product) -> AdminProductOut:
+    return AdminProductOut(
+        **to_product_out(product).model_dump(),
+        cost_price=product.cost_price,
+        supplier_store_price=product.supplier_store_price,
+        market_source=product.market_source,
+        margin_percent=real_margin_percent(product.cost_price, product.price),
+    )
+
+
+async def current_margin(db: AsyncSession) -> int:
+    settings = await db.get(PricingSettings, 1)
+    return settings.margin_percent if settings else DEFAULT_MARGIN_PERCENT
 
 
 @app.get("/categories", response_model=list[CategoryOut])
@@ -232,7 +252,11 @@ async def patch_product(
         product.description = changes["description"]
     if "is_active" in changes:
         product.is_active = changes["is_active"]
-    if "price" in changes:
+    if "cost_price" in changes:
+        # The selling price always follows the cost with the fixed margin.
+        product.cost_price = changes["cost_price"]
+        product.price = sale_price(product.cost_price, await current_margin(db))
+    elif "price" in changes:
         product.price = changes["price"]
 
     if "name" in changes or "benefits" in changes:
@@ -241,6 +265,37 @@ async def patch_product(
     await db.commit()
     await db.refresh(product, ["category", "need"])
     return to_product_out(product)
+
+
+@app.get("/admin/products", response_model=AdminProductListOut, dependencies=[Depends(require_internal)])
+async def list_admin_products(db: AsyncSession = Depends(get_db)) -> AdminProductListOut:
+    """Every product (active or not) with cost, references and margin, for the admin panel."""
+    products = (await db.execute(select(Product).order_by(Product.sort_order, Product.name))).scalars().all()
+    return AdminProductListOut(
+        items=[to_admin_product_out(p) for p in products],
+        total=len(products),
+        margin_percent=await current_margin(db),
+    )
+
+
+@app.get("/pricing", response_model=PricingOut, dependencies=[Depends(require_internal)])
+async def get_pricing(db: AsyncSession = Depends(get_db)) -> PricingOut:
+    return PricingOut(margin_percent=await current_margin(db))
+
+
+@app.put("/pricing", response_model=PricingOut, dependencies=[Depends(require_internal)])
+async def update_pricing(payload: PricingPatch, db: AsyncSession = Depends(get_db)) -> PricingOut:
+    """Change the fixed margin and reprice every product that has a supplier cost."""
+    settings = await db.get(PricingSettings, 1)
+    if settings is None:
+        settings = PricingSettings(id=1, margin_percent=payload.margin_percent)
+        db.add(settings)
+    settings.margin_percent = payload.margin_percent
+    products = (await db.execute(select(Product).where(Product.cost_price.is_not(None)))).scalars().all()
+    for product in products:
+        product.price = sale_price(product.cost_price, payload.margin_percent)
+    await db.commit()
+    return PricingOut(margin_percent=payload.margin_percent, products_repriced=len(products))
 
 
 @app.get("/summary", dependencies=[Depends(require_internal)])

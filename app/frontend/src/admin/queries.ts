@@ -3,6 +3,7 @@ import { api } from "../lib/api";
 import type {
   AdminDashboard,
   AdminOrderListItem,
+  AdminProductList,
   AdminProductRow,
   ContactMessage,
   NotificationStatus,
@@ -98,16 +99,20 @@ export function useUpdateStock() {
   });
 }
 
-/** The whole catalog (active and inactive). Filtering happens on the page, so it is instant. */
+/** The whole catalog (active and inactive) with costs and margin. Filtering happens on the page. */
 export function useAdminProducts() {
-  const query = new URLSearchParams({ include_inactive: "true", limit: "1000" });
   return useQuery({
     queryKey: ["admin", "products"],
-    queryFn: () =>
-      api.get<{ items: AdminProductRow[]; total: number }>(
-        `/admin/products?${query.toString()}`,
-        true,
-      ),
+    queryFn: () => api.get<AdminProductList>("/admin/products", true),
+  });
+}
+
+export function useUpdateMargin() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (margin_percent: number) =>
+      api.put<{ margin_percent: number; products_repriced: number }>("/admin/pricing", { margin_percent }, true),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "products"] }),
   });
 }
 
@@ -120,6 +125,7 @@ export function useUpdateProduct() {
     }: {
       ref: string;
       price?: number | null;
+      cost_price?: number;
       description?: string;
       is_active?: boolean;
       name?: string;

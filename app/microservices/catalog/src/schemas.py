@@ -40,9 +40,36 @@ class ProductOut(BaseModel):
     advisor_tags: list[str]
     image_url: str
     price: int | None
+    brand: str | None
+    # Public price found online for the same product; shown as a reference when higher than ours.
+    market_price: int | None
     is_viral: bool
     is_trending: bool
     is_active: bool
+
+
+class AdminProductOut(ProductOut):
+    """Internal view: adds what we pay and the resulting margin. Never exposed publicly."""
+
+    cost_price: int | None
+    supplier_store_price: int | None
+    market_source: str | None
+    margin_percent: float | None
+
+
+class AdminProductListOut(BaseModel):
+    items: list[AdminProductOut]
+    total: int
+    margin_percent: int
+
+
+class PricingOut(BaseModel):
+    margin_percent: int
+    products_repriced: int = 0
+
+
+class PricingPatch(BaseModel):
+    margin_percent: int = Field(ge=0, le=500)
 
 
 class ProductListOut(BaseModel):
@@ -54,12 +81,13 @@ class ProductListOut(BaseModel):
 
 class ProductPatch(BaseModel):
     price: int | None = None
+    cost_price: int | None = None
     description: str | None = None
     is_active: bool | None = None
     name: str | None = None
     benefits: list[str] | None = None
 
-    @field_validator("price")
+    @field_validator("price", "cost_price")
     @classmethod
     def price_must_be_positive_or_null(cls, value: int | None) -> int | None:
         if value is not None and value <= 0:

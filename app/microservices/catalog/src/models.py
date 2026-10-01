@@ -37,6 +37,14 @@ class Product(Base):
     image: Mapped[str | None] = mapped_column(String(200), nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     price: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # Supplier line (Greenlab, Naturpro...) and what we pay for the product.
+    brand: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    cost_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # The supplier's suggested store price and the public price found online, for reference.
+    supplier_store_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    market_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    market_source: Mapped[str | None] = mapped_column(String(200), nullable=True)
+    has_photo: Mapped[bool] = mapped_column(Boolean, default=True)
     is_viral: Mapped[bool] = mapped_column(Boolean, default=False)
     is_trending: Mapped[bool] = mapped_column(Boolean, default=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -45,3 +53,12 @@ class Product(Base):
 
     category: Mapped[Category] = relationship(lazy="joined")
     need: Mapped[Need] = relationship(lazy="joined")
+
+
+class PricingSettings(Base):
+    """Single row: the fixed profit margin applied to every supplier cost."""
+
+    __tablename__ = "pricing_settings"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, default=1)
+    margin_percent: Mapped[int] = mapped_column(Integer, default=40)

@@ -1,33 +1,26 @@
 import { useMemo, useState } from "react";
 import { Check, X } from "lucide-react";
-import { useAdminProducts, useUpdateProduct } from "./queries";
+import { useAdminProducts, useUpdateMargin, useUpdateProduct } from "./queries";
 import { matchesSearch } from "./filters";
 import type { AdminProductRow } from "../types";
 import { formatPrice } from "../lib/format";
 import { ErrorState } from "../components/ErrorState";
 import { Skeleton } from "../components/Skeleton";
 
-type PriceFilter = "all" | "missing" | "priced";
-
-function PriceCell({ product }: { product: AdminProductRow }) {
+function CostCell({ product }: { product: AdminProductRow }) {
   const updateProduct = useUpdateProduct();
-  const [value, setValue] = useState(product.price ? String(product.price) : "");
+  const [value, setValue] = useState(product.cost_price ? String(product.cost_price) : "");
   const [saved, setSaved] = useState(false);
 
   const parsed = value.trim() === "" ? null : Number(value);
-  const invalid = parsed !== null && (!Number.isInteger(parsed) || parsed <= 0);
-  const dirty = parsed !== (product.price ?? null);
+  const invalid = parsed === null || !Number.isInteger(parsed) || parsed <= 0;
+  const dirty = parsed !== (product.cost_price ?? null);
 
   function save() {
-    if (invalid || !dirty) return;
+    if (invalid || !dirty || parsed === null) return;
     updateProduct.mutate(
-      { ref: product.ref, price: parsed },
-      {
-        onSuccess: () => {
-          setSaved(true);
-          setTimeout(() => setSaved(false), 1500);
-        },
-      },
+      { ref: product.ref, cost_price: parsed },
+      { onSuccess: () => { setSaved(true); setTimeout(() => setSaved(false), 1500); } },
     );
   }
 
@@ -41,26 +34,73 @@ function PriceCell({ product }: { product: AdminProductRow }) {
           min={1}
           step={100}
           value={value}
-          placeholder="Sin precio"
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={(event) => event.key === "Enter" && save()}
-          aria-label={`Precio de ${product.name}`}
-          aria-invalid={invalid}
-          className={`w-32 rounded-control border py-1.5 pl-5 pr-2 text-body outline-none focus-visible:border-leaf ${
-            invalid ? "border-danger" : "border-line"
+          aria-label={`Precio proveedor de ${product.name}`}
+          aria-invalid={dirty && invalid}
+          className={`w-28 rounded-control border py-1.5 pl-5 pr-2 text-body outline-none focus-visible:border-leaf ${
+            dirty && invalid ? "border-danger" : "border-line"
           }`}
         />
       </div>
-      <button
-        type="button"
-        onClick={save}
-        disabled={!dirty || invalid || updateProduct.isPending}
-        className="rounded-pill bg-forest px-3 py-1.5 text-meta font-medium text-white disabled:opacity-40"
-      >
-        {updateProduct.isPending ? "..." : "Guardar"}
-      </button>
+      {dirty && (
+        <button
+          type="button"
+          onClick={save}
+          disabled={invalid || updateProduct.isPending}
+          className="rounded-pill bg-forest px-3 py-1.5 text-meta font-medium text-white disabled:opacity-40"
+        >
+          {updateProduct.isPending ? "..." : "Guardar"}
+        </button>
+      )}
       {saved && <Check size={18} className="text-leaf" aria-label="Guardado" />}
       {updateProduct.isError && <span className="text-meta text-danger">No se guardó</span>}
+    </div>
+  );
+}
+
+function MarginCard({ margin }: { margin: number }) {
+  const updateMargin = useUpdateMargin();
+  const [value, setValue] = useState(String(margin));
+  const parsed = Number(value);
+  const valid = Number.isInteger(parsed) && parsed >= 0 && parsed <= 500;
+  const example = 10000;
+
+  return (
+    <div className="mt-4 flex flex-wrap items-end gap-4 rounded-card border border-line bg-white p-4">
+      <div>
+        <label htmlFor="margin" className="block text-body font-semibold text-ink">Margen de ganancia</label>
+        <p className="text-meta text-muted">Precio de venta = precio proveedor + margen, redondeado a $500.</p>
+        <div className="mt-2 flex items-center gap-2">
+          <input
+            id="margin"
+            type="number"
+            min={0}
+            max={500}
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            className="w-20 rounded-control border border-line px-2 py-1.5 text-center text-body"
+          />
+          <span className="text-body text-ink">%</span>
+          <button
+            type="button"
+            onClick={() => updateMargin.mutate(parsed)}
+            disabled={!valid || parsed === margin || updateMargin.isPending}
+            className="rounded-pill bg-forest px-4 py-1.5 text-meta font-medium text-white disabled:opacity-40"
+          >
+            {updateMargin.isPending ? "Aplicando..." : "Aplicar a todos"}
+          </button>
+        </div>
+      </div>
+      {valid && (
+        <p className="text-meta text-muted">
+          Ejemplo: un producto que te cuesta {formatPrice(example)} se vende en{" "}
+          {formatPrice(Math.ceil((example * (1 + parsed / 100)) / 500) * 500)}.
+        </p>
+      )}
+      {updateMargin.isSuccess && (
+        <p className="text-meta text-leaf">Se actualizaron {updateMargin.data.products_repriced} precios.</p>
+      )}
     </div>
   );
 }
@@ -83,9 +123,19 @@ function ProductRow({ product, onEdit }: { product: AdminProductRow; onEdit: (p:
           </div>
         </div>
       </td>
-      <td className="px-4 py-3 text-body text-muted">{product.category.name}</td>
+      <td className="px-4 py-3 text-body text-muted">
+        {product.brand}
+        <p className="text-meta">{product.category.name}</p>
+      </td>
       <td className="px-4 py-3">
-        <PriceCell key={`${product.ref}-${product.price}`} product={product} />
+        <CostCell key={`${product.ref}-${product.cost_price}`} product={product} />
+      </td>
+      <td className="px-4 py-3 font-semibold text-ink">{formatPrice(product.price)}</td>
+      <td className="px-4 py-3 text-body text-muted" title={product.market_source ?? "Sin precio público encontrado"}>
+        {product.market_price ? formatPrice(product.market_price) : "-"}
+      </td>
+      <td className="px-4 py-3 text-body text-ink">
+        {product.margin_percent !== null ? `${product.margin_percent}%` : "-"}
       </td>
       <td className="px-4 py-3">
         <label className="inline-flex cursor-pointer items-center gap-2 text-body">
@@ -157,7 +207,7 @@ export function Products() {
   const products = useAdminProducts();
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("");
-  const [priceFilter, setPriceFilter] = useState<PriceFilter>("all");
+  const [brand, setBrand] = useState("");
   const [editing, setEditing] = useState<AdminProductRow | null>(null);
 
   const all = useMemo(() => products.data?.items ?? [], [products.data]);
@@ -166,34 +216,26 @@ export function Products() {
     all.forEach((p) => seen.set(p.category.slug, p.category.name));
     return [...seen.entries()];
   }, [all]);
-  const missing = all.filter((p) => !p.price).length;
+  const brands = useMemo(() => [...new Set(all.map((p) => p.brand).filter(Boolean))] as string[], [all]);
 
   const visible = all.filter(
     (p) =>
       (!category || p.category.slug === category) &&
-      (priceFilter === "all" || (priceFilter === "missing" ? !p.price : Boolean(p.price))) &&
-      matchesSearch(q, p.name, p.ref, p.format),
-  );
-
-  const chip = (value: PriceFilter, label: string) => (
-    <button
-      type="button"
-      onClick={() => setPriceFilter(value)}
-      className={`rounded-pill border px-4 py-2 text-body ${
-        priceFilter === value ? "border-forest bg-forest text-white" : "border-line bg-white text-ink hover:border-forest"
-      }`}
-    >
-      {label}
-    </button>
+      (!brand || p.brand === brand) &&
+      matchesSearch(q, p.name, p.ref, p.format, p.brand),
   );
 
   return (
     <div>
       <h1 className="font-display text-h3 font-bold text-ink">Productos</h1>
       {products.data && (
-        <p className="mt-1 text-body text-muted">
-          {all.length} productos: {all.length - missing} con precio y {missing} sin precio.
-        </p>
+        <>
+          <p className="mt-1 text-body text-muted">
+            {all.length} productos de {brands.join(" y ")}. Edita el precio proveedor y el precio de venta se recalcula
+            con el margen.
+          </p>
+          <MarginCard margin={products.data.margin_percent} />
+        </>
       )}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -216,9 +258,17 @@ export function Products() {
             <option key={slug} value={slug}>{name}</option>
           ))}
         </select>
-        {chip("all", "Todos")}
-        {chip("missing", `Sin precio (${missing})`)}
-        {chip("priced", "Con precio")}
+        <select
+          value={brand}
+          onChange={(event) => setBrand(event.target.value)}
+          aria-label="Filtrar por marca"
+          className="rounded-pill border border-line bg-white px-4 py-2 text-body"
+        >
+          <option value="">Todas las marcas</option>
+          {brands.map((b) => (
+            <option key={b} value={b}>{b}</option>
+          ))}
+        </select>
       </div>
 
       <div className="mt-4 overflow-x-auto rounded-card border border-line bg-white">
@@ -229,12 +279,15 @@ export function Products() {
           </div>
         )}
         {products.data && (
-          <table className="w-full min-w-[760px] text-body">
+          <table className="w-full min-w-[1080px] text-body">
             <thead>
               <tr className="border-b border-line text-left text-meta text-muted">
                 <th className="px-4 py-3">Producto</th>
-                <th className="px-4 py-3">Categoría</th>
-                <th className="px-4 py-3">Precio (COP)</th>
+                <th className="px-4 py-3">Marca</th>
+                <th className="px-4 py-3">Precio proveedor</th>
+                <th className="px-4 py-3">Precio de venta</th>
+                <th className="px-4 py-3" title="Precio al público encontrado en línea">Precio público</th>
+                <th className="px-4 py-3">Margen</th>
                 <th className="px-4 py-3">En la tienda</th>
               </tr>
             </thead>
@@ -244,7 +297,7 @@ export function Products() {
               ))}
               {visible.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-muted">No hay productos con esos filtros.</td>
+                  <td colSpan={7} className="px-4 py-8 text-center text-muted">No hay productos con esos filtros.</td>
                 </tr>
               )}
             </tbody>
@@ -252,7 +305,7 @@ export function Products() {
         )}
       </div>
       {products.data && (
-        <p className="mt-2 text-meta text-muted">Mostrando {visible.length} de {all.length}. Escribe el precio y pulsa Enter o Guardar.</p>
+        <p className="mt-2 text-meta text-muted">Mostrando {visible.length} de {all.length}. "Precio público" es el precio al público encontrado en línea, como referencia.</p>
       )}
 
       {editing && <EditPanel product={editing} onClose={() => setEditing(null)} />}

@@ -1,15 +1,15 @@
 from .conftest import SEED_PRICED, SEED_PRODUCTS, TEST_INTERNAL_TOKEN
 
 
-async def test_get_product_by_slug_returns_benefits_invima_and_description(client):
-    response = await client.get("/products/magnesium-complex-8-en-1-vw-158")
+async def test_get_product_by_slug_returns_brand_benefits_and_description(client):
+    response = await client.get("/products/naturpro-valeriana-pasiflora-600-ml")
     assert response.status_code == 200
 
     body = response.json()
-    assert body["ref"] == "VW-158"
-    assert body["invima"] == "NSA-2040-2025"
+    assert body["ref"] == "NP-007"
+    assert body["brand"] == "Naturpro"
     assert len(body["benefits"]) == 3
-    assert body["description"].startswith("Magnesium Complex 8 en 1: reduce el estrés")
+    assert body["description"].startswith("Valeriana Pasiflora 600 ml: con valeriana")
 
 
 async def test_get_product_by_slug_404_when_missing(client):
@@ -20,25 +20,25 @@ async def test_get_product_by_slug_404_when_missing(client):
 
 async def test_inactive_product_is_hidden_from_detail_and_list(client):
     patch = await client.patch(
-        "/products/VW-158",
+        "/products/NP-007",
         json={"is_active": False},
         headers={"X-Internal-Token": TEST_INTERNAL_TOKEN},
     )
     assert patch.status_code == 200
 
-    detail = await client.get("/products/magnesium-complex-8-en-1-vw-158")
+    detail = await client.get("/products/naturpro-valeriana-pasiflora-600-ml")
     assert detail.status_code == 404
 
     listing = await client.get("/products", params={"limit": 1000})
     refs = [item["ref"] for item in listing.json()["items"]]
-    assert "VW-158" not in refs
+    assert "NP-007" not in refs
 
 
 async def test_list_products_filters_by_category_and_need(client):
-    response = await client.get("/products", params={"category": "virales", "need": "sueno"})
+    response = await client.get("/products", params={"category": "jarabes", "need": "sueno"})
     assert response.status_code == 200
     for item in response.json()["items"]:
-        assert item["category"]["slug"] == "virales"
+        assert item["category"]["slug"] == "jarabes"
         assert item["need"]["slug"] == "sueno"
 
 
@@ -53,38 +53,38 @@ async def test_search_is_accent_insensitive(client):
 
 
 async def test_products_by_refs_omits_unknown_refs(client):
-    response = await client.get("/products/by-refs", params={"refs": "VW-158,DOES-NOT-EXIST"})
+    response = await client.get("/products/by-refs", params={"refs": "NP-007,DOES-NOT-EXIST"})
     assert response.status_code == 200
     refs = [item["ref"] for item in response.json()]
-    assert refs == ["VW-158"]
+    assert refs == ["NP-007"]
 
 
 async def test_related_products_prefers_same_need_then_category(client):
-    response = await client.get("/products/magnesium-complex-8-en-1-vw-158/related")
+    response = await client.get("/products/naturpro-valeriana-pasiflora-600-ml/related")
     assert response.status_code == 200
 
     items = response.json()
     assert len(items) <= 4
     refs = [item["ref"] for item in items]
-    assert "VW-158" not in refs
+    assert "NP-007" not in refs
 
 
 async def test_patch_product_sets_price(client):
     response = await client.patch(
-        "/products/VW-158",
+        "/products/NP-007",
         json={"price": 45000},
         headers={"X-Internal-Token": TEST_INTERNAL_TOKEN},
     )
     assert response.status_code == 200
     assert response.json()["price"] == 45000
 
-    detail = await client.get("/products/magnesium-complex-8-en-1-vw-158")
+    detail = await client.get("/products/naturpro-valeriana-pasiflora-600-ml")
     assert detail.json()["price"] == 45000
 
 
 async def test_patch_product_rejects_non_positive_price(client):
     response = await client.patch(
-        "/products/VW-158",
+        "/products/NP-007",
         json={"price": 0},
         headers={"X-Internal-Token": TEST_INTERNAL_TOKEN},
     )
@@ -93,21 +93,21 @@ async def test_patch_product_rejects_non_positive_price(client):
 
 
 async def test_patch_product_without_internal_token_is_rejected(client):
-    response = await client.patch("/products/VW-158", json={"price": 45000})
+    response = await client.patch("/products/NP-007", json={"price": 45000})
     assert response.status_code == 401
     assert response.json() == {"error": "No autorizado"}
 
 
 async def test_patch_product_updates_search_text(client):
     await client.patch(
-        "/products/VW-158",
+        "/products/NP-007",
         json={"benefits": ["Ayuda con el insomnio total"]},
         headers={"X-Internal-Token": TEST_INTERNAL_TOKEN},
     )
 
     response = await client.get("/products", params={"q": "insomnio"})
     refs = [item["ref"] for item in response.json()["items"]]
-    assert "VW-158" in refs
+    assert "NP-007" in refs
 
 
 async def test_summary_requires_internal_token(client):

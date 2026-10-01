@@ -129,11 +129,17 @@ export function Product() {
             {item.name}
           </h1>
           <p className="mt-1 text-meta text-muted">
-            Ref. {item.ref} · {item.format}
+            {item.brand ? `${item.brand} · ` : ""}Ref. {item.ref} · {item.format}
           </p>
-          <p className="mt-3 text-h4 font-semibold text-ink">
-            {formatPrice(item.price)}
-          </p>
+          <div className="mt-3 flex flex-wrap items-baseline gap-3">
+            <p className="text-h4 font-semibold text-ink">{formatPrice(item.price)}</p>
+            {item.market_price && item.price && item.market_price > item.price && (
+              <p className="text-body text-muted">
+                Precio público de referencia{" "}
+                <span className="line-through">{formatPrice(item.market_price)}</span>
+              </p>
+            )}
+          </div>
 
           <div className="mt-3">
             <AvailabilityPill status={status} />
@@ -188,10 +194,18 @@ export function Product() {
               <dt className="text-body text-muted">Presentación</dt>
               <dd className="text-body text-ink">{item.presentation}</dd>
             </div>
-            <div className="flex justify-between px-4 py-3">
-              <dt className="text-body text-muted">Registro INVIMA</dt>
-              <dd className="text-body text-ink">{item.invima ?? "Por confirmar"}</dd>
-            </div>
+            {item.brand && (
+              <div className="flex justify-between px-4 py-3">
+                <dt className="text-body text-muted">Marca</dt>
+                <dd className="text-body text-ink">{item.brand}</dd>
+              </div>
+            )}
+            {item.invima && (
+              <div className="flex justify-between px-4 py-3">
+                <dt className="text-body text-muted">Registro INVIMA</dt>
+                <dd className="text-body text-ink">{item.invima}</dd>
+              </div>
+            )}
             <div className="flex justify-between px-4 py-3">
               <dt className="text-body text-muted">Categoría</dt>
               <dd className="text-body text-ink">{item.category.name}</dd>

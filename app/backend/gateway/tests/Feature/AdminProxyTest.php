@@ -18,15 +18,33 @@ class AdminProxyTest extends TestCase
         return $admin->createToken('phpunit', ['admin'])->plainTextToken;
     }
 
-    public function test_admin_product_list_always_includes_inactive_products(): void
+    public function test_admin_product_list_uses_the_internal_view_with_costs(): void
     {
-        Http::fake(['*' => Http::response(['items' => []], 200)]);
+        Http::fake(['*' => Http::response(['items' => [], 'total' => 0, 'margin_percent' => 40], 200)]);
 
         $this->withToken($this->adminToken())
             ->getJson('/api/admin/products')
-            ->assertOk();
+            ->assertOk()
+            ->assertJsonPath('margin_percent', 40);
 
-        Http::assertSent(fn ($request) => str_contains($request->url(), 'include_inactive=true'));
+        Http::assertSent(fn ($request) => $request->url() === 'http://catalog.test/admin/products');
+    }
+
+    public function test_admin_can_change_the_margin(): void
+    {
+        Http::fake(['*' => Http::response(['margin_percent' => 50, 'products_repriced' => 103], 200)]);
+
+        $this->withToken($this->adminToken())
+            ->putJson('/api/admin/pricing', ['margin_percent' => 50])
+            ->assertOk()
+            ->assertJsonPath('products_repriced', 103);
+
+        Http::assertSent(fn ($request) => $request->method() === 'PUT' && $request->url() === 'http://catalog.test/pricing');
+    }
+
+    public function test_pricing_is_admin_only(): void
+    {
+        $this->putJson('/api/admin/pricing', ['margin_percent' => 0])->assertUnauthorized();
     }
 
     public function test_admin_can_list_order_sms_notifications(): void

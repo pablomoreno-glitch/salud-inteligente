@@ -34,6 +34,10 @@ export interface Product {
   advisor_tags: string[];
   image_url: string;
   price: number | null;
+  /** Supplier line, e.g. Greenlab or Naturpro. */
+  brand: string | null;
+  /** Public price found online for the same product (reference only). */
+  market_price: number | null;
   is_viral: boolean;
   is_trending: boolean;
   is_active: boolean;
@@ -252,8 +256,19 @@ export interface StockRow {
   image_url?: string;
 }
 
-// Admin product rows share the Product shape; admin lists may include inactive products.
-export type AdminProductRow = Product;
+/** Admin view of a product: adds what we pay the supplier and the resulting margin. */
+export interface AdminProductRow extends Product {
+  cost_price: number | null;
+  supplier_store_price: number | null;
+  market_source: string | null;
+  margin_percent: number | null;
+}
+
+export interface AdminProductList {
+  items: AdminProductRow[];
+  total: number;
+  margin_percent: number;
+}
 
 export interface ContactMessage {
   id: number;

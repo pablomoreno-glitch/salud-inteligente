@@ -23,8 +23,6 @@ async def test_seed_loads_needs_with_image_urls(client):
     assert response.status_code == 200
 
     needs = {item["slug"]: item for item in response.json()}
-    assert "otros" in needs
-    assert needs["otros"]["image_url"] == "/media/site/hero.webp"
     assert needs["sueno"]["image_url"] == "/media/site/need-sueno.webp"
 
 
