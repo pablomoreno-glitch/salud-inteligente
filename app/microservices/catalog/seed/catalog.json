@@ -12,8 +12,8 @@
   },
   {
    "slug": "jarabes",
-   "name": "Jarabes naturales",
-   "tagline": "Naturpro · 600 ml y litro",
+   "name": "Jarabes y líquidos",
+   "tagline": "600 ml y litro",
    "sort_order": 1
   },
   {
@@ -25,7 +25,7 @@
   {
    "slug": "capsulas",
    "name": "Cápsulas",
-   "tagline": "100 cápsulas blandas",
+   "tagline": "Frascos de cápsulas y perlas",
    "sort_order": 3
   },
   {
@@ -45,6 +45,18 @@
    "name": "Potencializadores",
    "tagline": "Energía y vitalidad",
    "sort_order": 6
+  },
+  {
+   "slug": "gomas",
+   "name": "Gomas y masticables",
+   "tagline": "Fáciles de tomar",
+   "sort_order": 7
+  },
+  {
+   "slug": "combos",
+   "name": "Combos",
+   "tagline": "Llévalos juntos",
+   "sort_order": 8
   }
  ],
  "needs": [
@@ -911,8 +923,8 @@
    "sort_order": 27,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 38000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -999,8 +1011,8 @@
    "sort_order": 30,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -1029,8 +1041,8 @@
    "sort_order": 31,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 26000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -1116,8 +1128,8 @@
    "sort_order": 34,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 26000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -1174,8 +1186,8 @@
    "sort_order": 36,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 27000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -1203,8 +1215,8 @@
    "sort_order": 37,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 26000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -1347,8 +1359,8 @@
    "sort_order": 42,
    "cost_price": 9500,
    "supplier_store_price": 10500,
-   "market_price": null,
-   "market_source": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
    "price": 13500
   },
   {
@@ -3114,6 +3126,3439 @@
    "market_price": null,
    "market_source": null,
    "price": 34000
+  },
+  {
+   "ref": "NV-001",
+   "slug": "silimarina-300-mg-nv-001",
+   "name": "Silimarina 300 mg",
+   "need": "digestion",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a la función hepática y digestiva",
+    "Con alcachofa y diente de león",
+    "Extracto de cardo mariano 300 mg"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "silimarina-300-mg-nv-001.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 103,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-002",
+   "slug": "vitamina-e-selenio-1000-ui-greenworld-nv-002",
+   "name": "Vitamina E + Selenio 1000 UI GreenWorld",
+   "need": "belleza",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Aporte antioxidante",
+    "Nutriente esencial para las células",
+    "Apoyo a la salud del músculo cardíaco"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "vitamina-e-selenio-1000-ui-greenworld-nv-002.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 104,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-003",
+   "slug": "ginkgo-biloba-160-mg-greenworld-nv-003",
+   "name": "Ginkgo Biloba 160 mg GreenWorld",
+   "need": "mente",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a la memoria y la concentración",
+    "Fórmula de 2 cápsulas al día"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "ginkgo-biloba-160-mg-greenworld-nv-003.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 105,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 50000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 50000
+  },
+  {
+   "ref": "NV-004",
+   "slug": "omega-3-1300-mg-active-plus-nv-004",
+   "name": "Omega 3 1300 mg Active Plus",
+   "need": "mente",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a la salud del corazón y el cerebro",
+    "Aceite de pescado de aguas profundas",
+    "Apoyo al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "omega-3-1300-mg-active-plus-nv-004.webp",
+   "brand": "Active Plus",
+   "type": "Active Plus",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 106,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 69000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 69000
+  },
+  {
+   "ref": "NV-005",
+   "slug": "nad-resveratrol-1500-mg-liposomal-satoomi-nv-005",
+   "name": "NAD+ Resveratrol 1500 mg liposomal Satoomi",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Energía a nivel celular",
+    "Resveratrol liposomal de alta absorción",
+    "No GMO, vegano"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "nad-resveratrol-1500-mg-liposomal-satoomi-nv-005.webp",
+   "brand": "Satoomi",
+   "type": "Satoomi",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 107,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 65000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 65000
+  },
+  {
+   "ref": "NV-006",
+   "slug": "citrato-de-magnesio-1000-mg-greenworld-nv-006",
+   "name": "Citrato de Magnesio 1000 mg GreenWorld",
+   "need": "sueno",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a la relajación muscular y nerviosa",
+    "Importante para la salud del corazón"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "citrato-de-magnesio-1000-mg-greenworld-nv-006.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 108,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-007",
+   "slug": "ashwagandha-5500-mg-nv-007",
+   "name": "Ashwagandha 5500 mg",
+   "need": "sueno",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Relajación mental y física",
+    "Apoyo en momentos de estrés",
+    "Alta absorción"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "ashwagandha-5500-mg-nv-007.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 109,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-008",
+   "slug": "ginkgo-biloba-120-mg-nv-008",
+   "name": "Ginkgo Biloba 120 mg",
+   "need": "mente",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a la función cerebral y la circulación",
+    "Apoyo a la memoria y la función cognitiva"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "ginkgo-biloba-120-mg-nv-008.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 110,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 50000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 50000
+  },
+  {
+   "ref": "NV-009",
+   "slug": "glucosamina-condroitina-msm-1500-mg-nv-009",
+   "name": "Glucosamina Condroitina MSM 1500 mg",
+   "need": "huesos",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Comodidad y flexibilidad articular",
+    "Con ácido hialurónico y MSM"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "glucosamina-condroitina-msm-1500-mg-nv-009.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 111,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 72000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 72000
+  },
+  {
+   "ref": "NV-010",
+   "slug": "combo-1-nad-resveratrol-satoomi-resveratrol-1600-mg-nv-010",
+   "name": "Combo 1: NAD+ Resveratrol Satoomi + Resveratrol 1600 mg",
+   "need": "belleza",
+   "format": "2 frascos",
+   "presentation": "2 frascos",
+   "benefits": [
+    "NAD+ Resveratrol liposomal 1500 mg",
+    "Resveratrol con extracto de vino tinto 1600 mg",
+    "Aporte antioxidante"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "combo-1-nad-resveratrol-satoomi-resveratrol-1600-mg-nv-010.webp",
+   "brand": "Satoomi / GreenWorld",
+   "type": "Satoomi / GreenWorld",
+   "category": "combos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 112,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 100000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 100000
+  },
+  {
+   "ref": "NV-011",
+   "slug": "combo-2-resveratrol-12-600-mg-resveratrol-1600-mg-greenworld-nv-011",
+   "name": "Combo 2: Resveratrol 12.600 mg + Resveratrol 1600 mg GreenWorld",
+   "need": "belleza",
+   "format": "2 frascos",
+   "presentation": "2 frascos",
+   "benefits": [
+    "Resveratrol con uva y extracto de vino tinto",
+    "Aporte antioxidante",
+    "Apoyo cardiovascular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "combo-2-resveratrol-12-600-mg-resveratrol-1600-mg-greenworld-nv-011.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "combos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 113,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 90000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 90000
+  },
+  {
+   "ref": "NV-012",
+   "slug": "zinc-quelado-50-mg-vitamina-d-5000-ui-greenworld-nv-012",
+   "name": "Zinc quelado 50 mg + Vitamina D 5000 UI GreenWorld",
+   "need": "defensas",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo al sistema inmune",
+    "Zinc quelado de mejor absorción"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "zinc-quelado-50-mg-vitamina-d-5000-ui-greenworld-nv-012.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 114,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 53000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 53000
+  },
+  {
+   "ref": "NV-013",
+   "slug": "l-arginina-4000-mg-greenworld-nv-013",
+   "name": "L-Arginina 4000 mg GreenWorld",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Precursor de óxido nítrico",
+    "Apoyo al flujo sanguíneo",
+    "Rendimiento físico"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "l-arginina-4000-mg-greenworld-nv-013.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 115,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 61000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 61000
+  },
+  {
+   "ref": "NV-014",
+   "slug": "mega-vitamina-d3-10-000-ui-greenworld-nv-014",
+   "name": "Mega Vitamina D3 10.000 UI GreenWorld",
+   "need": "huesos",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a huesos fuertes",
+    "Apoyo al sistema inmune",
+    "Triple concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "mega-vitamina-d3-10-000-ui-greenworld-nv-014.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 116,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 47000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 47000
+  },
+  {
+   "ref": "NV-015",
+   "slug": "maca-negra-2800-mg-greenworld-nv-015",
+   "name": "Maca Negra 2800 mg GreenWorld",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Energía y vitalidad",
+    "Con ashwagandha y fenogreco",
+    "Fórmula con minerales"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "maca-negra-2800-mg-greenworld-nv-015.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 117,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 35000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 35000
+  },
+  {
+   "ref": "NV-016",
+   "slug": "shilajit-10-000-mg-greenworld-nv-016",
+   "name": "Shilajit 10.000 mg GreenWorld",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Hierba tradicional ayurvédica",
+    "Extracto de espectro completo",
+    "Energía y vitalidad"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "shilajit-10-000-mg-greenworld-nv-016.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 118,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 56000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 56000
+  },
+  {
+   "ref": "NV-017",
+   "slug": "colageno-marino-extra-fuerte-greenworld-nv-017",
+   "name": "Colágeno Marino Extra Fuerte GreenWorld",
+   "need": "belleza",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Colágeno marino bioactivo",
+    "Apoyo a piel, cabello y articulaciones"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "colageno-marino-extra-fuerte-greenworld-nv-017.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 119,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 65000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 65000
+  },
+  {
+   "ref": "NV-018",
+   "slug": "melena-de-leon-2100-mg-greenworld-nv-018",
+   "name": "Melena de León 2100 mg GreenWorld",
+   "need": "mente",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Hongo melena de león orgánico",
+    "Apoyo a la memoria y la concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "melena-de-leon-2100-mg-greenworld-nv-018.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 120,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 64000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 64000
+  },
+  {
+   "ref": "NV-019",
+   "slug": "resveratrol-1600-mg-greenworld-nv-019",
+   "name": "Resveratrol 1600 mg GreenWorld",
+   "need": "belleza",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Extracto de vino tinto",
+    "Aporte antioxidante",
+    "Apoyo cardiovascular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "resveratrol-1600-mg-greenworld-nv-019.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 121,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-020",
+   "slug": "citrato-de-potasio-1000-mg-greenworld-nv-020",
+   "name": "Citrato de Potasio 1000 mg GreenWorld",
+   "need": "energia",
+   "format": "100 perlas",
+   "presentation": "100 perlas",
+   "benefits": [
+    "Mineral esencial",
+    "Apoyo a la función muscular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "citrato-de-potasio-1000-mg-greenworld-nv-020.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 122,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 45000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 45000
+  },
+  {
+   "ref": "NV-021",
+   "slug": "glucosamina-condroitina-1500-mg-con-acido-hialuronico-greenworld-nv-021",
+   "name": "Glucosamina Condroitina 1500 mg con ácido hialurónico GreenWorld",
+   "need": "huesos",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Comodidad y flexibilidad articular",
+    "Con ácido hialurónico y MSM",
+    "Fórmula de 2 cápsulas al día"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "glucosamina-condroitina-1500-mg-con-acido-hialuronico-greenworld-nv-021.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 123,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 72000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 72000
+  },
+  {
+   "ref": "NV-022",
+   "slug": "proteina-organica-vegetal-greenworld-nv-022",
+   "name": "Proteína Orgánica Vegetal GreenWorld",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "21 g de proteína vegetal",
+    "8 g de fibra prebiótica",
+    "Apoyo a la salud del corazón"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "proteina-organica-vegetal-greenworld-nv-022.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 124,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 54000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 54000
+  },
+  {
+   "ref": "NV-023",
+   "slug": "factor-transfer-1200-mg-con-zinc-greenworld-nv-023",
+   "name": "Factor Transfer 1200 mg con Zinc GreenWorld",
+   "need": "defensas",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Fórmula triple con zinc",
+    "Apoyo al sistema inmune",
+    "Fórmula de 2 cápsulas al día"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "factor-transfer-1200-mg-con-zinc-greenworld-nv-023.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 125,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-024",
+   "slug": "colageno-hidrolizado-con-zinc-biotina-y-vitamina-c-sabor-uva-nv-024",
+   "name": "Colágeno Hidrolizado con Zinc, Biotina y Vitamina C sabor uva",
+   "need": "belleza",
+   "format": "700 g polvo",
+   "presentation": "700 g polvo",
+   "benefits": [
+    "Colágeno hidrolizado",
+    "Con zinc, biotina y vitamina C",
+    "Apoyo a piel, cabello y uñas"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "colageno-hidrolizado-con-zinc-biotina-y-vitamina-c-sabor-uva-nv-024.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 126,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 49000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 49000
+  },
+  {
+   "ref": "NV-032",
+   "slug": "citramag-con-citrato-de-magnesio-sabor-frutos-verdes-nv-032",
+   "name": "Citramag con Citrato de Magnesio sabor frutos verdes",
+   "need": "sueno",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Citrato de magnesio",
+    "Con vitaminas A, D y C",
+    "Con cúrcuma, canela y jengibre"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "citramag-con-citrato-de-magnesio-sabor-frutos-verdes-nv-032.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 127,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 33000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 33000
+  },
+  {
+   "ref": "NV-033",
+   "slug": "vitafer-l-presentaciones-20-ml-500-ml-y-sachets-10-ml-nv-033",
+   "name": "Vitafer-L presentaciones 20 ml, 500 ml y sachets 10 ml",
+   "need": "energia",
+   "format": "20 ml / 500 ml / sachets 10 ml",
+   "presentation": "20 ml / 500 ml / sachets 10 ml",
+   "benefits": [
+    "Suplemento energizante",
+    "Disponible en frasco, botella y sachets"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "vitafer-l-presentaciones-20-ml-500-ml-y-sachets-10-ml-nv-033.webp",
+   "brand": "Vitafer-L",
+   "type": "Vitafer-L",
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 128,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 39000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 39000
+  },
+  {
+   "ref": "NV-035",
+   "slug": "melena-de-leon-liquida-sabor-kiwi-nv-035",
+   "name": "Melena de León líquida sabor kiwi",
+   "need": "mente",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Hericium erinaceus",
+    "Con arándano, zinc y vitaminas",
+    "Apoyo a la memoria y la concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "melena-de-leon-liquida-sabor-kiwi-nv-035.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 129,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 31000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 31000
+  },
+  {
+   "ref": "NV-036",
+   "slug": "ca-mg-z-complex-sabor-vainilla-nv-036",
+   "name": "CA-MG-Z Complex sabor vainilla",
+   "need": "huesos",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Calcio, magnesio y zinc",
+    "Con colágeno hidrolizado",
+    "Con cebolla, ajo, yacón y cúrcuma"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "ca-mg-z-complex-sabor-vainilla-nv-036.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 130,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 33000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 33000
+  },
+  {
+   "ref": "NV-037",
+   "slug": "fosfo-health-natural-health-nv-037",
+   "name": "Fosfo Health Natural Health",
+   "need": "energia",
+   "format": "Polvo",
+   "presentation": "Polvo",
+   "benefits": [
+    "Alimento en polvo a base de maltodextrina y proteína",
+    "Fuente de hierro, zinc, niacina y magnesio"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "fosfo-health-natural-health-nv-037.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 131,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-038",
+   "slug": "cloruro-de-magnesio-endulzado-con-stevia-nv-038",
+   "name": "Cloruro de Magnesio endulzado con stevia",
+   "need": "sueno",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Cloruro de magnesio",
+    "Endulzado con stevia",
+    "Apoyo a la función muscular y nerviosa"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "cloruro-de-magnesio-endulzado-con-stevia-nv-038.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 132,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 33000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 33000
+  },
+  {
+   "ref": "NV-039",
+   "slug": "enzopro-multicepas-de-probioticos-nv-039",
+   "name": "Enzopro Multicepas de Probióticos",
+   "need": "digestion",
+   "format": "Caja 25 sobres de 5 g",
+   "presentation": "Caja 25 sobres de 5 g",
+   "benefits": [
+    "Multicepas de probióticos con enzimas",
+    "Con FOS",
+    "Sobres para disolver en agua"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "enzopro-multicepas-de-probioticos-nv-039.webp",
+   "brand": "Enzopro",
+   "type": "Enzopro",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 133,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 52000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 52000
+  },
+  {
+   "ref": "NV-040",
+   "slug": "vitamina-c-masticable-acido-ascorbico-greensofg-nv-040",
+   "name": "Vitamina C masticable (ácido ascórbico) Greensofg",
+   "need": "defensas",
+   "format": "100 unidades masticables",
+   "presentation": "100 unidades masticables",
+   "benefits": [
+    "Alimento masticable de gelatina con vitamina C",
+    "Apoyo al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "vitamina-c-masticable-acido-ascorbico-greensofg-nv-040.webp",
+   "brand": "Greensofg",
+   "type": "Greensofg",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 134,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 41000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 41000
+  },
+  {
+   "ref": "NV-041",
+   "slug": "calostro-bovino-1000-mg-greensofg-nv-041",
+   "name": "Calostro Bovino 1000 mg Greensofg",
+   "need": "defensas",
+   "format": "100 unidades masticables",
+   "presentation": "100 unidades masticables",
+   "benefits": [
+    "Protección inmunológica",
+    "Crecimiento y reparación",
+    "Fuente de energía"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "calostro-bovino-1000-mg-greensofg-nv-041.webp",
+   "brand": "Greensofg",
+   "type": "Greensofg",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 135,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-042",
+   "slug": "super-magnesio-melatonina-y-ashwagandha-ksm-66-1200-mg-nv-042",
+   "name": "Super Magnesio, Melatonina y Ashwagandha KSM-66 1200 mg",
+   "need": "sueno",
+   "format": "100 cápsulas",
+   "presentation": "100 cápsulas",
+   "benefits": [
+    "Relajación mental y física",
+    "Apoyo al sistema nervioso",
+    "Apoyo en momentos de estrés"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "super-magnesio-melatonina-y-ashwagandha-ksm-66-1200-mg-nv-042.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 136,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 63000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 63000
+  },
+  {
+   "ref": "NV-043",
+   "slug": "multivitaminico-masticable-greensofg-nv-043",
+   "name": "Multivitamínico masticable Greensofg",
+   "need": "energia",
+   "format": "100 unidades masticables",
+   "presentation": "100 unidades masticables",
+   "benefits": [
+    "Vitaminas y minerales",
+    "Con vitamina C y biotina"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "multivitaminico-masticable-greensofg-nv-043.webp",
+   "brand": "Greensofg",
+   "type": "Greensofg",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 137,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-044",
+   "slug": "melena-de-leon-500-mg-con-vitaminas-b1-b2-y-b12-vitalcom-nv-044",
+   "name": "Melena de León 500 mg con vitaminas B1, B2 y B12 Vitalcom",
+   "need": "mente",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Melena de león 500 mg",
+    "Con vitaminas B1, B2 y B12",
+    "Apoyo a la memoria y el bienestar general"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "melena-de-leon-500-mg-con-vitaminas-b1-b2-y-b12-vitalcom-nv-044.webp",
+   "brand": "Vitalcom",
+   "type": "Vitalcom",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 138,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-046",
+   "slug": "vitamina-c-reforzada-nv-046",
+   "name": "Vitamina C Reforzada",
+   "need": "defensas",
+   "format": "Frasco líquido",
+   "presentation": "Frasco líquido",
+   "benefits": [
+    "Vitamina C adicionada con zinc",
+    "Con fósforo y complejo B",
+    "Apoyo al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "vitamina-c-reforzada-nv-046.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 139,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 25000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 25000
+  },
+  {
+   "ref": "NV-047",
+   "slug": "flexdol-sin-azucar-naturalista-lab-nv-047",
+   "name": "Flexdol sin azúcar Naturalista Lab",
+   "need": "huesos",
+   "format": "500 ml",
+   "presentation": "500 ml",
+   "benefits": [
+    "Apoyo al sistema óseo",
+    "Apoyo al sistema muscular",
+    "Sin azúcar"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "flexdol-sin-azucar-naturalista-lab-nv-047.webp",
+   "brand": "Naturalista Lab",
+   "type": "Naturalista Lab",
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 140,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 27000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 27000
+  },
+  {
+   "ref": "NV-048",
+   "slug": "177-plantas-clorofila-nv-048",
+   "name": "177 Plantas + Clorofila",
+   "need": "digestion",
+   "format": "500 ml",
+   "presentation": "500 ml",
+   "benefits": [
+    "Mezcla de plantas con clorofila",
+    "Apoyo a la depuración y la digestión"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "177-plantas-clorofila-nv-048.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 141,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 24000
+  },
+  {
+   "ref": "NV-049",
+   "slug": "vitacerebrina-francesa-reforzada-nv-049",
+   "name": "Vitacerebrina Francesa reforzada",
+   "need": "mente",
+   "format": "500 ml",
+   "presentation": "500 ml",
+   "benefits": [
+    "Reforzada con fósforo y fitina",
+    "Con omega 3, 6 y 9",
+    "Apoyo a la memoria y la concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "vitacerebrina-francesa-reforzada-nv-049.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 142,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 25000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 25000
+  },
+  {
+   "ref": "NV-050",
+   "slug": "mega-cerebral-reforzado-con-fitina-nv-050",
+   "name": "Mega Cerebral reforzado con fitina",
+   "need": "mente",
+   "format": "Frasco líquido",
+   "presentation": "Frasco líquido",
+   "benefits": [
+    "Reforzado con fitina",
+    "Apoyo en momentos de estrés",
+    "Apoyo a la memoria"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "mega-cerebral-reforzado-con-fitina-nv-050.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 143,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 25000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 25000
+  },
+  {
+   "ref": "NV-051",
+   "slug": "multivit-maca-plus-nv-051",
+   "name": "Multivit Maca Plus",
+   "need": "energia",
+   "format": "Frasco líquido",
+   "presentation": "Frasco líquido",
+   "benefits": [
+    "Energía y vitalidad",
+    "Con maca y multivitamínicos",
+    "100% natural"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "multivit-maca-plus-nv-051.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 144,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 29000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 29000
+  },
+  {
+   "ref": "NV-052",
+   "slug": "calostro-bovino-max-nv-052",
+   "name": "Calostro Bovino Max",
+   "need": "defensas",
+   "format": "600 g polvo",
+   "presentation": "600 g polvo",
+   "benefits": [
+    "Calostro bovino",
+    "Con zinc y vitaminas",
+    "Apoyo al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "calostro-bovino-max-nv-052.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 145,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 43000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 43000
+  },
+  {
+   "ref": "NV-053",
+   "slug": "yum-wu-mezcla-de-hierbas-nv-053",
+   "name": "Yum Wu mezcla de hierbas",
+   "need": "digestion",
+   "format": "Frasco polvo",
+   "presentation": "Frasco polvo",
+   "benefits": [
+    "Con alcachofa, berenjena y espirulina",
+    "Con glucomanán",
+    "Apoyo a la saciedad"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "yum-wu-mezcla-de-hierbas-nv-053.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 146,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 31000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 31000
+  },
+  {
+   "ref": "NV-054",
+   "slug": "alcachofa-esencia-floral-minerolin-nv-054",
+   "name": "Alcachofa Esencia Floral Minerolin",
+   "need": "digestion",
+   "format": "100 cápsulas",
+   "presentation": "100 cápsulas",
+   "benefits": [
+    "Extracto de alcachofa",
+    "Apoyo a la digestión"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "alcachofa-esencia-floral-minerolin-nv-054.webp",
+   "brand": "Minerolin",
+   "type": "Minerolin",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 147,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 30000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 30000
+  },
+  {
+   "ref": "NV-055",
+   "slug": "alcachofa-cynara-scolymus-natural-freshly-nv-055",
+   "name": "Alcachofa (Cynara scolymus) Natural Freshly",
+   "need": "digestion",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Extracto de alcachofa",
+    "Apoyo a la digestión y la función hepática"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "alcachofa-cynara-scolymus-natural-freshly-nv-055.webp",
+   "brand": "Natural Freshly",
+   "type": "Natural Freshly",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 148,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 35000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 35000
+  },
+  {
+   "ref": "NV-057",
+   "slug": "triple-omega-3-6-9-healthy-america-nv-057",
+   "name": "Triple Omega 3-6-9 Healthy America",
+   "need": "mente",
+   "format": "120 cápsulas blandas",
+   "presentation": "120 cápsulas blandas",
+   "benefits": [
+    "Omega 3, 6 y 9",
+    "Apoyo cardiovascular y cerebral"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "triple-omega-3-6-9-healthy-america-nv-057.webp",
+   "brand": "Healthy America",
+   "type": "Healthy America",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 149,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 86000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 86000
+  },
+  {
+   "ref": "NV-058",
+   "slug": "omega-triple-sacha-inchi-ajonjoli-y-linaza-natural-medix-nv-058",
+   "name": "Omega Triple sacha inchi, ajonjolí y linaza Natural Medix",
+   "need": "mente",
+   "format": "100 cápsulas",
+   "presentation": "100 cápsulas",
+   "benefits": [
+    "Omega de origen vegetal",
+    "Sacha inchi, ajonjolí y linaza"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "omega-triple-sacha-inchi-ajonjoli-y-linaza-natural-medix-nv-058.webp",
+   "brand": "Natural Medix",
+   "type": "Natural Medix",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 150,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 30000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 30000
+  },
+  {
+   "ref": "NV-059",
+   "slug": "omega-3-6-9-aceite-de-salmon-de-alaska-american-blue-nv-059",
+   "name": "Omega 3-6-9 aceite de salmón de Alaska American Blue",
+   "need": "mente",
+   "format": "90 cápsulas blandas",
+   "presentation": "90 cápsulas blandas",
+   "benefits": [
+    "Aceite de salmón salvaje de Alaska",
+    "Apoyo a la salud del corazón"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "omega-3-6-9-aceite-de-salmon-de-alaska-american-blue-nv-059.webp",
+   "brand": "American Blue",
+   "type": "American Blue",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 151,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-060",
+   "slug": "resveratrol-nad-advanced-1900-mg-greenworld-nv-060",
+   "name": "Resveratrol + NAD Advanced 1900 mg GreenWorld",
+   "need": "belleza",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Extracto de vino tinto con NAD",
+    "Aporte antioxidante",
+    "Apoyo cardiovascular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "resveratrol-nad-advanced-1900-mg-greenworld-nv-060.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 152,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-061",
+   "slug": "mega-multivitaminico-con-colageno-y-acido-hialuronico-greenworld-nv-061",
+   "name": "Mega Multivitamínico con colágeno y ácido hialurónico GreenWorld",
+   "need": "energia",
+   "format": "100 perlas",
+   "presentation": "100 perlas",
+   "benefits": [
+    "Multivitamínico completo",
+    "Con colágeno y ácido hialurónico",
+    "Energía y vitalidad"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "mega-multivitaminico-con-colageno-y-acido-hialuronico-greenworld-nv-061.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 153,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-062",
+   "slug": "vitamina-c-1500-mg-con-rosa-mosqueta-greenworld-nv-062",
+   "name": "Vitamina C 1500 mg con rosa mosqueta GreenWorld",
+   "need": "defensas",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Vitamina C con rosa mosqueta",
+    "Complejo de bioflavonoides y zinc",
+    "Apoyo al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "vitamina-c-1500-mg-con-rosa-mosqueta-greenworld-nv-062.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 154,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 54000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 54000
+  },
+  {
+   "ref": "NV-063",
+   "slug": "panax-ginseng-coreano-ginkgo-biloba-1500-mg-greenworld-nv-063",
+   "name": "Panax Ginseng coreano + Ginkgo Biloba 1500 mg GreenWorld",
+   "need": "energia",
+   "format": "100 perlas",
+   "presentation": "100 perlas",
+   "benefits": [
+    "Ginseng coreano estandarizado",
+    "Con ginkgo biloba",
+    "Energía y concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "panax-ginseng-coreano-ginkgo-biloba-1500-mg-greenworld-nv-063.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 155,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 65000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 65000
+  },
+  {
+   "ref": "NV-064",
+   "slug": "glicinato-de-magnesio-1330-mg-con-b6-greenworld-nv-064",
+   "name": "Glicinato de Magnesio 1330 mg con B6 GreenWorld",
+   "need": "sueno",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Magnesio quelado de alta absorción",
+    "Con vitamina B6",
+    "Apoyo a la relajación y el descanso"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "glicinato-de-magnesio-1330-mg-con-b6-greenworld-nv-064.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 156,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 69000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 69000
+  },
+  {
+   "ref": "NV-065",
+   "slug": "calcio-magnesio-zinc-vitamina-d3-greenworld-nv-065",
+   "name": "Calcio, Magnesio, Zinc + Vitamina D3 GreenWorld",
+   "need": "huesos",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Apoyo a huesos y dientes fuertes",
+    "Apoyo a nervios y músculos"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "calcio-magnesio-zinc-vitamina-d3-greenworld-nv-065.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 157,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 54000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 54000
+  },
+  {
+   "ref": "NV-066",
+   "slug": "cardo-mariano-milk-thistle-1300-mg-greenworld-nv-066",
+   "name": "Cardo Mariano (Milk Thistle) 1300 mg GreenWorld",
+   "need": "digestion",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Silimarina 650 mg",
+    "Doble concentración estandarizada",
+    "Apoyo a la función hepática"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "cardo-mariano-milk-thistle-1300-mg-greenworld-nv-066.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 158,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-067",
+   "slug": "saw-palmetto-2400-mg-greenworld-nv-067",
+   "name": "Saw Palmetto 2400 mg GreenWorld",
+   "need": "masculina",
+   "format": "100 perlas",
+   "presentation": "100 perlas",
+   "benefits": [
+    "Extracto de Serenoa repens",
+    "Apoyo a la salud de la próstata",
+    "Suplemento herbal tradicional"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Salud masculina"
+   ],
+   "image": "saw-palmetto-2400-mg-greenworld-nv-067.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 159,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-068",
+   "slug": "probioticos-y-prebioticos-100-mil-millones-greenworld-nv-068",
+   "name": "Probióticos y Prebióticos 100 mil millones GreenWorld",
+   "need": "digestion",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "16 cepas probióticas",
+    "Triple concentración",
+    "Apoyo a la digestión y las defensas"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "probioticos-y-prebioticos-100-mil-millones-greenworld-nv-068.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 160,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 73000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 73000
+  },
+  {
+   "ref": "NV-069",
+   "slug": "tongkat-ali-brabus-4250-mg-greenworld-nv-069",
+   "name": "Tongkat Ali Brabus 4250 mg GreenWorld",
+   "need": "masculina",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Tongkat ali extra fuerte",
+    "Con ashwagandha, tribulus terrestris y saw palmetto",
+    "Energía y vitalidad masculina"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Salud masculina"
+   ],
+   "image": "tongkat-ali-brabus-4250-mg-greenworld-nv-069.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 161,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-070",
+   "slug": "calostro-masticable-1000-mg-greenworld-nv-070",
+   "name": "Calostro masticable 1000 mg GreenWorld",
+   "need": "defensas",
+   "format": "Frasco masticables",
+   "presentation": "Frasco masticables",
+   "benefits": [
+    "Calostro bovino en polvo",
+    "Apoyo a la energía y al sistema inmune"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "calostro-masticable-1000-mg-greenworld-nv-070.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 162,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-071",
+   "slug": "arandano-rojo-cranberry-triple-concentracion-greenworld-nv-071",
+   "name": "Arándano rojo (Cranberry) triple concentración GreenWorld",
+   "need": "digestion",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Concentrado de arándano con vitamina C",
+    "Apoyo a la salud del tracto urinario"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "arandano-rojo-cranberry-triple-concentracion-greenworld-nv-071.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 163,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-072",
+   "slug": "garcinia-cambogia-2500-mg-greenworld-nv-072",
+   "name": "Garcinia Cambogia 2500 mg GreenWorld",
+   "need": "digestion",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Estandarizada al 50% de ácido hidroxicítrico",
+    "Apoyo al control de peso",
+    "Vegetariana"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "garcinia-cambogia-2500-mg-greenworld-nv-072.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 164,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 45000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 45000
+  },
+  {
+   "ref": "NV-073",
+   "slug": "l-carnitina-3000-mg-brabus-greenworld-nv-073",
+   "name": "L-Carnitina 3000 mg Brabus GreenWorld",
+   "need": "energia",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Máxima concentración",
+    "Apoyo al rendimiento físico",
+    "Transporte de ácidos grasos para energía"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "l-carnitina-3000-mg-brabus-greenworld-nv-073.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 165,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 85000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 85000
+  },
+  {
+   "ref": "NV-074",
+   "slug": "vitamina-super-b-complex-greenworld-nv-074",
+   "name": "Vitamina Super B-Complex GreenWorld",
+   "need": "energia",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Complejo B con ácido fólico y vitamina C",
+    "Con electrolitos",
+    "Sin gluten, trigo ni lácteos"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "vitamina-super-b-complex-greenworld-nv-074.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 166,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 42000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 42000
+  },
+  {
+   "ref": "NV-075",
+   "slug": "neuro-mag-l-treonato-nootropicos-greenworld-nv-075",
+   "name": "Neuro-Mag L-Treonato + Nootrópicos GreenWorld",
+   "need": "mente",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Magnesio L-treonato",
+    "Con nootrópicos",
+    "Apoyo a la función cerebral"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "neuro-mag-l-treonato-nootropicos-greenworld-nv-075.webp",
+   "brand": "GreenWorld",
+   "type": "GreenWorld",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 167,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 54000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 54000
+  },
+  {
+   "ref": "NV-077",
+   "slug": "colageno-hidrolizado-y-cloruro-de-magnesio-nv-077",
+   "name": "Colágeno Hidrolizado y Cloruro de Magnesio",
+   "need": "belleza",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Colágeno hidrolizado",
+    "Con cloruro de magnesio, zinc y vitaminas",
+    "Con arándano y acaí"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "colageno-hidrolizado-y-cloruro-de-magnesio-nv-077.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 168,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 38000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 38000
+  },
+  {
+   "ref": "NV-078",
+   "slug": "batido-verde-nutriplan-nv-078",
+   "name": "Batido Verde NutriPlan",
+   "need": "digestion",
+   "format": "450 g polvo",
+   "presentation": "450 g polvo",
+   "benefits": [
+    "Alimento en polvo a base de linaza",
+    "Con manzana, pera, apio, kiwi y té verde",
+    "Apoyo a la digestión"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "batido-verde-nutriplan-nv-078.webp",
+   "brand": "NutriPlan",
+   "type": "NutriPlan",
+   "category": "fibras",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 169,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 25000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 25000
+  },
+  {
+   "ref": "NV-079",
+   "slug": "te-matcha-d-tox-verde-con-espirulina-y-limon-naturteck-nv-079",
+   "name": "Té Matcha D-Tox Verde con espirulina y limón Naturteck",
+   "need": "digestion",
+   "format": "Bolsa polvo",
+   "presentation": "Bolsa polvo",
+   "benefits": [
+    "Té matcha con espirulina y limón",
+    "Alimento en polvo a base de linaza"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "te-matcha-d-tox-verde-con-espirulina-y-limon-naturteck-nv-079.webp",
+   "brand": "Naturteck",
+   "type": "Naturteck",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 170,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 52000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 52000
+  },
+  {
+   "ref": "NV-080",
+   "slug": "colageno-hidrolizado-marino-sabor-vainilla-colmarin-nv-080",
+   "name": "Colágeno Hidrolizado Marino sabor vainilla Colmarin",
+   "need": "belleza",
+   "format": "700 g",
+   "presentation": "700 g",
+   "benefits": [
+    "Con péptidos de colágeno y cloruro de magnesio",
+    "Con proteína de arveja",
+    "Con vitaminas y minerales"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "colageno-hidrolizado-marino-sabor-vainilla-colmarin-nv-080.webp",
+   "brand": "Colmarin",
+   "type": "Colmarin",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 171,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 77000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 77000
+  },
+  {
+   "ref": "NV-081",
+   "slug": "shilajit-liquido-con-borojo-chontaduro-maca-y-noni-nv-081",
+   "name": "Shilajit líquido con borojó, chontaduro, maca y noni",
+   "need": "energia",
+   "format": "1000 ml",
+   "presentation": "1000 ml",
+   "benefits": [
+    "Mezcla líquida de frutas con shilajit",
+    "Con borojó, chontaduro, maca y noni",
+    "Energía y vitalidad"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "shilajit-liquido-con-borojo-chontaduro-maca-y-noni-nv-081.webp",
+   "brand": null,
+   "type": null,
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 172,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 47000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 47000
+  },
+  {
+   "ref": "NV-083",
+   "slug": "vita-granulada-sabor-vainilla-natural-health-nv-083",
+   "name": "Vita-Granulada sabor vainilla Natural Health",
+   "need": "energia",
+   "format": "1000 g bolsa",
+   "presentation": "1000 g bolsa",
+   "benefits": [
+    "Alimento granulado a base de avena",
+    "Con vitaminas, minerales y polidextrosa"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "vita-granulada-sabor-vainilla-natural-health-nv-083.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 173,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 29000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 29000
+  },
+  {
+   "ref": "NV-084",
+   "slug": "vitcalpro-kids-sabor-fresa-nv-084",
+   "name": "Vitcalpro Kids sabor fresa",
+   "need": "energia",
+   "format": "700 g",
+   "presentation": "700 g",
+   "benefits": [
+    "Alimento en polvo con vitaminas y minerales",
+    "Con hierro y calcio",
+    "Para el crecimiento de los niños"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "vitcalpro-kids-sabor-fresa-nv-084.webp",
+   "brand": "Vitcalpro",
+   "type": "Vitcalpro",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 174,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 44000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 44000
+  },
+  {
+   "ref": "NV-085",
+   "slug": "vita-granulada-sabor-fresa-natural-health-nv-085",
+   "name": "Vita-Granulada sabor fresa Natural Health",
+   "need": "energia",
+   "format": "1000 g bolsa",
+   "presentation": "1000 g bolsa",
+   "benefits": [
+    "Alimento granulado a base de avena",
+    "Con vitaminas, minerales y polidextrosa"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "vita-granulada-sabor-fresa-natural-health-nv-085.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 175,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 29000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 29000
+  },
+  {
+   "ref": "NV-086",
+   "slug": "pumosan-noche-jengibre-y-menta-nv-086",
+   "name": "Pumosan Noche jengibre y menta",
+   "need": "defensas",
+   "format": "Caja 24 sobres",
+   "presentation": "Caja 24 sobres",
+   "benefits": [
+    "Mezcla en polvo a base de panela",
+    "Con jengibre y menta",
+    "Fortificado con vitamina C"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "pumosan-noche-jengibre-y-menta-nv-086.webp",
+   "brand": "Pumosan",
+   "type": "Pumosan",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 176,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 42000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 42000
+  },
+  {
+   "ref": "NV-087",
+   "slug": "waslim-te-verde-con-yerbabuena-nv-087",
+   "name": "Waslim Té Verde con Yerbabuena",
+   "need": "digestion",
+   "format": "60 g (30 tisanas)",
+   "presentation": "60 g (30 tisanas)",
+   "benefits": [
+    "Té verde con yerbabuena en tisanas",
+    "Apoyo a la digestión"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "waslim-te-verde-con-yerbabuena-nv-087.webp",
+   "brand": "Waslim",
+   "type": "Waslim",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 177,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 23000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 23000
+  },
+  {
+   "ref": "NV-088",
+   "slug": "gomitas-adulto-con-oregano-natural-health-nv-088",
+   "name": "Gomitas Adulto con Orégano Natural Health",
+   "need": "defensas",
+   "format": "60 gomitas",
+   "presentation": "60 gomitas",
+   "benefits": [
+    "Gomas sin azúcar con orégano",
+    "Sabor a frutos verdes"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "gomitas-adulto-con-oregano-natural-health-nv-088.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 178,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 56000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 56000
+  },
+  {
+   "ref": "NV-089",
+   "slug": "curcuma-con-colageno-y-vitaminas-natural-health-nv-089",
+   "name": "Cúrcuma con colágeno y vitaminas Natural Health",
+   "need": "huesos",
+   "format": "100 unidades",
+   "presentation": "100 unidades",
+   "benefits": [
+    "Con cúrcuma y colágeno",
+    "Con vitaminas y magnesio"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "curcuma-con-colageno-y-vitaminas-natural-health-nv-089.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 179,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-090",
+   "slug": "siluet-reductor-natural-formula-mejorada-nv-090",
+   "name": "Siluet Reductor Natural fórmula mejorada",
+   "need": "digestion",
+   "format": "60 cápsulas",
+   "presentation": "60 cápsulas",
+   "benefits": [
+    "Apoyo al control de peso",
+    "Fórmula mejorada"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "siluet-reductor-natural-formula-mejorada-nv-090.webp",
+   "brand": "Siluet",
+   "type": "Siluet",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 180,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 75000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 75000
+  },
+  {
+   "ref": "NV-091",
+   "slug": "adelgace-max-10-en-1-nv-091",
+   "name": "Adelgace Max 10 en 1",
+   "need": "digestion",
+   "format": "60 cápsulas",
+   "presentation": "60 cápsulas",
+   "benefits": [
+    "Apoyo al control de peso",
+    "100% natural"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "adelgace-max-10-en-1-nv-091.webp",
+   "brand": "Adelgace Max",
+   "type": "Adelgace Max",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 181,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 37000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 37000
+  },
+  {
+   "ref": "NV-092",
+   "slug": "siluet-quiebra-barriga-plus-nv-092",
+   "name": "Siluet Quiebra Barriga Plus",
+   "need": "digestion",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Apoyo al control de peso",
+    "Fórmula mejorada"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "siluet-quiebra-barriga-plus-nv-092.webp",
+   "brand": "Siluet",
+   "type": "Siluet",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 182,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 30000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 30000
+  },
+  {
+   "ref": "NV-093",
+   "slug": "gomitas-adulto-ns-creatina-sabor-mora-azul-natural-health-nv-093",
+   "name": "Gomitas Adulto NS Creatina sabor mora azul Natural Health",
+   "need": "energia",
+   "format": "60 gomitas",
+   "presentation": "60 gomitas",
+   "benefits": [
+    "Gomas de creatina",
+    "Apoyo a la fuerza y el rendimiento"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "gomitas-adulto-ns-creatina-sabor-mora-azul-natural-health-nv-093.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 183,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 63000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 63000
+  },
+  {
+   "ref": "NV-094",
+   "slug": "gomitas-adulto-con-resveratrol-sabor-uva-natural-health-nv-094",
+   "name": "Gomitas Adulto con Resveratrol sabor uva Natural Health",
+   "need": "belleza",
+   "format": "60 gomitas",
+   "presentation": "60 gomitas",
+   "benefits": [
+    "Gomas sin azúcar con resveratrol",
+    "Aporte antioxidante"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "gomitas-adulto-con-resveratrol-sabor-uva-natural-health-nv-094.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "gomas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 184,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 52000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 52000
+  },
+  {
+   "ref": "NV-095",
+   "slug": "redumex-plus-distribuciones-deyda-nv-095",
+   "name": "Redumex Plus Distribuciones Deyda",
+   "need": "digestion",
+   "format": "60 cápsulas",
+   "presentation": "60 cápsulas",
+   "benefits": [
+    "Apoyo al control de peso",
+    "100% natural"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "redumex-plus-distribuciones-deyda-nv-095.webp",
+   "brand": "Distribuciones Deyda",
+   "type": "Distribuciones Deyda",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 185,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 40000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 40000
+  },
+  {
+   "ref": "NV-096",
+   "slug": "resveratrol-masticable-natural-health-nv-096",
+   "name": "Resveratrol masticable Natural Health",
+   "need": "belleza",
+   "format": "100 unidades",
+   "presentation": "100 unidades",
+   "benefits": [
+    "Alimento masticable a base de suero de leche con resveratrol",
+    "Aporte antioxidante"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Piel, belleza y antiedad"
+   ],
+   "image": "resveratrol-masticable-natural-health-nv-096.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 186,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 52000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 52000
+  },
+  {
+   "ref": "NV-097",
+   "slug": "bisglicinato-de-magnesio-masticable-con-curcuma-natural-health-nv-097",
+   "name": "Bisglicinato de Magnesio masticable con cúrcuma Natural Health",
+   "need": "sueno",
+   "format": "100 unidades",
+   "presentation": "100 unidades",
+   "benefits": [
+    "Alimento masticable con bisglicinato de magnesio",
+    "Con cúrcuma",
+    "Apoyo a la relajación y el descanso"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "bisglicinato-de-magnesio-masticable-con-curcuma-natural-health-nv-097.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 187,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-098",
+   "slug": "oregano-con-magnesio-vitaminas-y-calcio-natural-health-nv-098",
+   "name": "Orégano con magnesio, vitaminas y calcio Natural Health",
+   "need": "defensas",
+   "format": "100 unidades",
+   "presentation": "100 unidades",
+   "benefits": [
+    "Con orégano y magnesio",
+    "Con vitaminas y calcio"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "oregano-con-magnesio-vitaminas-y-calcio-natural-health-nv-098.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 188,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 48000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 48000
+  },
+  {
+   "ref": "NV-099",
+   "slug": "bilalax-sabor-pina-nv-099",
+   "name": "Bilalax sabor piña",
+   "need": "digestion",
+   "format": "Sobre 20 g",
+   "presentation": "Sobre 20 g",
+   "benefits": [
+    "Alimento a base de linaza",
+    "Con pitaya, papaya, piña y té verde",
+    "Con jengibre y magnesio"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "bilalax-sabor-pina-nv-099.webp",
+   "brand": "Bilalax",
+   "type": "Bilalax",
+   "category": "fibras",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 189,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 22000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 22000
+  },
+  {
+   "ref": "NV-100",
+   "slug": "cranberry-con-arandanos-natural-health-nv-100",
+   "name": "Cranberry con arándanos Natural Health",
+   "need": "digestion",
+   "format": "100 unidades",
+   "presentation": "100 unidades",
+   "benefits": [
+    "Con arándano rojo",
+    "Apoyo a la salud del tracto urinario"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "cranberry-con-arandanos-natural-health-nv-100.webp",
+   "brand": "Natural Health",
+   "type": "Natural Health",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 190,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-101",
+   "slug": "adelgazante-natural-lipo-reductor-laboratorios-loli-cham-nv-101",
+   "name": "Adelgazante Natural Lipo Reductor Laboratorios Loli Cham",
+   "need": "digestion",
+   "format": "60 cápsulas",
+   "presentation": "60 cápsulas",
+   "benefits": [
+    "Apoyo al control de peso",
+    "100% natural"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "adelgazante-natural-lipo-reductor-laboratorios-loli-cham-nv-101.webp",
+   "brand": "Laboratorios Loli Cham",
+   "type": "Laboratorios Loli Cham",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 191,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 50000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 50000
+  },
+  {
+   "ref": "NV-102",
+   "slug": "ashwagandha-ksm-66-6700-mg-con-hierba-de-san-juan-nv-102",
+   "name": "Ashwagandha KSM-66 6700 mg con hierba de San Juan",
+   "need": "sueno",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Relajación mental y física",
+    "Apoyo al control del cortisol y el estrés",
+    "Libre de GMO y gluten"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "ashwagandha-ksm-66-6700-mg-con-hierba-de-san-juan-nv-102.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 192,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 60000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 60000
+  },
+  {
+   "ref": "NV-103",
+   "slug": "geolax-purgante-natural-nv-103",
+   "name": "Geolax Purgante Natural",
+   "need": "digestion",
+   "format": "4 cápsulas + 4 tabletas",
+   "presentation": "4 cápsulas + 4 tabletas",
+   "benefits": [
+    "Purgante natural de origen vegetal",
+    "Presentación de 4 cápsulas y 4 tabletas",
+    "Consulta a un profesional antes de usarlo en niños"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "geolax-purgante-natural-nv-103.webp",
+   "brand": "Geolax",
+   "type": "Geolax",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 193,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 10000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 10000
+  },
+  {
+   "ref": "NV-104",
+   "slug": "platinum-creatine-monohidratada-muscletech-nv-104",
+   "name": "Platinum Creatine Monohidratada MuscleTech",
+   "need": "energia",
+   "format": "400 g polvo",
+   "presentation": "400 g polvo",
+   "benefits": [
+    "Creatina monohidratada micronizada",
+    "Apoyo a la fuerza y la recuperación",
+    "Sin sabor"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "platinum-creatine-monohidratada-muscletech-nv-104.webp",
+   "brand": "MuscleTech",
+   "type": "MuscleTech",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 194,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 164000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 164000
+  },
+  {
+   "ref": "NV-105",
+   "slug": "ferroviled-jarabe-con-hierro-ledmar-nv-105",
+   "name": "FerroViled jarabe con hierro Ledmar",
+   "need": "energia",
+   "format": "360 ml",
+   "presentation": "360 ml",
+   "benefits": [
+    "Suplemento en jarabe a base de polifenoles",
+    "Enriquecido con hierro, vitaminas y minerales",
+    "Apoyo a la energía y la vitalidad"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "ferroviled-jarabe-con-hierro-ledmar-nv-105.webp",
+   "brand": "Ledmar",
+   "type": "Ledmar",
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 195,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 24000
+  },
+  {
+   "ref": "NV-106",
+   "slug": "monster-test-nv-106",
+   "name": "Monster Test",
+   "need": "masculina",
+   "format": "120 tabletas",
+   "presentation": "120 tabletas",
+   "benefits": [
+    "Apoyo a la masa muscular",
+    "Energía y vitalidad masculina"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Salud masculina"
+   ],
+   "image": "monster-test-nv-106.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 196,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 95000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 95000
+  },
+  {
+   "ref": "NV-107",
+   "slug": "cirsan-ledmar-nv-107",
+   "name": "Cirsan Ledmar",
+   "need": "mente",
+   "format": "360 ml",
+   "presentation": "360 ml",
+   "benefits": [
+    "Suplemento a base de proteína de soya, uva y minerales",
+    "Con vitaminas del complejo B",
+    "Apoyo a la circulación"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "cirsan-ledmar-nv-107.webp",
+   "brand": "Ledmar",
+   "type": "Ledmar",
+   "category": "jarabes",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 197,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 24000
+  },
+  {
+   "ref": "NV-108",
+   "slug": "testoultra-blue-edition-nv-108",
+   "name": "TestoUltra Blue Edition",
+   "need": "masculina",
+   "format": "Frasco cápsulas",
+   "presentation": "Frasco cápsulas",
+   "benefits": [
+    "Con tribulus terrestris, maca peruana y ginseng",
+    "Con fenogreco",
+    "Energía y rendimiento masculino"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Salud masculina"
+   ],
+   "image": "testoultra-blue-edition-nv-108.webp",
+   "brand": "TestoUltra",
+   "type": "TestoUltra",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 198,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 99000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 99000
+  },
+  {
+   "ref": "NV-109",
+   "slug": "corcenten-ledmar-nv-109",
+   "name": "Corcenten Ledmar",
+   "need": "mente",
+   "format": "Caja 60 cápsulas",
+   "presentation": "Caja 60 cápsulas",
+   "benefits": [
+    "Con polvo de uva, vitaminas B12, B3, C y E",
+    "Apoyo a la concentración y la memoria",
+    "Rico en antioxidantes naturales"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "corcenten-ledmar-nv-109.webp",
+   "brand": "Ledmar",
+   "type": "Ledmar",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 199,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 64000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 64000
+  },
+  {
+   "ref": "NV-110",
+   "slug": "amino-powder-sabor-sandia-gmn-nv-110",
+   "name": "Amino Powder sabor sandía GMN",
+   "need": "energia",
+   "format": "200 g polvo",
+   "presentation": "200 g polvo",
+   "benefits": [
+    "Aminoácidos en polvo 8500 mg",
+    "Apoyo a la recuperación muscular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "amino-powder-sabor-sandia-gmn-nv-110.webp",
+   "brand": "GMN",
+   "type": "GMN",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 200,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 55000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 55000
+  },
+  {
+   "ref": "NV-111",
+   "slug": "creatina-monohidratada-micronizada-lab-grade-nv-111",
+   "name": "Creatina Monohidratada Micronizada Lab Grade",
+   "need": "energia",
+   "format": "360 g (72 porciones)",
+   "presentation": "360 g (72 porciones)",
+   "benefits": [
+    "Creatina monohidratada micronizada",
+    "Apoyo a la energía y la resistencia",
+    "Sin sabor"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "creatina-monohidratada-micronizada-lab-grade-nv-111.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 201,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 114000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 114000
+  },
+  {
+   "ref": "NV-112",
+   "slug": "creatina-monohidratada-nutrex-nv-112",
+   "name": "Creatina Monohidratada Nutrex",
+   "need": "energia",
+   "format": "300 g (60 porciones)",
+   "presentation": "300 g (60 porciones)",
+   "benefits": [
+    "Creatina monohidratada pura y micronizada",
+    "Apoyo a la fuerza y el rendimiento",
+    "Sin sabor"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "creatina-monohidratada-nutrex-nv-112.webp",
+   "brand": "Nutrex",
+   "type": "Nutrex",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 202,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 95000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 95000
+  },
+  {
+   "ref": "NV-113",
+   "slug": "omega-3-2000-mg-aceite-de-pescado-maximum-care-nv-113",
+   "name": "Omega 3 2000 mg aceite de pescado Maximum Care",
+   "need": "mente",
+   "format": "Frasco cápsulas blandas",
+   "presentation": "Frasco cápsulas blandas",
+   "benefits": [
+    "Aceite de pescado altamente purificado",
+    "Apoyo a ojos, cerebro y corazón",
+    "Sabor limón sin regusto a pescado"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "omega-3-2000-mg-aceite-de-pescado-maximum-care-nv-113.webp",
+   "brand": "Maximum Care",
+   "type": "Maximum Care",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 203,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 69000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 69000
+  },
+  {
+   "ref": "NV-114",
+   "slug": "oil-of-oregano-4000-mg-american-blue-nv-114",
+   "name": "Oil of Oregano 4000 mg American Blue",
+   "need": "defensas",
+   "format": "90 cápsulas blandas",
+   "presentation": "90 cápsulas blandas",
+   "benefits": [
+    "Aceite de orégano concentrado",
+    "Propiedades antioxidantes"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Defensas e inmunidad"
+   ],
+   "image": "oil-of-oregano-4000-mg-american-blue-nv-114.webp",
+   "brand": "American Blue",
+   "type": "American Blue",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 204,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 48000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 48000
+  },
+  {
+   "ref": "NV-115",
+   "slug": "best-vegan-proteina-vegetal-sabor-chocolate-proscience-nv-115",
+   "name": "Best Vegan proteína vegetal sabor chocolate Proscience",
+   "need": "energia",
+   "format": "980 g polvo",
+   "presentation": "980 g polvo",
+   "benefits": [
+    "Proteína de arveja con BCAA",
+    "Sabor chocolate"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "best-vegan-proteina-vegetal-sabor-chocolate-proscience-nv-115.webp",
+   "brand": "Proscience",
+   "type": "Proscience",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 205,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 130000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 130000
+  },
+  {
+   "ref": "NV-116",
+   "slug": "smart-ganador-sabor-vainilla-gourmet-proscience-nv-116",
+   "name": "Smart ganador sabor vainilla gourmet Proscience",
+   "need": "energia",
+   "format": "2,7 kg polvo",
+   "presentation": "2,7 kg polvo",
+   "benefits": [
+    "Harina de avena con proteína de suero",
+    "44 g de proteína por porción",
+    "Sabor vainilla gourmet"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "smart-ganador-sabor-vainilla-gourmet-proscience-nv-116.webp",
+   "brand": "Proscience",
+   "type": "Proscience",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 206,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 166000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 166000
+  },
+  {
+   "ref": "NV-117",
+   "slug": "fem-protein-sabor-vainilla-gourmet-nv-117",
+   "name": "Fem Protein sabor vainilla gourmet",
+   "need": "energia",
+   "format": "Frasco polvo",
+   "presentation": "Frasco polvo",
+   "benefits": [
+    "Mezcla en polvo a base de proteína de suero",
+    "Sin colorantes adicionales"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "fem-protein-sabor-vainilla-gourmet-nv-117.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 207,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 159000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 159000
+  },
+  {
+   "ref": "NV-118",
+   "slug": "magnesium-complex-9-formas-con-complejo-b-nv-118",
+   "name": "Magnesium Complex 9 formas con complejo B",
+   "need": "sueno",
+   "format": "90 cápsulas blandas",
+   "presentation": "90 cápsulas blandas",
+   "benefits": [
+    "9 formas de magnesio quelado",
+    "Con complejo de vitamina B",
+    "Extra concentración"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "magnesium-complex-9-formas-con-complejo-b-nv-118.webp",
+   "brand": null,
+   "type": null,
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 208,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 68000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 68000
+  },
+  {
+   "ref": "NV-119",
+   "slug": "premium-creatine-nv-119",
+   "name": "Premium Creatine",
+   "need": "energia",
+   "format": "500 g (100 porciones)",
+   "presentation": "500 g (100 porciones)",
+   "benefits": [
+    "Creatina monohidratada micronizada",
+    "Apoyo a la fuerza y la recuperación",
+    "100% pura"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "premium-creatine-nv-119.webp",
+   "brand": null,
+   "type": null,
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 209,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 110000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 110000
+  },
+  {
+   "ref": "NV-120",
+   "slug": "best-whey-proteina-sabor-vainilla-gourmet-proscience-nv-120",
+   "name": "Best Whey proteína sabor vainilla gourmet Proscience",
+   "need": "energia",
+   "format": "924 g polvo",
+   "presentation": "924 g polvo",
+   "benefits": [
+    "Proteína concentrada de suero de leche",
+    "24 g de proteína por porción"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "best-whey-proteina-sabor-vainilla-gourmet-proscience-nv-120.webp",
+   "brand": "Proscience",
+   "type": "Proscience",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 210,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 164000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 164000
+  },
+  {
+   "ref": "NV-121",
+   "slug": "nad-10-en-1-american-blue-nv-121",
+   "name": "NAD+ 10 en 1 American Blue",
+   "need": "energia",
+   "format": "100 cápsulas",
+   "presentation": "100 cápsulas",
+   "benefits": [
+    "Resveratrol y nicotinamida",
+    "Con quercetina, semilla de uva y té verde"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "nad-10-en-1-american-blue-nv-121.webp",
+   "brand": "American Blue",
+   "type": "American Blue",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 211,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 62000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 62000
+  },
+  {
+   "ref": "NV-122",
+   "slug": "barbarus-ganador-de-peso-sabor-vainilla-francesa-healthy-sports-nv-122",
+   "name": "Barbarus ganador de peso sabor vainilla francesa Healthy Sports",
+   "need": "energia",
+   "format": "1820 g polvo",
+   "presentation": "1820 g polvo",
+   "benefits": [
+    "600 calorías y 60 g de proteína por porción",
+    "Con creatina monohidratada y L-glutamina",
+    "Apoyo al aumento de masa"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "barbarus-ganador-de-peso-sabor-vainilla-francesa-healthy-sports-nv-122.webp",
+   "brand": "Healthy Sports",
+   "type": "Healthy Sports",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 212,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 255000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 255000
+  },
+  {
+   "ref": "NV-123",
+   "slug": "citrato-de-magnesio-ashwagandha-nutricion-celular-nv-123",
+   "name": "Citrato de Magnesio + Ashwagandha Nutrición Celular",
+   "need": "sueno",
+   "format": "350 g polvo",
+   "presentation": "350 g polvo",
+   "benefits": [
+    "Balance cuerpo y mente",
+    "Apoyo al sueño profundo",
+    "Apoyo a la salud muscular y en el estrés"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "citrato-de-magnesio-ashwagandha-nutricion-celular-nv-123.webp",
+   "brand": "Nutrición Celular",
+   "type": "Nutrición Celular",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 213,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 66000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 66000
+  },
+  {
+   "ref": "NV-124",
+   "slug": "whey-protein-hardcore-funat-nv-124",
+   "name": "Whey Protein Hardcore Funat",
+   "need": "energia",
+   "format": "908 g polvo",
+   "presentation": "908 g polvo",
+   "benefits": [
+    "38 g de proteína por porción",
+    "Apoyo a la recuperación muscular"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Energía, vitaminas y rendimiento"
+   ],
+   "image": "whey-protein-hardcore-funat-nv-124.webp",
+   "brand": "Funat",
+   "type": "Funat",
+   "category": "polvos",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 214,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 59000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 59000
+  },
+  {
+   "ref": "NV-125",
+   "slug": "stevia-endulzante-natural-en-gotas-nutricion-celular-nv-125",
+   "name": "Stevia endulzante natural en gotas Nutrición Celular",
+   "need": "digestion",
+   "format": "30 ml",
+   "presentation": "30 ml",
+   "benefits": [
+    "Endulzante natural",
+    "Cero calorías",
+    "Sin sabores amargos"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Digestión, peso y depuración"
+   ],
+   "image": "stevia-endulzante-natural-en-gotas-nutricion-celular-nv-125.webp",
+   "brand": "Nutrición Celular",
+   "type": "Nutrición Celular",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 215,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 24000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 24000
+  },
+  {
+   "ref": "NV-126",
+   "slug": "curcuma-organica-con-pimienta-negra-y-aceite-mct-nutricion-celular-nv-126",
+   "name": "Cúrcuma Orgánica con pimienta negra y aceite MCT Nutrición Celular",
+   "need": "huesos",
+   "format": "60 cápsulas",
+   "presentation": "60 cápsulas",
+   "benefits": [
+    "Cúrcuma orgánica con pimienta negra",
+    "Con aceite MCT",
+    "Apoyo a la salud articular y la digestión"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Huesos, articulaciones y dolor"
+   ],
+   "image": "curcuma-organica-con-pimienta-negra-y-aceite-mct-nutricion-celular-nv-126.webp",
+   "brand": "Nutrición Celular",
+   "type": "Nutrición Celular",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 216,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 42000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 42000
+  },
+  {
+   "ref": "NV-127",
+   "slug": "super-magnesium-400-mg-healthy-america-nv-127",
+   "name": "Super Magnesium 400 mg Healthy America",
+   "need": "sueno",
+   "format": "100 cápsulas blandas",
+   "presentation": "100 cápsulas blandas",
+   "benefits": [
+    "Aspartato, lactato y citrato de magnesio",
+    "Fórmula de 2 cápsulas blandas"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Sueño, estrés y ansiedad"
+   ],
+   "image": "super-magnesium-400-mg-healthy-america-nv-127.webp",
+   "brand": "Healthy America",
+   "type": "Healthy America",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 217,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 73000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 73000
+  },
+  {
+   "ref": "NV-128",
+   "slug": "omega-3-fish-oil-1200-mg-healthy-america-nv-128",
+   "name": "Omega-3 Fish Oil 1200 mg Healthy America",
+   "need": "mente",
+   "format": "Frasco cápsulas blandas",
+   "presentation": "Frasco cápsulas blandas",
+   "benefits": [
+    "Aceite de pescado 1200 mg",
+    "Apoyo a la salud cardiovascular y cerebral"
+   ],
+   "invima": null,
+   "advisor_tags": [
+    "Memoria, cerebro y corazón"
+   ],
+   "image": "omega-3-fish-oil-1200-mg-healthy-america-nv-128.webp",
+   "brand": "Healthy America",
+   "type": "Healthy America",
+   "category": "capsulas",
+   "is_viral": false,
+   "is_trending": false,
+   "has_photo": true,
+   "sort_order": 218,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": 72000,
+   "market_source": "Mediana de precios de mercado (catálogo de fotos, commits 5f3a847/5df8132)",
+   "price": 72000
   }
  ]
 }

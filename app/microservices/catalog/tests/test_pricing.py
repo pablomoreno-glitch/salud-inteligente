@@ -20,7 +20,11 @@ async def test_every_seeded_price_is_cost_plus_margin(client):
     body = (await client.get("/admin/products", headers=AUTH)).json()
     assert body["margin_percent"] == margin
     for item in body["items"]:
-        assert item["price"] == sale_price(item["cost_price"], margin)
+        if item["cost_price"]:
+            assert item["price"] == sale_price(item["cost_price"], margin)
+        else:
+            # Without a supplier cost, the price is the median market price.
+            assert item["price"] == item["market_price"]
 
 
 async def test_cost_is_never_public(client):
@@ -37,9 +41,12 @@ async def test_admin_products_requires_internal_token(client):
 async def test_changing_the_margin_reprices_everything(client):
     resp = await client.put("/pricing", json={"margin_percent": 50}, headers=AUTH)
     assert resp.status_code == 200
-    assert resp.json()["products_repriced"] == len(SEED["products"])
+    with_cost = [p for p in SEED["products"] if p.get("cost_price")]
+    assert resp.json()["products_repriced"] == len(with_cost)
     body = (await client.get("/admin/products", headers=AUTH)).json()
-    assert all(i["price"] == sale_price(i["cost_price"], 50) for i in body["items"])
+    for i in body["items"]:
+        expected = sale_price(i["cost_price"], 50) if i["cost_price"] else i["market_price"]
+        assert i["price"] == expected
 
 
 async def test_changing_the_cost_updates_the_price(client):

@@ -37,6 +37,7 @@ function CostCell({ product }: { product: AdminProductRow }) {
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={(event) => event.key === "Enter" && save()}
           aria-label={`Precio proveedor de ${product.name}`}
+          placeholder="Sin costo"
           aria-invalid={dirty && invalid}
           className={`w-28 rounded-control border py-1.5 pl-5 pr-2 text-body outline-none focus-visible:border-leaf ${
             dirty && invalid ? "border-danger" : "border-line"
@@ -135,7 +136,7 @@ function ProductRow({ product, onEdit }: { product: AdminProductRow; onEdit: (p:
         {product.market_price ? formatPrice(product.market_price) : "-"}
       </td>
       <td className="px-4 py-3 text-body text-ink">
-        {product.margin_percent !== null ? `${product.margin_percent}%` : "-"}
+        {product.margin_percent !== null ? `${product.margin_percent}%` : <span className="text-meta text-muted">Precio de mercado</span>}
       </td>
       <td className="px-4 py-3">
         <label className="inline-flex cursor-pointer items-center gap-2 text-body">
@@ -216,7 +217,8 @@ export function Products() {
     all.forEach((p) => seen.set(p.category.slug, p.category.name));
     return [...seen.entries()];
   }, [all]);
-  const brands = useMemo(() => [...new Set(all.map((p) => p.brand).filter(Boolean))] as string[], [all]);
+  const withCost = all.filter((p) => p.cost_price).length;
+  const brands = useMemo(() => ([...new Set(all.map((p) => p.brand).filter(Boolean))] as string[]).sort((a, b) => a.localeCompare(b, "es")), [all]);
 
   const visible = all.filter(
     (p) =>
@@ -231,8 +233,9 @@ export function Products() {
       {products.data && (
         <>
           <p className="mt-1 text-body text-muted">
-            {all.length} productos de {brands.join(" y ")}. Edita el precio proveedor y el precio de venta se recalcula
-            con el margen.
+            {all.length} productos. Los {withCost} que tienen precio proveedor se venden con el margen; los{" "}
+            {all.length - withCost} restantes usan la mediana del precio de mercado hasta que les pongas un precio
+            proveedor.
           </p>
           <MarginCard margin={products.data.margin_percent} />
         </>
