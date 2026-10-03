@@ -292,7 +292,8 @@ export interface OrderNotification {
 
 export interface NotificationStatus {
   sms_configured: boolean;
-  order_sms_to: string[];
+  /** A single string from notifications services older than the multi-number SMS. */
+  order_sms_to: string[] | string;
 }
 
 export interface AdminUser {
