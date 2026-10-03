@@ -51,6 +51,7 @@ class ProductOut(BaseModel):
 class AdminProductOut(ProductOut):
     """Internal view: adds what we pay and the resulting margin over cost. Never exposed publicly."""
 
+    supplier: str | None
     cost_price: int | None
     supplier_store_price: int | None
     market_source: str | None

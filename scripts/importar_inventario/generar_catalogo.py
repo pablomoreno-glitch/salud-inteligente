@@ -299,7 +299,8 @@ for src, mapping in (("GLNP", GLNP), ("EO", EO)):
             report["inactive_rule"].append((ref, name, INACTIVE_EO[n]))
 
         item = {
-            "ref": ref, "slug": slug, "name": name, "brand": brand, "category": category, "need": need,
+            "ref": ref, "slug": slug, "name": name, "brand": brand,
+            "supplier": brand if src == "GLNP" else "El Oasis", "category": category, "need": need,
             "type": brand, "format": fmt, "presentation": presentation,
             "is_viral": (base or {}).get("is_viral", False), "is_trending": (base or {}).get("is_trending", False),
             "invima": (base or {}).get("invima"), "benefits": benefits, "description": description,

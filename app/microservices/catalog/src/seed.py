@@ -33,6 +33,7 @@ def product_fields(item: dict) -> dict:
         description=item.get("description"),
         price=item.get("price"),
         brand=item.get("brand"),
+        supplier=item.get("supplier"),
         cost_price=item.get("cost_price"),
         supplier_store_price=item.get("supplier_store_price"),
         market_price=item.get("market_price"),
@@ -72,4 +73,22 @@ async def seed_if_empty() -> None:
         for item in data["products"]:
             session.add(Product(ref=item["ref"], **product_fields(item)))
 
+        await session.commit()
+
+
+async def backfill_suppliers() -> None:
+    """Fill in the supplier of existing products from the seed, leaving every other field alone.
+
+    Databases seeded before the supplier column existed get it on the next start, without
+    overwriting prices or visibility edited in the admin panel.
+    """
+    suppliers = {
+        item["ref"]: item["supplier"]
+        for item in json.loads(SEED_FILE.read_text(encoding="utf-8"))["products"]
+        if item.get("supplier")
+    }
+    async with AsyncSessionLocal() as session:
+        missing = (await session.execute(select(Product).where(Product.supplier.is_(None)))).scalars().all()
+        for product in missing:
+            product.supplier = suppliers.get(product.ref)
         await session.commit()

@@ -21,7 +21,7 @@ from .schemas import (
     ProductPatch,
     SummaryOut,
 )
-from .seed import build_search_text, seed_if_empty
+from .seed import backfill_suppliers, build_search_text, seed_if_empty
 from .security import require_internal
 from .text import normalize
 
@@ -30,6 +30,7 @@ from .text import normalize
 async def lifespan(app: FastAPI):
     await init_db()
     await seed_if_empty()
+    await backfill_suppliers()
     yield
 
 
@@ -73,6 +74,7 @@ def to_product_out(product: Product) -> ProductOut:
 def to_admin_product_out(product: Product) -> AdminProductOut:
     return AdminProductOut(
         **to_product_out(product).model_dump(),
+        supplier=product.supplier,
         cost_price=product.cost_price,
         supplier_store_price=product.supplier_store_price,
         market_source=product.market_source,

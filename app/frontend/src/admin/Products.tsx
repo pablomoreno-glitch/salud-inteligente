@@ -101,9 +101,18 @@ function ProductRow({ product, onEdit }: { product: AdminProductRow; onEdit: (p:
           </div>
         </div>
       </td>
-      <td className="px-4 py-3 text-body text-muted">
-        {product.brand}
-        <p className="text-meta">{product.category.name}</p>
+      <td className="px-4 py-3 text-body">
+        {product.supplier ? (
+          <span className="inline-block rounded-pill bg-sage px-2.5 py-0.5 text-meta font-medium text-forest">
+            {product.supplier}
+          </span>
+        ) : (
+          <span className="text-meta text-muted">Sin proveedor</span>
+        )}
+        <p className="mt-1 text-meta text-muted">
+          {product.brand && product.brand !== product.supplier ? `${product.brand} · ` : ""}
+          {product.category.name}
+        </p>
       </td>
       <td className="px-4 py-3">
         <MoneyCell key={`c-${product.ref}-${product.cost_price}`} product={product} field="cost_price" label="Precio proveedor" />
@@ -185,6 +194,7 @@ export function Products() {
   const [q, setQ] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
+  const [supplier, setSupplier] = useState("");
   const [editing, setEditing] = useState<AdminProductRow | null>(null);
 
   const all = useMemo(() => products.data?.items ?? [], [products.data]);
@@ -194,13 +204,19 @@ export function Products() {
     return [...seen.entries()];
   }, [all]);
   const withCost = all.filter((p) => p.cost_price).length;
+  const suppliers = useMemo(() => {
+    const counts = new Map<string, number>();
+    all.forEach((p) => p.supplier && counts.set(p.supplier, (counts.get(p.supplier) ?? 0) + 1));
+    return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b, "es"));
+  }, [all]);
   const brands = useMemo(() => ([...new Set(all.map((p) => p.brand).filter(Boolean))] as string[]).sort((a, b) => a.localeCompare(b, "es")), [all]);
 
   const visible = all.filter(
     (p) =>
       (!category || p.category.slug === category) &&
+      (!supplier || p.supplier === supplier) &&
       (!brand || p.brand === brand) &&
-      matchesSearch(q, p.name, p.ref, p.format, p.brand),
+      matchesSearch(q, p.name, p.ref, p.format, p.brand, p.supplier),
   );
 
   return (
@@ -220,7 +236,7 @@ export function Products() {
           type="search"
           value={q}
           onChange={(event) => setQ(event.target.value)}
-          placeholder="Buscar por nombre, referencia o presentación..."
+          placeholder="Buscar por nombre, referencia, proveedor o presentación..."
           aria-label="Buscar productos"
           className="w-full max-w-sm rounded-pill border border-line bg-white px-4 py-2 text-body outline-none focus-visible:border-leaf"
         />
@@ -233,6 +249,17 @@ export function Products() {
           <option value="">Todas las categorías</option>
           {categories.map(([slug, name]) => (
             <option key={slug} value={slug}>{name}</option>
+          ))}
+        </select>
+        <select
+          value={supplier}
+          onChange={(event) => setSupplier(event.target.value)}
+          aria-label="Filtrar por proveedor"
+          className="rounded-pill border border-line bg-white px-4 py-2 text-body"
+        >
+          <option value="">Todos los proveedores</option>
+          {suppliers.map(([name, count]) => (
+            <option key={name} value={name}>{name} ({count})</option>
           ))}
         </select>
         <select
@@ -260,7 +287,7 @@ export function Products() {
             <thead>
               <tr className="border-b border-line text-left text-meta text-muted">
                 <th className="px-4 py-3">Producto</th>
-                <th className="px-4 py-3">Marca</th>
+                <th className="px-4 py-3">Proveedor</th>
                 <th className="px-4 py-3">Precio proveedor</th>
                 <th className="px-4 py-3">Precio de venta</th>
                 <th className="px-4 py-3">Ganancia</th>
