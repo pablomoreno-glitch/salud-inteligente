@@ -39,7 +39,7 @@ class Product(Base):
     price: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # Supplier line (Greenlab, Naturpro...) and what we pay for the product.
     brand: Mapped[str | None] = mapped_column(String(80), nullable=True)
-    # Catalog the product is bought from (Greenlab, Naturpro, El Oasis); the brand is the maker.
+    # Where the product comes from (Greenlab, Naturpro, El Oasis, the photo catalog); the brand is the maker.
     supplier: Mapped[str | None] = mapped_column(String(80), nullable=True)
     cost_price: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # The supplier's suggested store price and the public price found online, for reference.

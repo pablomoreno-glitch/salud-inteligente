@@ -258,7 +258,7 @@ export interface StockRow {
 
 /** Admin view of a product: adds what we pay the supplier and the resulting margin. */
 export interface AdminProductRow extends Product {
-  /** Catalog the product is bought from: Greenlab, Naturpro or El Oasis. Null for retired products. */
+  /** Where the product comes from: Greenlab, Naturpro, El Oasis or the WhatsApp photo catalog. */
   supplier: string | null;
   cost_price: number | null;
   supplier_store_price: number | null;

@@ -324,12 +324,16 @@ for src, mapping in (("GLNP", GLNP), ("EO", EO)):
         order += 1
 
 # Productos actuales que no estan en los Excel: se conservan inactivos
+RETIRED_SUPPLIERS = {"GL": "Greenlab", "NP": "Naturpro"}
+PHOTO_CATALOG_SUPPLIER = "Catálogo de fotos (WhatsApp)"
 kept = {p["ref"] for p in products}
 retired = []
 for p in current["products"]:
     if p["ref"] not in kept:
         q = dict(p)
         q["is_active"] = False
+        # NP/GL come from the 2026 Naturpro/Greenlab price lists; the rest from the WhatsApp photo catalog.
+        q["supplier"] = RETIRED_SUPPLIERS.get(p["ref"].split("-")[0], PHOTO_CATALOG_SUPPLIER)
         q["sort_order"] = order
         order += 1
         products.append(q)
