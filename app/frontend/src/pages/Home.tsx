@@ -6,6 +6,7 @@ import { useBusiness, useCategories, useNeeds, useProducts } from "../lib/querie
 import { ProductCard } from "../components/ProductCard";
 import { ProductGridSkeleton } from "../components/Skeleton";
 import { ErrorState } from "../components/ErrorState";
+import { ServicesStory } from "../components/ServicesStory";
 
 const SUGGESTION_CHIPS = [
   "Me cuesta dormir",
@@ -87,6 +88,10 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {business.data && business.data.services.length > 0 && (
+        <ServicesStory services={business.data.services} whatsapp={business.data.contacts.whatsapp} />
+      )}
 
       <section id="necesidades" className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <h2 className="font-display text-h3 font-bold text-ink">
@@ -181,57 +186,6 @@ export function Home() {
           </div>
         )}
       </section>
-
-      <section className="border-y border-line bg-sage/40">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:items-center">
-          <div className="overflow-hidden rounded-tile">
-            <img
-              src="/media/site/nosotros.webp"
-              alt="Cómo funciona el asesor IA"
-              width={800}
-              height={600}
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div>
-            <h2 className="font-display text-h3 font-bold text-ink">
-              Un asesor que conoce el catálogo
-            </h2>
-            <p className="mt-3 text-body-lg text-muted">
-              Cuéntale lo que sientes y te recomienda productos reales del
-              catálogo, con su razón. No reemplaza la consulta médica ni hace
-              diagnósticos.
-            </p>
-            <button
-              type="button"
-              onClick={advisor.open}
-              className="mt-4 rounded-pill bg-forest px-5 py-3 text-body font-medium text-white hover:bg-forest/90"
-            >
-              Hablar con el asesor
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {business.data && business.data.services.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-          <h2 className="font-display text-h3 font-bold text-ink">
-            Nuestros servicios
-          </h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {business.data.services.map((service) => (
-              <div
-                key={service.id}
-                className="rounded-card border border-line bg-white p-4"
-              >
-                <p className="text-body-lg font-semibold text-ink">{service.title}</p>
-                <p className="mt-1 text-body text-muted">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }
