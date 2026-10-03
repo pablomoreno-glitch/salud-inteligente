@@ -26,9 +26,9 @@ def order_created_body(event) -> str:
     """Short Spanish summary of a new order for the business phone."""
     lines = ", ".join(f"{line.quantity}x {line.name}" for line in event.items)
     if event.total:
-        total = format_pesos(event.total) + (" + por confirmar" if event.has_unpriced else "")
+        total = format_pesos(event.total) + (" + a consultar" if event.has_unpriced else "")
     else:
-        total = "por confirmar"
+        total = "a consultar"
     head = (
         f"Nuevo pedido {event.order_code} de {event.customer_name} "
         f"({event.customer_city}) Tel {event.customer_phone}. Total {total}. "

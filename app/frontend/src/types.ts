@@ -290,7 +290,7 @@ export interface OrderNotification {
 
 export interface NotificationStatus {
   sms_configured: boolean;
-  order_sms_to: string;
+  order_sms_to: string[];
 }
 
 export interface AdminUser {

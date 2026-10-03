@@ -29,7 +29,7 @@ function OrderSmsCard() {
         <div className="mt-3 space-y-1 text-body text-ink">
           <p>
             {sms.data.status.sms_configured
-              ? `Cada pedido nuevo llega por SMS al ${sms.data.status.order_sms_to}.`
+              ? `Cada pedido nuevo llega por SMS a ${sms.data.status.order_sms_to.join(" y ")}.`
               : "Twilio aún no está configurado: los pedidos no generan SMS."}
           </p>
           <p className="text-muted">

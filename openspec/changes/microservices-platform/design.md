@@ -251,9 +251,9 @@ The system prompt keeps every rule of `docs/spec.md` section 4 and the `RECS:[..
 
 | Method and path | Access | Notes |
 | --- | --- | --- |
-| `POST /events/order-created` | internal | `{order_code, customer_name, customer_phone, customer_city, items: [{name, quantity}], total, has_unpriced}`; texts `ORDER_SMS_TO` (default `+573043486001`) through the Twilio Messages API and returns the stored notification (`201`) |
+| `POST /events/order-created` | internal | `{order_code, customer_name, customer_phone, customer_city, items: [{name, quantity}], total, has_unpriced}`; texts every number in `ORDER_SMS_TO` (comma-separated, default `+573043486001,+573245710972`) through the Twilio Messages API and returns one stored notification per number (`201`) |
 | `GET /notifications?limit=&offset=` | internal | `{items, total}` newest first; `status` in `sent`, `failed`, `skipped` |
-| `GET /status` | internal | `{sms_configured, order_sms_to}` |
+| `GET /status` | internal | `{sms_configured, order_sms_to: [...]}` |
 
 `orders` calls `POST /events/order-created` as a background task after the checkout response, so SMS problems never affect an order.
 Without Twilio credentials every message is stored as `skipped`; Twilio errors are stored as `failed` with Twilio's error code, never with credentials.

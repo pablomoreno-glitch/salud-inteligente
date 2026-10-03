@@ -119,7 +119,8 @@ La página [saludinteligente.lat/api](https://saludinteligente.lat/api) document
 ## WhatsApp y SMS
 
 - El botón "Enviar pedido por WhatsApp" abre un chat con el +57 304 3486001 con el pedido ya escrito (`BUSINESS_WHATSAPP`).
-- Cada pedido nuevo envía un SMS al mismo número con Twilio (`TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`).
+- Cada pedido nuevo envía un SMS con Twilio (`TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`) a cada número de `ORDER_SMS_TO`, separados por comas: hoy el +57 304 3486001 y el +57 324 5710972.
+  El +57 324 5710972 solo recibe SMS; no es el número de WhatsApp.
   Si Twilio falla o no está configurado, el pedido se crea igual y el panel muestra el SMS como "no enviado".
 
 ## Desarrollo local

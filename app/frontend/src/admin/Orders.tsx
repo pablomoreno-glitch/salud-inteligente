@@ -98,7 +98,7 @@ function OrderDetail({ id, onClose }: { id: number; onClose: () => void }) {
                   <div key={item.ref} className="flex justify-between text-body">
                     <span>{item.quantity} x {item.name}</span>
                     <span>
-                      {item.unit_price === null ? "Por confirmar" : formatPrice(item.line_total)}
+                      {item.unit_price === null ? "A consultar" : formatPrice(item.line_total)}
                     </span>
                   </div>
                 ))}

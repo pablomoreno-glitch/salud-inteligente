@@ -28,26 +28,31 @@ async def health():
     return {"status": "ok", "service": "notifications"}
 
 
-@app.post("/events/order-created", response_model=NotificationOut, status_code=201,
+@app.post("/events/order-created", response_model=list[NotificationOut], status_code=201,
           dependencies=[Depends(require_internal)])
 async def order_created(event: OrderCreatedEvent, db: AsyncSession = Depends(get_db)):
-    """Text the business phone about a new order and record the outcome."""
+    """Text every order phone about a new order and record one outcome per recipient."""
     body = order_created_body(event)
-    result = await send_sms(settings.order_sms_to, body)
-    notification = Notification(
-        channel="sms",
-        event="order_created",
-        recipient=settings.order_sms_to,
-        body=body,
-        order_code=event.order_code,
-        status=result.status,
-        provider_id=result.provider_id,
-        error=result.error,
-    )
-    db.add(notification)
+    notifications = []
+    for recipient in settings.order_sms_recipients:
+        result = await send_sms(recipient, body)
+        notifications.append(
+            Notification(
+                channel="sms",
+                event="order_created",
+                recipient=recipient,
+                body=body,
+                order_code=event.order_code,
+                status=result.status,
+                provider_id=result.provider_id,
+                error=result.error,
+            )
+        )
+    db.add_all(notifications)
     await db.commit()
-    await db.refresh(notification)
-    return notification
+    for notification in notifications:
+        await db.refresh(notification)
+    return notifications
 
 
 @app.get("/notifications", dependencies=[Depends(require_internal)])
@@ -67,4 +72,4 @@ async def list_notifications(
 
 @app.get("/status", dependencies=[Depends(require_internal)])
 async def status():
-    return {"sms_configured": settings.sms_configured, "order_sms_to": settings.order_sms_to}
+    return {"sms_configured": settings.sms_configured, "order_sms_to": settings.order_sms_recipients}

@@ -16,8 +16,9 @@ class Settings(BaseSettings):
     twilio_messaging_service_sid: str = ""
     twilio_api_base: str = "https://api.twilio.com"
 
-    # Who gets the "new order" SMS: the business phone, in E.164.
-    order_sms_to: str = "+573043486001"
+    # Who gets the "new order" SMS: comma-separated E.164 numbers. SMS only; the
+    # WhatsApp order button uses BUSINESS_WHATSAPP in the business service.
+    order_sms_to: str = "+573043486001,+573245710972"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -25,6 +26,12 @@ class Settings(BaseSettings):
     def sms_configured(self) -> bool:
         has_sender = bool(self.twilio_from_number or self.twilio_messaging_service_sid)
         return bool(self.twilio_account_sid and self.twilio_auth_token and has_sender)
+
+    @property
+    def order_sms_recipients(self) -> list[str]:
+        """Every number in ORDER_SMS_TO, in order, without blanks or repeats."""
+        numbers = (part.strip() for part in self.order_sms_to.split(","))
+        return list(dict.fromkeys(number for number in numbers if number))
 
 
 settings = Settings()
