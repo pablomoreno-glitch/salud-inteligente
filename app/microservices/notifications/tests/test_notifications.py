@@ -39,10 +39,10 @@ async def test_new_order_texts_the_business_phone(make_client):
     body = response.json()
     assert body["status"] == "sent"
     assert body["provider_id"] == "SM123"
-    assert body["recipient"] == "+573018000324"
+    assert body["recipient"] == "+573043486001"
 
     form = dict(httpx.QueryParams(route.calls.last.request.content.decode()))
-    assert form["To"] == "+573018000324"
+    assert form["To"] == "+573043486001"
     assert form["From"] == "+15005550006"
     assert "SI-000007" in form["Body"]
     assert "Ana Pérez (Pasto)" in form["Body"]
@@ -86,4 +86,4 @@ async def test_long_orders_are_trimmed_to_two_sms_segments(make_client):
 async def test_status_reports_configuration(make_client):
     async with make_client(**TWILIO_ENV) as client:
         status = (await client.get("/status", headers=AUTH)).json()
-    assert status == {"sms_configured": True, "order_sms_to": "+573018000324"}
+    assert status == {"sms_configured": True, "order_sms_to": "+573043486001"}

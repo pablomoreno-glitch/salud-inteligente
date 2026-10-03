@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     twilio_api_base: str = "https://api.twilio.com"
 
     # Who gets the "new order" SMS: the business phone, in E.164.
-    order_sms_to: str = "+573018000324"
+    order_sms_to: str = "+573043486001"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

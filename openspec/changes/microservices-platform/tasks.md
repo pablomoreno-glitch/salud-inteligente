@@ -25,8 +25,8 @@ Each group is independently verifiable; the owner of each group is noted.
 
 ## 3b. Notifications (coordinator, owner request 2026-09-25)
 
-- [x] 3.3 notifications service: SMS to +57 301 8000324 for every new order via Twilio, delivery log, admin endpoints, tests with a mocked Twilio API.
-- [x] 3.4 Business WhatsApp +57 301 8000324 as the default contact channel; blank contact variables return `null`.
+- [x] 3.3 notifications service: SMS to +57 304 3486001 for every new order via Twilio, delivery log, admin endpoints, tests with a mocked Twilio API.
+- [x] 3.4 Business WhatsApp +57 304 3486001 as the default contact channel; blank contact variables return `null`.
 
 ## 4. Gateway (executor C)
 

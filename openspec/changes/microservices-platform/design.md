@@ -251,7 +251,7 @@ The system prompt keeps every rule of `docs/spec.md` section 4 and the `RECS:[..
 
 | Method and path | Access | Notes |
 | --- | --- | --- |
-| `POST /events/order-created` | internal | `{order_code, customer_name, customer_phone, customer_city, items: [{name, quantity}], total, has_unpriced}`; texts `ORDER_SMS_TO` (default `+573018000324`) through the Twilio Messages API and returns the stored notification (`201`) |
+| `POST /events/order-created` | internal | `{order_code, customer_name, customer_phone, customer_city, items: [{name, quantity}], total, has_unpriced}`; texts `ORDER_SMS_TO` (default `+573043486001`) through the Twilio Messages API and returns the stored notification (`201`) |
 | `GET /notifications?limit=&offset=` | internal | `{items, total}` newest first; `status` in `sent`, `failed`, `skipped` |
 | `GET /status` | internal | `{sms_configured, order_sms_to}` |
 

@@ -290,7 +290,7 @@ export const endpoints: ApiEndpoint[] = [
     method: "GET",
     path: "/admin/notifications/status",
     description: "Indica si Twilio está configurado y a qué número llegan los SMS.",
-    example: `{ "sms_configured": true, "order_sms_to": "+573018000324" }`,
+    example: `{ "sms_configured": true, "order_sms_to": "+573043486001" }`,
     group: "Administración",
     admin: true,
   },
