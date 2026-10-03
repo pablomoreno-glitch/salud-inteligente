@@ -5,6 +5,15 @@ import { AdvisorContext, type AdvisorContextValue } from "../context/advisor";
 import type { BusinessService } from "../types";
 import { ServicesStory } from "./ServicesStory";
 
+// jsdom has no layout or scrolling, so the scroll-driven timeline is replaced with no-ops.
+const timeline = { add: () => timeline, set: () => timeline };
+vi.mock("animejs", () => ({
+  createScope: () => ({ add: (setup: () => void) => (setup(), { revert: () => {} }) }),
+  createTimeline: () => timeline,
+  onScroll: () => ({}),
+  utils: { set: () => {} },
+}));
+
 const SERVICES: BusinessService[] = [
   { id: 1, title: "Asesor IA de bienestar", description: "Te recomienda productos.", icon: "sparkles" },
   { id: 2, title: "Catálogo con registro INVIMA", description: "Registro visible.", icon: "shield-check" },
@@ -34,8 +43,8 @@ function preferReducedMotion() {
 
 afterEach(() => vi.unstubAllGlobals());
 
-describe("ServicesStory with reduced motion", () => {
-  it("lists every service with its action instead of animating", () => {
+describe("ServicesStory", () => {
+  it("renders every service with its action, also with reduced motion", () => {
     preferReducedMotion();
     const { open } = renderStory();
 
