@@ -236,7 +236,7 @@ export function Products() {
           type="search"
           value={q}
           onChange={(event) => setQ(event.target.value)}
-          placeholder="Buscar por nombre, referencia, proveedor o presentación..."
+          placeholder="Buscar por nombre, referencia o proveedor..."
           aria-label="Buscar productos"
           className="w-full max-w-sm rounded-pill border border-line bg-white px-4 py-2 text-body outline-none focus-visible:border-leaf"
         />
@@ -285,7 +285,7 @@ export function Products() {
         {products.data && (
           <table className="w-full min-w-[1080px] text-body">
             <thead>
-              <tr className="border-b border-line text-left text-meta text-muted">
+              <tr className="whitespace-nowrap border-b border-line text-left text-meta text-muted">
                 <th className="px-4 py-3">Producto</th>
                 <th className="px-4 py-3">Proveedor</th>
                 <th className="px-4 py-3">Precio proveedor</th>
