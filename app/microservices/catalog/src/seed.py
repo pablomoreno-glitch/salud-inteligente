@@ -15,6 +15,37 @@ def build_search_text(ref: str, name: str, benefits: list[str]) -> str:
     return normalize(" ".join(parts))
 
 
+def product_fields(item: dict) -> dict:
+    """Column values for a product from its seed entry (shared by the seed and sync_catalog)."""
+    benefits = item.get("benefits", [])
+    return dict(
+        slug=item["slug"],
+        name=item["name"],
+        category_slug=item["category"],
+        need_slug=item["need"],
+        type=item.get("type"),
+        format=item.get("format"),
+        presentation=item.get("presentation"),
+        invima=item.get("invima"),
+        benefits=benefits,
+        advisor_tags=item.get("advisor_tags", []),
+        image=item.get("image"),
+        description=item.get("description"),
+        price=item.get("price"),
+        brand=item.get("brand"),
+        cost_price=item.get("cost_price"),
+        supplier_store_price=item.get("supplier_store_price"),
+        market_price=item.get("market_price"),
+        market_source=item.get("market_source"),
+        has_photo=item.get("has_photo", True),
+        is_viral=item.get("is_viral", False),
+        is_trending=item.get("is_trending", False),
+        is_active=item.get("is_active", True),
+        sort_order=item.get("sort_order", 0),
+        search_text=build_search_text(item["ref"], item["name"], benefits),
+    )
+
+
 async def seed_if_empty() -> None:
     async with AsyncSessionLocal() as session:
         total = (await session.execute(select(func.count(Product.ref)))).scalar_one()
@@ -39,35 +70,6 @@ async def seed_if_empty() -> None:
         await session.flush()
 
         for item in data["products"]:
-            benefits = item.get("benefits", [])
-            session.add(
-                Product(
-                    ref=item["ref"],
-                    slug=item["slug"],
-                    name=item["name"],
-                    category_slug=item["category"],
-                    need_slug=item["need"],
-                    type=item.get("type"),
-                    format=item.get("format"),
-                    presentation=item.get("presentation"),
-                    invima=item.get("invima"),
-                    benefits=benefits,
-                    advisor_tags=item.get("advisor_tags", []),
-                    image=item.get("image"),
-                    description=None,
-                    price=item.get("price"),
-                    brand=item.get("brand"),
-                    cost_price=item.get("cost_price"),
-                    supplier_store_price=item.get("supplier_store_price"),
-                    market_price=item.get("market_price"),
-                    market_source=item.get("market_source"),
-                    has_photo=item.get("has_photo", True),
-                    is_viral=item.get("is_viral", False),
-                    is_trending=item.get("is_trending", False),
-                    is_active=True,
-                    sort_order=item.get("sort_order", 0),
-                    search_text=build_search_text(item["ref"], item["name"], benefits),
-                )
-            )
+            session.add(Product(ref=item["ref"], **product_fields(item)))
 
         await session.commit()

@@ -39,6 +39,17 @@ docker exec salud_catalog python -m src.sync_prices --apply    # fill prices tha
 
 By default a product whose price in the database differs from the JSON (for example one edited in the admin panel) is reported and left as is. Add `--overwrite` to replace those too. The run is a single transaction and can be repeated safely.
 
+## Replacing the catalog in an existing database
+
+`src/sync_catalog.py` applies the whole `seed/catalog.json` to a running installation: it creates new categories and
+products, updates the existing ones (data, prices, photo, `is_active`) and hides products that are not in the JSON.
+Nothing is deleted, so orders keep pointing at retired products and they can be reactivated from the admin.
+
+```bash
+docker exec salud_catalog python -m src.sync_catalog            # dry run, writes nothing
+docker exec salud_catalog python -m src.sync_catalog --apply    # write the changes
+```
+
 ## Running tests
 
 ```bash

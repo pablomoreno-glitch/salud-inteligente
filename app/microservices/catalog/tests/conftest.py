@@ -15,6 +15,8 @@ TEST_INTERNAL_TOKEN = "test-internal-token"
 # Expected counts come from the seed itself, so adding products does not break the tests.
 SEED = json.loads((ROOT / "seed" / "catalog.json").read_text(encoding="utf-8"))
 SEED_PRODUCTS = len(SEED["products"])
+# Products shown in the store: the seed also keeps retired products, marked inactive.
+SEED_ACTIVE = sum(1 for p in SEED["products"] if p.get("is_active", True))
 SEED_CATEGORIES = len(SEED["categories"])
 SEED_PRICED = sum(1 for p in SEED["products"] if p.get("price"))
 

@@ -7,11 +7,11 @@ describe("formatPrice", () => {
   });
 
   it("returns the 'to be confirmed' label for null", () => {
-    expect(formatPrice(null)).toBe("Precio por confirmar");
+    expect(formatPrice(null)).toBe("Precio a consultar");
   });
 
   it("returns the 'to be confirmed' label for undefined", () => {
-    expect(formatPrice(undefined)).toBe("Precio por confirmar");
+    expect(formatPrice(undefined)).toBe("Precio a consultar");
   });
 
   it("formats zero as a valid price", () => {

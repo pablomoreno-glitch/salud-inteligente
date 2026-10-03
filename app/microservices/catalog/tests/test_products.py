@@ -1,4 +1,4 @@
-from .conftest import SEED_PRICED, SEED_PRODUCTS, TEST_INTERNAL_TOKEN
+from .conftest import SEED, SEED_ACTIVE, SEED_PRICED, SEED_PRODUCTS, TEST_INTERNAL_TOKEN
 
 
 async def test_get_product_by_slug_returns_brand_benefits_and_description(client):
@@ -8,8 +8,9 @@ async def test_get_product_by_slug_returns_brand_benefits_and_description(client
     body = response.json()
     assert body["ref"] == "NP-007"
     assert body["brand"] == "Naturpro"
-    assert len(body["benefits"]) == 3
-    assert body["description"].startswith("Valeriana Pasiflora 600 ml: con valeriana")
+    seed_item = next(p for p in SEED["products"] if p["ref"] == "NP-007")
+    assert body["benefits"] == seed_item["benefits"]
+    assert body["description"] == seed_item["description"]
 
 
 async def test_get_product_by_slug_404_when_missing(client):
@@ -121,5 +122,5 @@ async def test_summary_counts_products(client):
 
     body = response.json()
     assert body["products"] == SEED_PRODUCTS
-    assert body["active"] == SEED_PRODUCTS
+    assert body["active"] == SEED_ACTIVE
     assert body["unpriced"] == SEED_PRODUCTS - SEED_PRICED

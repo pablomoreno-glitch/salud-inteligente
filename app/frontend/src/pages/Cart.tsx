@@ -148,7 +148,7 @@ export function Cart() {
               min={0}
             />
             <p className="w-24 shrink-0 text-right text-body font-medium text-ink">
-              {line.price === null ? "Por confirmar" : formatPrice(line.line_total)}
+              {line.price === null ? "A consultar" : formatPrice(line.line_total)}
             </p>
             <button
               type="button"
@@ -171,7 +171,7 @@ export function Cart() {
 
       {data.has_unpriced && (
         <p className="mt-2 text-meta text-warn">
-          Algunos productos tienen precio por confirmar; te lo confirmamos por
+          Algunos productos tienen precio a consultar; te lo confirmamos por
           WhatsApp.
         </p>
       )}

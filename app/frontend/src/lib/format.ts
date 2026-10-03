@@ -6,7 +6,7 @@ const currencyFormatter = new Intl.NumberFormat("es-CO", {
 
 export function formatPrice(price: number | null | undefined): string {
   if (price === null || price === undefined) {
-    return "Precio por confirmar";
+    return "Precio a consultar";
   }
   return currencyFormatter.format(price);
 }

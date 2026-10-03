@@ -50,7 +50,7 @@ export function OrderConfirmation() {
                   </div>
                 </div>
                 <p className="text-body font-medium text-ink">
-                  {line.unit_price === null ? "Por confirmar" : formatPrice(line.line_total)}
+                  {line.unit_price === null ? "A consultar" : formatPrice(line.line_total)}
                 </p>
               </div>
             ))}

@@ -1,4 +1,4 @@
-from .conftest import SEED_CATEGORIES, SEED_PRODUCTS
+from .conftest import SEED_ACTIVE, SEED_CATEGORIES
 
 
 async def test_seed_loads_every_product_with_image_urls(client):
@@ -6,8 +6,8 @@ async def test_seed_loads_every_product_with_image_urls(client):
     assert response.status_code == 200
 
     body = response.json()
-    assert body["total"] == SEED_PRODUCTS
-    assert len(body["items"]) == SEED_PRODUCTS
+    assert body["total"] == SEED_ACTIVE
+    assert len(body["items"]) == SEED_ACTIVE
     for item in body["items"]:
         assert item["image_url"].startswith("/media/products/")
 
@@ -28,8 +28,8 @@ async def test_seed_loads_needs_with_image_urls(client):
 
 async def test_seed_is_idempotent_on_restart(client):
     first = await client.get("/products", params={"limit": 1000})
-    assert first.json()["total"] == SEED_PRODUCTS
+    assert first.json()["total"] == SEED_ACTIVE
 
     # Re-running the lifespan seed step (simulated via a second call) must not duplicate rows.
     second = await client.get("/products", params={"limit": 1000})
-    assert second.json()["total"] == SEED_PRODUCTS
+    assert second.json()["total"] == SEED_ACTIVE

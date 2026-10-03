@@ -134,7 +134,7 @@ def build_order_summary(order_code: str, items: list[dict], total: int | None, h
     for item in items:
         lines.append(f"{item['quantity']} x {item['name']} (Ref. {item['ref']})")
     if has_unpriced or total is None:
-        lines.append("Total: precios por confirmar")
+        lines.append("Total: precios a consultar")
     else:
         lines.append(f"Total: {format_price(total)}")
     lines.append(f"Cliente: {name} - {city}")
