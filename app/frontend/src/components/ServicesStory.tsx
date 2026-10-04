@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createScope, createTimeline, onScroll, utils } from "animejs";
 import type { BusinessService } from "../types";
 import { useAdvisor } from "../context/advisor";
+import { usePrefersReducedMotion } from "../lib/motion";
 
 /** Photo for each service, keyed by the icon the business service already carries. */
 const SERVICE_IMAGES: Record<string, string> = {
@@ -12,20 +13,6 @@ const SERVICE_IMAGES: Record<string, string> = {
   store: "/media/site/service-distributors.webp",
 };
 const FALLBACK_IMAGE = "/media/site/hero.webp";
-
-const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
-
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(() => window.matchMedia?.(REDUCED_MOTION).matches ?? false);
-  useEffect(() => {
-    const query = window.matchMedia?.(REDUCED_MOTION);
-    if (!query) return;
-    const update = () => setReduced(query.matches);
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-  return reduced;
-}
 
 function ServiceAction({ service, whatsapp }: { service: BusinessService; whatsapp: string | null }) {
   const advisor = useAdvisor();

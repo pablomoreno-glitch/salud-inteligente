@@ -7,6 +7,7 @@ import { ProductCard } from "../components/ProductCard";
 import { ProductGridSkeleton } from "../components/Skeleton";
 import { ErrorState } from "../components/ErrorState";
 import { ServicesStory } from "../components/ServicesStory";
+import { KefirPromo } from "../components/KefirPromo";
 
 const SUGGESTION_CHIPS = [
   "Me cuesta dormir",
@@ -141,6 +142,8 @@ export function Home() {
           </div>
         )}
       </section>
+
+      <KefirPromo whatsapp={business.data?.contacts.whatsapp ?? null} />
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <h2 className="font-display text-h3 font-bold text-ink">Destacados</h2>
