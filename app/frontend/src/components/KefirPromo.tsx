@@ -3,6 +3,7 @@ import { MessageCircle, ShieldCheck, Sparkles, Sprout, Zap } from "lucide-react"
 import { animate, createScope, createTimeline, onScroll, stagger, utils } from "animejs";
 import { useAdvisor } from "../context/advisor";
 import { usePrefersReducedMotion } from "../lib/motion";
+import kefirPoster from "../assets/promo-kefir.webp";
 
 const BENEFITS = [
   { icon: Sprout, label: "Mejora tu digestión" },
@@ -76,7 +77,7 @@ export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
           <div className="promo-float mx-auto w-full max-w-[17rem] lg:max-w-[20rem]">
             <div className="promo-poster overflow-hidden rounded-tile shadow-[0_30px_60px_-30px_rgba(31,61,43,0.45)]">
               <img
-                src="/media/site/promo-kefir.webp"
+                src={kefirPoster}
                 alt="Kefir Casero, probióticos naturales: mejora tu digestión, refuerza tu inmunidad y aumenta tu energía natural"
                 width={572}
                 height={792}

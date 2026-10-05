@@ -28,7 +28,7 @@ describe("KefirPromo", () => {
   it("shows the poster and every benefit", () => {
     renderPromo();
     expect(screen.getByRole("heading", { name: "Kefir Casero" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /Kefir Casero/ })).toHaveAttribute("src", "/media/site/promo-kefir.webp");
+    expect(screen.getByRole("img", { name: /Kefir Casero/ })).toHaveAttribute("src", expect.stringContaining("promo-kefir"));
     expect(screen.getAllByRole("listitem")).toHaveLength(3);
   });
 
