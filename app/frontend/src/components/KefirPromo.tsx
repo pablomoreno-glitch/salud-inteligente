@@ -79,7 +79,7 @@ export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
                 src="/media/site/promo-kefir.webp"
                 alt="Kefir Casero, probióticos naturales: mejora tu digestión, refuerza tu inmunidad y aumenta tu energía natural"
                 width={572}
-                height={1024}
+                height={792}
                 loading="lazy"
                 className="block h-auto w-full"
               />
