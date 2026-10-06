@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
-import { MessageCircle, ShieldCheck, Sparkles, Sprout, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, MessageCircle, ShieldCheck, Sparkles, Sprout, Zap } from "lucide-react";
 import { animate, createScope, createTimeline, onScroll, stagger, utils } from "animejs";
 import { useAdvisor } from "../context/advisor";
 import { usePrefersReducedMotion } from "../lib/motion";
+import { formatPrice } from "../lib/format";
+import { KEFIR_SLUG, kefirOrderMessage } from "../lib/kefir";
+import { useProduct } from "../lib/queries";
+import { QuantityStepper } from "./QuantityStepper";
 import kefirPoster from "../assets/promo-kefir.webp";
 
 const BENEFITS = [
@@ -11,18 +16,24 @@ const BENEFITS = [
   { icon: Zap, label: "Aumenta tu energía natural" },
 ];
 
-const WHATSAPP_MESSAGE = "Hola, quiero pedir Kefir Casero.";
+const MAX_LITERS = 20;
 const ADVISOR_QUESTION = "¿Qué beneficios tiene el kefir casero y cómo lo tomo?";
 
 /**
  * Promotion for the homemade kefir, shown above the featured products. When it scrolls into view
  * the poster is unveiled from the bottom and the copy and benefits rise in; afterwards the poster
  * keeps a slow float. With reduced motion everything is simply shown.
+ *
+ * The visitor picks how many liters they want and orders through WhatsApp with the total already
+ * written, or opens the kefir's product page in the catalog. The price comes from the catalog.
  */
 export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
   const advisor = useAdvisor();
   const reducedMotion = usePrefersReducedMotion();
   const root = useRef<HTMLElement>(null);
+  const kefir = useProduct(KEFIR_SLUG);
+  const [liters, setLiters] = useState(1);
+  const pricePerLiter = kefir.data?.price ?? null;
 
   useEffect(() => {
     const section = root.current;
@@ -62,7 +73,7 @@ export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
   }, [reducedMotion]);
 
   const whatsappHref = whatsapp
-    ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+    ? `https://wa.me/${whatsapp}?text=${encodeURIComponent(kefirOrderMessage(liters, pricePerLiter))}`
     : null;
 
   return (
@@ -111,7 +122,37 @@ export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
               ))}
             </ul>
 
-            <div className="promo-rise mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="promo-rise mt-8 flex flex-col gap-4 rounded-card border border-line bg-paper/80 p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-meta font-medium uppercase tracking-wide text-muted">Presentación de 1 litro</p>
+                {pricePerLiter !== null && (
+                  <p className="mt-0.5 text-body-lg text-ink">
+                    <span className="font-semibold">{formatPrice(pricePerLiter)}</span>
+                    <span className="text-muted"> / litro</span>
+                  </p>
+                )}
+              </div>
+              <div className="flex items-center justify-between gap-4 sm:justify-end">
+                <div className="flex items-center gap-2">
+                  <span id="kefir-liters-label" className="text-body text-muted">
+                    Litros
+                  </span>
+                  <div role="group" aria-labelledby="kefir-liters-label">
+                    <QuantityStepper value={liters} onChange={setLiters} max={MAX_LITERS} />
+                  </div>
+                </div>
+                {pricePerLiter !== null && (
+                  <p className="text-right">
+                    <span className="block text-meta text-muted">Total</span>
+                    <span className="block text-body-lg font-semibold text-forest" aria-live="polite">
+                      {formatPrice(pricePerLiter * liters)}
+                    </span>
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="promo-rise mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {whatsappHref && (
                 <a
                   href={whatsappHref}
@@ -130,6 +171,15 @@ export function KefirPromo({ whatsapp }: { whatsapp: string | null }) {
               >
                 Preguntar al asesor
               </button>
+              {kefir.data && (
+                <Link
+                  to={`/producto/${kefir.data.slug}`}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-pill px-3 py-3 text-body font-medium text-forest underline-offset-4 hover:underline"
+                >
+                  Ver en el catálogo
+                  <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
