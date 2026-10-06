@@ -8,9 +8,14 @@ with the JSON without deleting anything:
 - products in the database that are not in the JSON are marked inactive (hidden), so order
   history keeps pointing at them and they can be reactivated from the admin.
 
+With --only, just the listed products are created or updated: categories and needs are still
+brought in line (a new product may need them), but no other product is touched or hidden. This
+adds a new product to a running store without overwriting prices or visibility edited in the admin.
+
 Usage (inside the catalog container, from /app):
-    python -m src.sync_catalog            # dry run: report only, writes nothing
-    python -m src.sync_catalog --apply    # write the changes
+    python -m src.sync_catalog                          # dry run: report only, writes nothing
+    python -m src.sync_catalog --apply                  # write the changes
+    python -m src.sync_catalog --only SI-001 --apply    # create or update only SI-001
 """
 
 import argparse
@@ -43,8 +48,12 @@ class CatalogSyncReport:
         return len(self.categories_created) + len(self.needs_created) + len(self.created) + len(self.updated) + len(self.deactivated)
 
 
-async def sync_catalog(apply: bool = False, path: Path = SEED_FILE) -> CatalogSyncReport:
+async def sync_catalog(apply: bool = False, path: Path = SEED_FILE, only: set[str] | None = None) -> CatalogSyncReport:
     data = json.loads(path.read_text(encoding="utf-8"))
+    if only is not None:
+        missing = only - {item["ref"] for item in data["products"]}
+        if missing:
+            raise ValueError(f"Refs not in {path.name}: {', '.join(sorted(missing))}")
     report = CatalogSyncReport()
 
     async with AsyncSessionLocal() as session:
@@ -71,6 +80,8 @@ async def sync_catalog(apply: bool = False, path: Path = SEED_FILE) -> CatalogSy
         seen = set()
         for item in data["products"]:
             ref = item["ref"]
+            if only is not None and ref not in only:
+                continue
             seen.add(ref)
             values = product_fields(item)
             product = products.get(ref)
@@ -93,7 +104,7 @@ async def sync_catalog(apply: bool = False, path: Path = SEED_FILE) -> CatalogSy
             report.updated.append(ref)
 
         for ref, product in products.items():
-            if ref not in seen and product.is_active:
+            if only is None and ref not in seen and product.is_active:
                 product.is_active = False
                 report.deactivated.append(ref)
                 report.updated.append(ref)
@@ -106,9 +117,10 @@ async def sync_catalog(apply: bool = False, path: Path = SEED_FILE) -> CatalogSy
     return report
 
 
-def print_report(report: CatalogSyncReport, apply: bool) -> None:
+def print_report(report: CatalogSyncReport, apply: bool, only: set[str] | None = None) -> None:
     mode = "APLICADO" if apply else "SIMULACRO (no se escribió nada; usa --apply)"
-    print(f"Sincronización del catálogo desde {SEED_FILE.name}: {mode}\n")
+    scope = f" (solo {', '.join(sorted(only))})" if only else ""
+    print(f"Sincronización del catálogo desde {SEED_FILE.name}{scope}: {mode}\n")
     print(f"  Categorías nuevas:           {len(report.categories_created)} {report.categories_created}")
     print(f"  Necesidades nuevas:          {len(report.needs_created)} {report.needs_created}")
     print(f"  Productos nuevos:            {len(report.created)}")
@@ -122,9 +134,11 @@ def print_report(report: CatalogSyncReport, apply: bool) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Aplica seed/catalog.json a la base del catálogo (reemplazo completo).")
     parser.add_argument("--apply", action="store_true", help="escribe los cambios (sin esto solo se reporta)")
+    parser.add_argument("--only", nargs="+", metavar="REF", help="sincroniza solo estos productos, sin tocar ni ocultar los demás")
     args = parser.parse_args(argv)
-    report = asyncio.run(sync_catalog(apply=args.apply))
-    print_report(report, apply=args.apply)
+    only = set(args.only) if args.only else None
+    report = asyncio.run(sync_catalog(apply=args.apply, only=only))
+    print_report(report, apply=args.apply, only=only)
     return 0
 
 

@@ -1,5 +1,6 @@
 import importlib
 
+import pytest
 from sqlalchemy import select
 
 from .conftest import SEED
@@ -69,3 +70,31 @@ async def test_apply_matches_the_json_and_hides_unknown_products(client):
 
     again = await sync.sync_catalog(apply=True)
     assert again.changes == 0
+
+
+async def _delete(ref):
+    session_factory, models = await _session()
+    async with session_factory() as session:
+        await session.delete((await session.execute(select(models.Product).where(models.Product.ref == ref))).scalar_one())
+        await session.commit()
+
+
+async def test_only_adds_the_listed_product_and_leaves_the_rest_alone(client):
+    await _drift_database()
+    await _delete("SI-001")
+    sync = importlib.import_module("src.sync_catalog")
+    report = await sync.sync_catalog(apply=True, only={"SI-001"})
+
+    assert report.created == ["SI-001"]
+    assert report.updated == [] and report.deactivated == []
+    kefir = await _get("SI-001")
+    assert kefir.slug == "kefir-casero-1-l" and kefir.price == 20000 and kefir.is_active is True
+    # Admin edits and stray products outside --only survive.
+    assert (await _get(ACTIVE_REF)).price == 1
+    assert (await _get("XX-999")).is_active is True
+
+
+async def test_only_rejects_refs_missing_from_the_json(client):
+    sync = importlib.import_module("src.sync_catalog")
+    with pytest.raises(ValueError, match="NO-EXISTE"):
+        await sync.sync_catalog(only={"NO-EXISTE"})

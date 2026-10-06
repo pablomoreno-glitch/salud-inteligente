@@ -11955,6 +11955,42 @@
    "market_source": "Mediana de precios de mercado (commits 5f3a847/5df8132)",
    "price": 56000,
    "is_active": false
+  },
+  {
+   "ref": "SI-001",
+   "slug": "kefir-casero-1-l",
+   "name": "Kefir Casero 1 L",
+   "brand": "Salud Inteligente",
+   "supplier": "Salud Inteligente",
+   "category": "bebidas",
+   "need": "digestion",
+   "type": "Casero",
+   "format": "Bebida fermentada",
+   "presentation": "1 L",
+   "is_viral": true,
+   "is_trending": true,
+   "invima": null,
+   "benefits": [
+    "Mejora tu digestión",
+    "Refuerza tu inmunidad",
+    "Aumenta tu energía natural"
+   ],
+   "description": "Kefir de leche preparado en casa con leche fresca y gránulos de kefir. Bebida fermentada con probióticos naturales que acompañan una digestión saludable y una flora intestinal equilibrada. Un aliado diario para sentirte mejor desde adentro. Modo de uso: un vaso al día, solo, con frutas o en batidos. Se vende por litro. Precauciones: Mantener refrigerado. Contiene leche.",
+   "advisor_tags": [
+    "Probióticos naturales",
+    "Digestión y flora intestinal",
+    "Defensas",
+    "Energía natural"
+   ],
+   "image": "kefir-casero-1-l.webp",
+   "price": 20000,
+   "cost_price": null,
+   "supplier_store_price": null,
+   "market_price": null,
+   "market_source": null,
+   "has_photo": true,
+   "is_active": true,
+   "sort_order": -1
   }
  ]
 }

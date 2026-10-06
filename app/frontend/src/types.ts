@@ -258,7 +258,7 @@ export interface StockRow {
 
 /** Admin view of a product: adds what we pay the supplier and the resulting margin. */
 export interface AdminProductRow extends Product {
-  /** Where the product comes from: Greenlab, Naturpro, El Oasis or the WhatsApp photo catalog. */
+  /** Where the product comes from: Greenlab, Naturpro, El Oasis, the WhatsApp photo catalog or Salud Inteligente itself (homemade). */
   supplier: string | null;
   cost_price: number | null;
   supplier_store_price: number | null;

@@ -13,7 +13,7 @@ async def test_admin_products_show_the_catalog_supplier(client):
     items = (await client.get("/admin/products", headers=AUTH)).json()["items"]
 
     assert {item["ref"]: item["supplier"] for item in items} == SUPPLIERS
-    assert {item["supplier"] for item in items if item["is_active"]} == {"Greenlab", "Naturpro", "El Oasis"}
+    assert {item["supplier"] for item in items if item["is_active"]} == {"Greenlab", "Naturpro", "El Oasis", "Salud Inteligente"}
 
 
 async def test_supplier_is_never_public(client):
