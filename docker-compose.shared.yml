@@ -2,9 +2,12 @@
 #
 # That Caddy joins nothing of ours: instead our gateway joins its Docker network,
 # so its Caddyfile can proxy api.saludinteligente.lat to salud_gateway:8110.
-# The storefront is served by Netlify, so the frontend container is not started.
+# The storefront is normally served by Netlify, so the frontend container only
+# starts with the "vps-storefront" profile; it then joins the same network and
+# Caddy serves saludinteligente.lat from salud_frontend:80.
 #
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.shared.yml up -d --build
+#   docker compose ... --profile vps-storefront up -d --build frontend
 
 services:
   gateway:
@@ -23,6 +26,9 @@ services:
 
   frontend:
     profiles: ["vps-storefront"]
+    networks: [salud, edge]
+    # Caddy reaches it over the shared network; no host port is needed.
+    ports: !reset []
 
 networks:
   edge:
