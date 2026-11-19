@@ -27,6 +27,9 @@ const config: Config = {
         h3: ["32px", "38px"],
         h2: ["44px", "50px"],
         h1: ["56px", "62px"],
+        display: ["60px", "66px"],
+        "display-xl": ["72px", "78px"],
+        marquee: ["96px", "104px"],
       },
       borderRadius: {
         pill: "999px",
