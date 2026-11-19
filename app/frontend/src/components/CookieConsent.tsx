@@ -128,7 +128,7 @@ export function CookieConsent() {
         <div className="flex flex-col items-center gap-1 border-t border-line bg-white px-4 pb-3 pt-3">
           <span className="text-[11px] font-medium text-muted">Diseñado y mantenido por</span>
           <a href="https://github.com/Macreat" target="_blank" rel="noopener noreferrer" aria-label="Macreat en GitHub">
-            <img src="/media/site/macreat.webp" alt="Macreat" width={120} height={50} className="cookie-signature h-[50px] w-auto" />
+            <img src="/media/site/macreat-signature.webp" alt="Macreat" width={129} height={50} className="cookie-signature h-[50px] w-auto" />
           </a>
         </div>
       </div>
