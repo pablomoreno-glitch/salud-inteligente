@@ -1,0 +1,31 @@
+# Run on a server with no public ports (for example a home server), published through Cloudflare Tunnel.
+#
+# cloudflared dials out to Cloudflare, so the router and the host firewall stay closed.
+# It joins the stack's own network and reaches the containers through dash-named aliases,
+# because Cloudflare's route form rejects the underscores in the container names.
+# Public hostnames are configured on the tunnel in the Cloudflare dashboard:
+#   saludinteligente.lat and www.saludinteligente.lat -> http://salud-frontend:80
+#   api.saludinteligente.lat                          -> http://salud-gateway:8110
+#
+#   docker compose -p salud -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.tunnel.yml up -d --build
+
+services:
+  frontend:
+    networks:
+      salud:
+        aliases: [salud-frontend]
+
+  gateway:
+    networks:
+      salud:
+        aliases: [salud-gateway]
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.11.1
+    container_name: salud_tunnel
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?set CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on: [frontend, gateway]
+    restart: unless-stopped
+    networks: [salud]

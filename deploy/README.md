@@ -1,5 +1,9 @@
 # Deploying Salud Inteligente
 
+> **Current production setup: [home server behind Cloudflare Tunnel](home-server.md).**
+> Since 2026-11-19 the whole stack runs on a home server and the laVillaSB VPS described below is no longer in use.
+> The rest of this guide is kept for a future move back to a VPS.
+
 The storefront runs on Netlify, the API runs on one VPS, and the domain `saludinteligente.lat` ties them together.
 
 | Piece | Where | Notes |
