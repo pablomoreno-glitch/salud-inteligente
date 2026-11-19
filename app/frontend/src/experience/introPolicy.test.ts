@@ -1,34 +1,25 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { INTRO_SEEN_KEY, rememberIntroSeen, shouldPlayIntro } from "./introPolicy";
+import { afterEach, describe, expect, it } from "vitest";
+import { rememberIntroSeen, resetIntroPolicy, shouldPlayIntro } from "./introPolicy";
 
-afterEach(() => {
-  vi.restoreAllMocks();
-  sessionStorage.clear();
-});
+afterEach(() => resetIntroPolicy());
 
 describe("introPolicy", () => {
-  it("plays on the first visit", () => {
+  it("plays on a fresh page load", () => {
     expect(shouldPlayIntro(false)).toBe(true);
   });
 
-  it("does not play again once it has been seen", () => {
+  it("does not replay within the same page load", () => {
     rememberIntroSeen();
-    expect(sessionStorage.getItem(INTRO_SEEN_KEY)).toBe("1");
     expect(shouldPlayIntro(false)).toBe(false);
+  });
+
+  it("plays again on the next page load, even in the same browser session", () => {
+    rememberIntroSeen();
+    resetIntroPolicy();
+    expect(shouldPlayIntro(false)).toBe(true);
   });
 
   it("never plays with reduced motion", () => {
     expect(shouldPlayIntro(true)).toBe(false);
-  });
-
-  it("plays when storage throws, and remembering does not throw", () => {
-    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
-      throw new Error("blocked");
-    });
-    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
-      throw new Error("blocked");
-    });
-    expect(shouldPlayIntro(false)).toBe(true);
-    expect(() => rememberIntroSeen()).not.toThrow();
   });
 });

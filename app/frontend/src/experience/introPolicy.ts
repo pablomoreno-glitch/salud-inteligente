@@ -1,19 +1,19 @@
-export const INTRO_SEEN_KEY = "si:intro:seen";
+/**
+ * The intro plays on every page load (a new visit, a new tab or a reload), but only once per
+ * load: navigating back to the home page inside the app does not replay it. It never plays
+ * when the visitor asks for reduced motion.
+ */
+let seenThisLoad = false;
 
-/** The intro plays once per browser session, and never when the visitor asks for reduced motion. */
 export function shouldPlayIntro(reducedMotion: boolean): boolean {
-  if (reducedMotion) return false;
-  try {
-    return sessionStorage.getItem(INTRO_SEEN_KEY) !== "1";
-  } catch {
-    return true;
-  }
+  return !reducedMotion && !seenThisLoad;
 }
 
 export function rememberIntroSeen(): void {
-  try {
-    sessionStorage.setItem(INTRO_SEEN_KEY, "1");
-  } catch {
-    /* storage blocked: the intro may play again on the next visit */
-  }
+  seenThisLoad = true;
+}
+
+/** Test hook: forget that the intro played, as a fresh page load would. */
+export function resetIntroPolicy(): void {
+  seenThisLoad = false;
 }

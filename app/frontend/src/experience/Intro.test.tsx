@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { isIntroPlaying } from "../lib/introSignal";
 import { Intro } from "./Intro";
+import { rememberIntroSeen, resetIntroPolicy, shouldPlayIntro } from "./introPolicy";
 
 // jsdom has no layout or animation clock: animejs is replaced with recording no-ops.
 interface FakeTimeline {
@@ -41,9 +42,9 @@ vi.mock("animejs", () => ({
 
 beforeEach(() => {
   timelines.length = 0;
-  sessionStorage.clear();
+  resetIntroPolicy();
 });
-afterEach(() => sessionStorage.clear());
+afterEach(() => resetIntroPolicy());
 
 describe("Intro", () => {
   it("renders nothing with reduced motion and reveals once", () => {
@@ -54,8 +55,8 @@ describe("Intro", () => {
     expect(isIntroPlaying()).toBe(false);
   });
 
-  it("renders nothing when it has been seen in this session", () => {
-    sessionStorage.setItem("si:intro:seen", "1");
+  it("renders nothing when it already played in this page load", () => {
+    rememberIntroSeen();
     const onReveal = vi.fn();
     const { container } = render(<Intro reducedMotion={false} onReveal={onReveal} />);
     expect(container).toBeEmptyDOMElement();
@@ -79,7 +80,7 @@ describe("Intro", () => {
     expect(container).toBeEmptyDOMElement();
     expect(isIntroPlaying()).toBe(false);
     expect(onReveal).toHaveBeenCalledTimes(1);
-    expect(sessionStorage.getItem("si:intro:seen")).toBe("1");
+    expect(shouldPlayIntro(false)).toBe(false);
   });
 
   it("skips on Escape", () => {

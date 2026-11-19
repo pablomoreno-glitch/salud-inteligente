@@ -63,7 +63,7 @@ function wavePath(width: number, period: number, amplitude: number, depth: numbe
  * Cinematic opening (after Essentia's logo preloader and Hydroflow's liquid), about 2.8 s: a
  * capsule draws itself and fills with a drifting liquid, the line-art logo mark draws over it,
  * the wordmark rises letter by letter and a counter runs to 100, then the capsule becomes an
- * iris that opens onto the hero. Once per browser session; skippable by button, Escape or a click
+ * iris that opens onto the hero. Once per page load (see introPolicy); skippable by button, Escape or a click
  * on the layer; it leaves the DOM when done and never traps focus.
  * `onReveal` fires when the iris starts to open (or at once when there is no intro).
  */
