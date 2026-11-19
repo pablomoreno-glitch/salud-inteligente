@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Cookie, X } from "lucide-react";
 import { readConsent, saveConsent } from "../lib/consent";
+import { whenIntroDone } from "../lib/introSignal";
 
 /** First-visit consent card, same idea as lavillasb.com, in the Salud Inteligente look. */
 export function CookieConsent() {
@@ -11,8 +12,10 @@ export function CookieConsent() {
 
   useEffect(() => {
     const stored = readConsent();
+    // On a first visit the card waits for the home intro, so the two never overlap.
+    let cancelWait = () => {};
     if (stored) setFunctional(stored.functional);
-    else setOpen(true);
+    else cancelWait = whenIntroDone(() => setOpen(true));
 
     const reopen = () => {
       const current = readConsent();
@@ -21,7 +24,10 @@ export function CookieConsent() {
       setOpen(true);
     };
     window.addEventListener("si-open-cookies", reopen);
-    return () => window.removeEventListener("si-open-cookies", reopen);
+    return () => {
+      cancelWait();
+      window.removeEventListener("si-open-cookies", reopen);
+    };
   }, []);
 
   function decide(choice: { functional: boolean }) {
